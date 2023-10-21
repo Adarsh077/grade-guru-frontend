@@ -6,7 +6,7 @@ const HomeLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-7xl mx-auto pt-8">
+      <div className="md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto pt-8">
         <Breadcrumb className="mb-6 -translate-x-4" />
 
         <Outlet />

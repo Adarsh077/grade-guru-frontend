@@ -15,19 +15,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AddDepartmentDailog } from "@/features";
-import { departmentSelector } from "@/store/department/department.selectors";
 import { MoreHorizontal, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { semestersSelector } from "@/store/semester/semester.selectors";
 
-const Departments = () => {
-  const departments = useSelector(departmentSelector);
+const Semesters = () => {
+  const semesters = useSelector(semestersSelector);
   const navigate = useNavigate();
 
-  const handleDepartmentClick = (department) => {
-    if (!department) return;
-    navigate(`/departments/${department._id}/semesters`);
+  const handleSemesterClick = (semester) => {
+    if (!semester) return;
+    navigate(`/semesters/${semester._id}/subjects`);
   };
 
   return (
@@ -39,11 +38,9 @@ const Departments = () => {
         <div className="md:col-span-5 xl:col-span-6"></div>
         <div className="md:col-span-3 xl:col-span-2">
           <div className="flex justify-end">
-            <AddDepartmentDailog>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" /> Add Department
-              </Button>
-            </AddDepartmentDailog>
+            <Button>
+              <Plus className="mr-2 h-4 w-4" /> Add Semester
+            </Button>
           </div>
         </div>
       </div>
@@ -51,20 +48,18 @@ const Departments = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>HOD</TableHead>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {departments.map((department) => {
+          {semesters.map((semester) => {
             return (
               <TableRow
                 className="cursor-pointer"
-                onClick={() => handleDepartmentClick(department)}
-                key={department._id}
+                onClick={() => handleSemesterClick(semester)}
+                key={semester._id}
               >
-                <TableCell className="font-medium">{department.name}</TableCell>
-                <TableCell>{department.hod?.name}</TableCell>
+                <TableCell className="font-medium">{semester.name}</TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -92,4 +87,4 @@ const Departments = () => {
     </div>
   );
 };
-export default Departments;
+export default Semesters;

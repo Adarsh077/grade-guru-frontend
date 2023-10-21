@@ -3,9 +3,10 @@ import appAxios from "./axios.service";
 import endpoints from "@/constants/endpoints";
 
 class DepartmentService {
-  static getAllDepartments = catchAsync(async () => {
+  static getAllDepartments = catchAsync(async ({ batch }) => {
     const response = await appAxios.get(
-      endpoints.departments.getAllDepartments
+      endpoints.departments.getAllDepartments,
+      { params: { batch } }
     );
 
     if (response.data.status === "success" && response.data.body?.departments) {

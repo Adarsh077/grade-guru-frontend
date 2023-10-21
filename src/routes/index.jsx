@@ -9,6 +9,8 @@ import { isAutenticatedSelector } from "@/store/auth/auth.selectors";
 import FetchData from "@/components/FetchData";
 import { getUserDetails } from "@/store/user/user.actions";
 import { userErrorSelector } from "@/store/user/user.selectors";
+import { getAllBatches } from "@/store/batch/batch.actions";
+import { batchErrorSelector } from "@/store/batch/batch.selectors";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,7 @@ const AppRoutes = () => {
     (state) => state.authReducer.isAuthenticating
   );
   const userError = useSelector(userErrorSelector);
+  const batchError = useSelector(batchErrorSelector);
 
   useEffect(() => {
     if (!isAuthenticated) dispatch(checkIsAuthenticated());
@@ -33,7 +36,13 @@ const AppRoutes = () => {
       error={userError}
       dispatchFunction={getUserDetails()}
     >
-      <ProtectedRoutes />
+      <FetchData
+        loadFirstThenRender
+        error={batchError}
+        dispatchFunction={getAllBatches()}
+      >
+        <ProtectedRoutes />
+      </FetchData>
     </FetchData>
   ) : (
     <PublicRoutes />

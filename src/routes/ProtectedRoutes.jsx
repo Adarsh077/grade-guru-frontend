@@ -1,5 +1,5 @@
 import { HomeLayout } from "@/layouts";
-import { DepartmentsScreen } from "@/pages";
+import { DepartmentsScreen, SemestersScreen } from "@/pages";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 const ProtectedRoutes = () => {
@@ -7,6 +7,7 @@ const ProtectedRoutes = () => {
     <Routes>
       <Route path="/departments" element={<HomeLayout />}>
         <Route path="" element={<DepartmentsScreen />} />
+        <Route path=":departmentId/semesters" element={<SemestersScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="/departments" replace />} />
     </Routes>

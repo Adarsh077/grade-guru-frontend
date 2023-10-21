@@ -1,9 +1,9 @@
-import { DepartmentService } from "@/services";
+import { SemesterService } from "@/services";
 import { gracelyHandleError } from "@/utils";
-import { setDepartments, setError } from "./department.slice";
+import { setSemesters, setError } from "./semester.slice";
 
-export const getAllDepartments =
-  ({ batch }) =>
+export const getAllSemesters =
+  ({ departmentId }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -12,11 +12,11 @@ export const getAllDepartments =
         })
       );
 
-      const { departments } = await DepartmentService.getAllDepartments({
-        batch,
+      const { semesters } = await SemesterService.getAllSemesters({
+        departmentId,
       });
 
-      dispatch(setDepartments({ departments }));
+      dispatch(setSemesters({ semesters }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(
