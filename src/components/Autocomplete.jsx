@@ -100,7 +100,8 @@ const AutocompleteComponent = (props, ref) => {
         >
           {groupedOptions.map((option, index) => (
             <li
-              className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5  outline-none"
+              title={option.label}
+              className="w-full cursor-default select-none rounded-sm px-2 py-1.5 outline-none whitespace-nowrap overflow-hidden text-ellipsis"
               key={`autocomplete-${index}`}
               {...getOptionProps({ option, index })}
             >
