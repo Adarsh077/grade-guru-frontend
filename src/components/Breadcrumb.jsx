@@ -29,7 +29,7 @@ const Breadcrumb = (props) => {
           return (
             <p
               key={`breadcrumb-${index}`}
-              className="hover:bg-gray-100 text-lg text-gray-950 px-4 py-1 rounded-full"
+              className="text-lg text-gray-950 px-4 py-1 rounded-full"
             >
               {breadcrumb.label}
             </p>
