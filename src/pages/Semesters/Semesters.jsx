@@ -17,11 +17,13 @@ import {
 } from "@/components/ui/table";
 import { MoreHorizontal, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { semestersSelector } from "@/store/semester/semester.selectors";
 
 const Semesters = () => {
-  const semesters = useSelector(semestersSelector);
+  const { departmentId } = useParams();
+
+  const semesters = useSelector(semestersSelector(departmentId));
   const navigate = useNavigate();
 
   const handleSemesterClick = (semester) => {

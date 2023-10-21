@@ -16,7 +16,7 @@ export const getAllSemesters =
         departmentId,
       });
 
-      dispatch(setSemesters({ semesters }));
+      dispatch(setSemesters({ semesters, departmentId }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(

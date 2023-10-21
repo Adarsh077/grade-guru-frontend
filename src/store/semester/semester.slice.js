@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  semesters: [],
+  semesters: {},
   error: null,
 };
 
@@ -11,9 +11,12 @@ export const semesterSlice = createSlice({
   reducers: {
     reset: () => initialState,
     setSemesters: (state, action) => {
-      const { semesters } = action.payload;
+      const { semesters, departmentId } = action.payload;
 
-      state.semesters = semesters;
+      state.semesters = {
+        ...state.semesters,
+        [departmentId]: semesters,
+      };
     },
     setError: (state, action) => {
       state.error = action.payload.error;
