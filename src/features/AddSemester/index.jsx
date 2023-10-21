@@ -6,11 +6,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import AddDepartmentForm from "./AddDepartmentForm";
+import AddSemesterForm from "./AddSemesterForm";
 import { useState } from "react";
 
-const AddDepartmentDailog = (props) => {
-  const { children } = props;
+const AddSemesterDailog = (props) => {
+  const { children, departmentId } = props;
   const [open, setOpen] = useState(false);
 
   return (
@@ -20,11 +20,14 @@ const AddDepartmentDailog = (props) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add Department</DialogTitle>
+          <DialogTitle>Add Semester</DialogTitle>
         </DialogHeader>
-        <AddDepartmentForm handleClose={() => setOpen(false)} />
+        <AddSemesterForm
+          departmentId={departmentId}
+          handleClose={() => setOpen(false)}
+        />
       </DialogContent>
     </Dialog>
   );
 };
-export default AddDepartmentDailog;
+export default AddSemesterDailog;

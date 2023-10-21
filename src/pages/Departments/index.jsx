@@ -8,6 +8,8 @@ import { Plus } from "lucide-react";
 import FetchData from "@/components/FetchData";
 import { useQueryString } from "@/hooks";
 import { getAllDepartments } from "@/store/department/department.actions";
+import CaslCan from "@/components/CaslCan";
+import caslEnum from "@/constants/casl.enum";
 
 const DepartmentRoot = () => {
   const departmentError = useSelector(departmentErrorSelector);
@@ -21,11 +23,20 @@ const DepartmentRoot = () => {
         </div>
         <div className="md:col-span-3 xl:col-span-2">
           <div className="flex justify-end">
-            <AddDepartmentDailog>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" /> Add Department
-              </Button>
-            </AddDepartmentDailog>
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.create,
+                  subject: caslEnum.subjects.departments,
+                },
+              ]}
+            >
+              <AddDepartmentDailog>
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" /> Add Department
+                </Button>
+              </AddDepartmentDailog>
+            </CaslCan>
           </div>
         </div>
       </div>

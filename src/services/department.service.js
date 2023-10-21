@@ -15,6 +15,22 @@ class DepartmentService {
 
     return { departments: [] };
   });
+
+  static addDepartment = catchAsync(async (data) => {
+    const { name, hod, batch } = data;
+
+    const response = await appAxios.post(endpoints.departments.addDepartment, {
+      name,
+      hod,
+      batch,
+    });
+
+    if (response.data.status === "success" && response.data.body?.department) {
+      return { department: response.data.body.department };
+    }
+
+    return { department: [] };
+  });
 }
 
 export default DepartmentService;

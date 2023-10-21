@@ -21,6 +21,7 @@ const endpoints = {
   semesters: {
     getAllSemestersBy: (departmentId) =>
       `/departments/${departmentId}/semesters`,
+    addSemesterBy: (departmentId) => `/departments/${departmentId}/semesters`,
   },
   subjects: {
     getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,

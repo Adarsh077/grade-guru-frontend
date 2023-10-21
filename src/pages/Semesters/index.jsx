@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { AddSemesterDailog } from "@/features";
 
 const SemestersRoot = () => {
   const { departmentId } = useParams();
@@ -20,9 +21,11 @@ const SemestersRoot = () => {
         </div>
         <div className="md:col-span-3 xl:col-span-2">
           <div className="flex justify-end">
-            <Button>
-              <Plus className="mr-2 h-4 w-4" /> Add Semester
-            </Button>
+            <AddSemesterDailog departmentId={departmentId}>
+              <Button>
+                <Plus className="mr-2 h-4 w-4" /> Add Semester
+              </Button>
+            </AddSemesterDailog>
           </div>
         </div>
       </div>

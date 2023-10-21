@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   semesters: {},
   error: null,
+
+  isCallingAddSemesterApi: false,
+  addSemesterError: null,
 };
 
 export const semesterSlice = createSlice({
@@ -21,9 +24,23 @@ export const semesterSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload.error;
     },
+    setIsCallingAddSemesterApi: (state, action) => {
+      const { isLoading } = action.payload;
+
+      state.isCallingAddSemesterApi = isLoading;
+    },
+    setAddSemesterError: (state, action) => {
+      state.addSemesterError = action.payload.error;
+    },
   },
 });
 
-export const { setSemesters, reset, setError } = semesterSlice.actions;
+export const {
+  setSemesters,
+  reset,
+  setError,
+  setAddSemesterError,
+  setIsCallingAddSemesterApi,
+} = semesterSlice.actions;
 
 export default semesterSlice.reducer;

@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   departments: [],
   error: null,
+
+  isCallingAddDepartmentApi: false,
+  addDepartmentError: null,
 };
 
 export const departmentSlice = createSlice({
@@ -18,9 +21,23 @@ export const departmentSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload.error;
     },
+    setIsCallingAddDepartmentApi: (state, action) => {
+      const { isLoading } = action.payload;
+
+      state.isCallingAddDepartmentApi = isLoading;
+    },
+    setAddDepartmentError: (state, action) => {
+      state.addDepartmentError = action.payload.error;
+    },
   },
 });
 
-export const { setDepartments, reset, setError } = departmentSlice.actions;
+export const {
+  setDepartments,
+  reset,
+  setError,
+  setAddDepartmentError,
+  setIsCallingAddDepartmentApi,
+} = departmentSlice.actions;
 
 export default departmentSlice.reducer;

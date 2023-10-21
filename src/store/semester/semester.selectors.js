@@ -3,3 +3,10 @@ export const semestersSelector = (departmentId) => (state) => {
 };
 
 export const semesterErrorSelector = (state) => state.semesterReducer.error;
+
+export const isCallingAddSemesterApiSelector = (state) => {
+  return state.semesterReducer.isCallingAddSemesterApi;
+};
+
+export const addSemesterErrorSelector = (state) =>
+  state.semesterReducer.addSemesterError;

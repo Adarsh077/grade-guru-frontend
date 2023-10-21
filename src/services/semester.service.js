@@ -14,6 +14,19 @@ class SemesterService {
 
     return { semesters: null };
   });
+
+  static addSemester = catchAsync(async ({ departmentId, name }) => {
+    const response = await appAxios.post(
+      endpoints.semesters.addSemesterBy(departmentId),
+      { name }
+    );
+
+    if (response.data.status === "success" && response.data.body?.semester) {
+      return { semester: response.data.body.semester };
+    }
+
+    return { semester: null };
+  });
 }
 
 export default SemesterService;
