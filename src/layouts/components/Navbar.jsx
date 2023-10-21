@@ -14,7 +14,7 @@ const Navbar = () => {
   ]);
 
   return (
-    <div className="border-b">
+    <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center">
           <img src="/logo.png" className="h-8 mr-2" alt="UCOE" />
