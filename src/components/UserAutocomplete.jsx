@@ -18,7 +18,7 @@ const UserAutocompleteComponent = (props, ref) => {
       if (results && Array.isArray(results)) {
         setUsers(
           results.map((user) => ({
-            label: `${user.name} (${user.email})`,
+            label: `${user.name}`,
             value: user._id,
           }))
         );

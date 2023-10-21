@@ -29,7 +29,39 @@ class DepartmentService {
       return { department: response.data.body.department };
     }
 
-    return { department: [] };
+    return { department: null };
+  });
+
+  static updateDepartment = catchAsync(async (data) => {
+    const { departmentId, name, hod } = data;
+
+    const response = await appAxios.patch(
+      endpoints.departments.updateDepartment(departmentId),
+      {
+        name,
+        hod,
+      }
+    );
+
+    if (response.data.status === "success" && response.data.body?.department) {
+      return { department: response.data.body.department };
+    }
+
+    return { department: null };
+  });
+
+  static deleteDepartment = catchAsync(async (data) => {
+    const { departmentId } = data;
+
+    const response = await appAxios.delete(
+      endpoints.departments.deleteDepartment(departmentId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.department) {
+      return { department: response.data.body.department };
+    }
+
+    return { department: null };
   });
 }
 

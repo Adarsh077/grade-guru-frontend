@@ -8,3 +8,15 @@ export const isCallingAddDepartmentApiSelector = (state) =>
 
 export const addDepartmentErrorSelector = (state) =>
   state.departmentReducer.addDepartmentError;
+
+export const isCallingUpdateDepartmentApiSelector = (state) =>
+  state.departmentReducer.isCallingUpdateDepartmentApi;
+
+export const updateDepartmentErrorSelector = (state) =>
+  state.departmentReducer.updateDepartmentError;
+
+export const isCallingDeleteDepartmentApiSelector = (state) =>
+  state.departmentReducer.isCallingDeleteDepartmentApi;
+
+export const deleteDepartmentErrorSelector = (state) =>
+  state.departmentReducer.deleteDepartmentError;
