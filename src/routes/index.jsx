@@ -7,8 +7,14 @@ import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { isAutenticatedSelector } from "@/store/auth/auth.selectors";
 import FetchData from "@/components/FetchData";
-import { getUserDetails } from "@/store/user/user.actions";
-import { userErrorSelector } from "@/store/user/user.selectors";
+import {
+  getUserDetails,
+  getUserAbilityStatements,
+} from "@/store/user/user.actions";
+import {
+  userAbilityStatementsErrorSelector,
+  userErrorSelector,
+} from "@/store/user/user.selectors";
 import { getAllBatches } from "@/store/batch/batch.actions";
 import { batchErrorSelector } from "@/store/batch/batch.selectors";
 
@@ -21,6 +27,9 @@ const AppRoutes = () => {
   );
   const userError = useSelector(userErrorSelector);
   const batchError = useSelector(batchErrorSelector);
+  const userAbilityStatementsError = useSelector(
+    userAbilityStatementsErrorSelector
+  );
 
   useEffect(() => {
     if (!isAuthenticated) dispatch(checkIsAuthenticated());
@@ -38,10 +47,16 @@ const AppRoutes = () => {
     >
       <FetchData
         loadFirstThenRender
-        error={batchError}
-        dispatchFunction={getAllBatches()}
+        error={userAbilityStatementsError}
+        dispatchFunction={getUserAbilityStatements()}
       >
-        <ProtectedRoutes />
+        <FetchData
+          loadFirstThenRender
+          error={batchError}
+          dispatchFunction={getAllBatches()}
+        >
+          <ProtectedRoutes />
+        </FetchData>
       </FetchData>
     </FetchData>
   ) : (

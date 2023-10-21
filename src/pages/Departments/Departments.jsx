@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AddDepartmentDailog } from "@/features";
+import { useQueryString } from "@/hooks";
 import { departmentSelector } from "@/store/department/department.selectors";
 import { MoreHorizontal, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
@@ -24,10 +25,14 @@ import { useNavigate } from "react-router-dom";
 const Departments = () => {
   const departments = useSelector(departmentSelector);
   const navigate = useNavigate();
+  const { queryString, parsedQueryString } = useQueryString();
 
   const handleDepartmentClick = (department) => {
     if (!department) return;
-    navigate(`/departments/${department._id}/semesters`);
+    navigate({
+      pathname: `/departments/${department._id}/semesters`,
+      search: queryString.stringify(parsedQueryString),
+    });
   };
 
   return (

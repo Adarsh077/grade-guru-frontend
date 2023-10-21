@@ -3,3 +3,4 @@ export { default as UserService } from "./user.service";
 export { default as BatchService } from "./batch.service";
 export { default as DepartmentService } from "./department.service";
 export { default as SemesterService } from "./semester.service";
+export { default as SubjectService } from "./subject.service";

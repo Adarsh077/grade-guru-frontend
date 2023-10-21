@@ -5,6 +5,7 @@ import userSlice from "./user/user.slice";
 import batchSlice from "./batch/batch.slice";
 import departmentSlice from "./department/department.slice";
 import semesterSlice from "./semester/semester.slice";
+import subjectSlice from "./subject/subject.slice";
 
 const rootReducer = combineReducers({
   authReducer: authSlice,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   batchReducer: batchSlice,
   departmentReducer: departmentSlice,
   semesterReducer: semesterSlice,
+  subjectReducer: subjectSlice,
 });
 
 export const store = configureStore({

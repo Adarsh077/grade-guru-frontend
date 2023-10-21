@@ -1,15 +1,85 @@
-import { HomeLayout } from "@/layouts";
-import { DepartmentsScreen, SemestersScreen } from "@/pages";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { DashbordLayout, MySubjectsLayout } from "@/layouts";
+import {
+  DepartmentsScreen,
+  MySubjectsScreen,
+  SemestersScreen,
+  SubjectsScreen,
+} from "@/pages";
+import { Route, Routes } from "react-router-dom";
+import Redirect from "./Redirect";
+import CaslCan from "@/components/CaslCan";
+import caslEnum from "@/constants/casl.enum";
 
 const ProtectedRoutes = () => {
   return (
     <Routes>
-      <Route path="/departments" element={<HomeLayout />}>
-        <Route path="" element={<DepartmentsScreen />} />
-        <Route path=":departmentId/semesters" element={<SemestersScreen />} />
+      <Route path="/departments" element={<DashbordLayout />}>
+        <Route
+          path=""
+          element={
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.read,
+                  subject: caslEnum.subjects.departments,
+                },
+              ]}
+            >
+              <DepartmentsScreen />
+            </CaslCan>
+          }
+        />
+        <Route
+          path=":departmentId/semesters"
+          element={
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.read,
+                  subject: caslEnum.subjects.semesters,
+                },
+              ]}
+            >
+              <SemestersScreen />
+            </CaslCan>
+          }
+        />
       </Route>
-      <Route path="*" element={<Navigate to="/departments" replace />} />
+      <Route path="/semesters" element={<DashbordLayout />}>
+        <Route
+          path=":semesterId/subjects"
+          element={
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.read,
+                  subject: caslEnum.subjects.subjects,
+                },
+              ]}
+            >
+              <SubjectsScreen />
+            </CaslCan>
+          }
+        />
+      </Route>
+      <Route path="/subjects" element={<MySubjectsLayout />}>
+        <Route
+          path="my"
+          element={
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.read,
+                  subject: caslEnum.subjects.subjects,
+                },
+              ]}
+            >
+              <MySubjectsScreen />
+            </CaslCan>
+          }
+        />
+      </Route>
+      <Route path="*" element={<Redirect />} />
     </Routes>
   );
 };

@@ -9,6 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import caslEnum from "@/constants/casl.enum";
+import { useCaslCan } from "@/hooks";
 import { logout } from "@/store/auth/auth.actions";
 import { userSelector } from "@/store/user/user.selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +19,10 @@ const UserProfile = () => {
   const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
+
+  const isAdmin = useCaslCan([
+    { action: caslEnum.actions.manage, subject: caslEnum.subjects.all },
+  ]);
 
   return (
     <DropdownMenu>
@@ -47,7 +53,7 @@ const UserProfile = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>My Team</DropdownMenuItem>
+          {isAdmin && <DropdownMenuItem>My Team</DropdownMenuItem>}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => dispatch(logout())}>

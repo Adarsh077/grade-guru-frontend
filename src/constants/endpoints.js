@@ -5,6 +5,7 @@ const endpoints = {
   user: {
     details: "/user",
     search: "/user/search",
+    getAbilityStatements: "/user/ability",
   },
   batch: {
     getAllBatches: "/batches",
@@ -20,6 +21,9 @@ const endpoints = {
   semesters: {
     getAllSemestersBy: (departmentId) =>
       `/departments/${departmentId}/semesters`,
+  },
+  subjects: {
+    getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
   },
 };
 

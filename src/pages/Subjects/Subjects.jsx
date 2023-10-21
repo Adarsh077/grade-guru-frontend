@@ -17,23 +17,18 @@ import {
 } from "@/components/ui/table";
 import { MoreHorizontal, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { semestersSelector } from "@/store/semester/semester.selectors";
-import { useQueryString } from "@/hooks";
+import { useParams } from "react-router-dom";
+import { subjectSelector } from "@/store/subject/subject.selectors";
 
-const Semesters = () => {
-  const { departmentId } = useParams();
-  const { queryString, parsedQueryString } = useQueryString();
+const Subjects = () => {
+  const { semesterId } = useParams();
 
-  const semesters = useSelector(semestersSelector(departmentId));
-  const navigate = useNavigate();
+  const subjects = useSelector(subjectSelector(semesterId));
+  // const navigate = useNavigate();
 
-  const handleSemesterClick = (semester) => {
-    if (!semester) return;
-    navigate({
-      pathname: `/semesters/${semester._id}/subjects`,
-      search: queryString.stringify(parsedQueryString),
-    });
+  const handleSubjectClick = (subject) => {
+    if (!subject) return;
+    // navigate(`/subjects/${subjec._id}/subjects`);
   };
 
   return (
@@ -55,18 +50,20 @@ const Semesters = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
+            <TableHead>Staff</TableHead>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {semesters.map((semester) => {
+          {subjects.map((subjects) => {
             return (
               <TableRow
                 className="cursor-pointer"
-                onClick={() => handleSemesterClick(semester)}
-                key={semester._id}
+                onClick={() => handleSubjectClick(subjects)}
+                key={subjects._id}
               >
-                <TableCell className="font-medium">{semester.name}</TableCell>
+                <TableCell className="font-medium">{subjects.name}</TableCell>
+                <TableCell>{subjects.staff?.name}</TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -94,4 +91,4 @@ const Semesters = () => {
     </div>
   );
 };
-export default Semesters;
+export default Subjects;
