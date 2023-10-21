@@ -14,6 +14,18 @@ class SubjectService {
 
     return { subjects: null };
   });
+
+  static getMySubjects = catchAsync(async ({ batch }) => {
+    const response = await appAxios.get(endpoints.subjects.getMySubjects, {
+      params: { batch },
+    });
+
+    if (response.data.status === "success" && response.data.body?.subjects) {
+      return { subjects: response.data.body.subjects };
+    }
+
+    return { subjects: null };
+  });
 }
 
 export default SubjectService;

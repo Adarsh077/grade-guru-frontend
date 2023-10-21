@@ -1,6 +1,11 @@
 import { SubjectService } from "@/services";
 import { gracelyHandleError } from "@/utils";
-import { setSubjects, setError } from "./subject.slice";
+import {
+  setSubjects,
+  setError,
+  setMySubjects,
+  setMySubjectsError,
+} from "./subject.slice";
 
 export const getAllSubjects =
   ({ semesterId }) =>
@@ -21,6 +26,29 @@ export const getAllSubjects =
       const appError = gracelyHandleError(err);
       dispatch(
         setError({
+          error: appError,
+        })
+      );
+    }
+  };
+
+export const getMySubjects =
+  ({ batch }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setMySubjectsError({
+          error: null,
+        })
+      );
+
+      const { subjects } = await SubjectService.getMySubjects({ batch });
+
+      dispatch(setMySubjects({ subjects }));
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setMySubjectsError({
           error: appError,
         })
       );
