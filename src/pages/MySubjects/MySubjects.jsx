@@ -6,7 +6,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -15,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, Plus } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { mySubjectsSelector } from "@/store/subject/subject.selectors";
 
@@ -32,15 +31,7 @@ const MySubjects = () => {
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="col-span-4">
-          <Input type="text" placeholder="Filter" />
-        </div>
-        <div className="md:col-span-5 xl:col-span-6"></div>
-        <div className="md:col-span-3 xl:col-span-2">
-          <div className="flex justify-end">
-            <Button>
-              <Plus className="mr-2 h-4 w-4" /> Add Semester
-            </Button>
-          </div>
+          <h2 className="text-2xl font-medium">My Subjects</h2>
         </div>
       </div>
       <Table className="border">

@@ -6,6 +6,9 @@ const initialState = {
 
   mySubjects: [],
   mySubjectsError: null,
+
+  isCallingAddSubjectApi: false,
+  addSubjectError: null,
 };
 
 export const subjectSlice = createSlice({
@@ -31,6 +34,13 @@ export const subjectSlice = createSlice({
     setMySubjectsError: (state, action) => {
       state.mySubjectsError = action.payload.error;
     },
+    setIsCallingAddSubjectApi: (state, action) => {
+      const { isLoading } = action.payload;
+      state.isCallingAddSubjectApi = isLoading;
+    },
+    setAddSubjectError: (state, action) => {
+      state.addSubjectError = action.payload.error;
+    },
   },
 });
 
@@ -40,6 +50,8 @@ export const {
   setError,
   setMySubjects,
   setMySubjectsError,
+  setAddSubjectError,
+  setIsCallingAddSubjectApi,
 } = subjectSlice.actions;
 
 export default subjectSlice.reducer;

@@ -5,7 +5,9 @@ import {
   setError,
   setMySubjects,
   setMySubjectsError,
+  setAddSubjectError,
 } from "./subject.slice";
+import { setIsCallingAddSemesterApi } from "../semester/semester.slice";
 
 export const getAllSubjects =
   ({ semesterId }) =>
@@ -50,6 +52,47 @@ export const getMySubjects =
       dispatch(
         setMySubjectsError({
           error: appError,
+        })
+      );
+    }
+  };
+
+export const addSubject =
+  ({ semesterId, name, staffId }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setAddSubjectError({
+          error: null,
+        })
+      );
+      dispatch(
+        setIsCallingAddSemesterApi({
+          isLoading: true,
+        })
+      );
+      const { subject } = await SubjectService.addSubject({
+        semesterId,
+        name,
+        staffId,
+      });
+
+      if (subject) {
+        await dispatch(getAllSubjects({ semesterId }));
+      }
+      return true;
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setAddSubjectError({
+          error: appError,
+        })
+      );
+      return false;
+    } finally {
+      dispatch(
+        setIsCallingAddSemesterApi({
+          isLoading: false,
         })
       );
     }

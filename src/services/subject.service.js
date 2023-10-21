@@ -26,6 +26,22 @@ class SubjectService {
 
     return { subjects: null };
   });
+
+  static addSubject = catchAsync(async ({ semesterId, name, staffId }) => {
+    const response = await appAxios.post(
+      endpoints.subjects.addSubject(semesterId),
+      {
+        name,
+        staffId,
+      }
+    );
+
+    if (response.data.status === "success" && response.data.body?.subject) {
+      return { subject: response.data.body.subject };
+    }
+
+    return { subject: null };
+  });
 }
 
 export default SubjectService;

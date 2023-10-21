@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Departments from "./Departments";
 import { departmentErrorSelector } from "@/store/department/department.selectors";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -10,10 +10,18 @@ import { useQueryString } from "@/hooks";
 import { getAllDepartments } from "@/store/department/department.actions";
 import CaslCan from "@/components/CaslCan";
 import caslEnum from "@/constants/casl.enum";
+import { useEffect } from "react";
+import { reset } from "@/store/breadcrumb/breadcrumb.slice";
 
 const DepartmentRoot = () => {
+  const dispatch = useDispatch();
   const departmentError = useSelector(departmentErrorSelector);
   const { parsedQueryString } = useQueryString();
+
+  useEffect(() => {
+    dispatch(reset());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

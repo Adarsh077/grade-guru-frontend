@@ -8,3 +8,9 @@ export const mySubjectsSelector = (state) => {
 };
 export const mySubjectsErrorSelector = (state) =>
   state.subjectReducer.mySubjectsError;
+
+export const isCallingAddSubjectApiSelector = (state) => {
+  return state.subjectReducer.isCallingAddSubjectApi;
+};
+export const addSubjectErrorSelector = (state) =>
+  state.subjectReducer.addSubjectError;
