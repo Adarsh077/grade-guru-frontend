@@ -15,14 +15,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { batchesSelector } from "@/store/batch/batch.selectors";
 import { useQueryString } from "@/hooks";
 import { useNavigate } from "react-router-dom";
+import { reset } from "@/store/breadcrumb/breadcrumb.slice";
 
 const BatchSelector = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
 
   const { parsedQueryString, changeQueryString } = useQueryString();
@@ -32,8 +33,8 @@ const BatchSelector = () => {
 
   const handleBatchChange = (batchName) => {
     if (batchName !== selectedBatch) {
-      navigate("/");
-      changeQueryString({ batch: batchName });
+      dispatch(reset());
+      navigate(`/?batch=${batchName}`);
     }
     setOpen(false);
   };

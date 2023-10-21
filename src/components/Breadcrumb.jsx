@@ -1,8 +1,22 @@
+import { removeBreadcrumbItemUntil } from "@/store/breadcrumb/breadcrumb.actions";
+import { breadcrumbsSelector } from "@/store/breadcrumb/breadcrumb.selectors";
 import { cn } from "@/utils";
 import { ChevronRight } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Breadcrumb = (props) => {
+  const breadcrumbs = useSelector(breadcrumbsSelector);
+  const dispatch = useDispatch();
+
+  const handleBreadcrumbClick = (index) => {
+    dispatch(
+      removeBreadcrumbItemUntil({
+        index,
+      })
+    );
+  };
+
   return (
     <div
       className={cn(
@@ -10,11 +24,33 @@ const Breadcrumb = (props) => {
         props.className
       )}
     >
-      <Link className="hover:bg-gray-100 px-4 py-1 rounded-full">Home</Link>
-      <ChevronRight className="w-5 h-5 " />
-      <Link className="hover:bg-gray-100 text-lg text-gray-950 px-4 py-1 rounded-full">
-        Information Technology
-      </Link>
+      {breadcrumbs.map((breadcrumb, index) => {
+        if (index === breadcrumbs.length - 1) {
+          return (
+            <p
+              key={`breadcrumb-${index}`}
+              className="hover:bg-gray-100 text-lg text-gray-950 px-4 py-1 rounded-full"
+            >
+              {breadcrumb.label}
+            </p>
+          );
+        }
+
+        return [
+          <Link
+            key={`breadcrumb-${index}`}
+            to={breadcrumb.link}
+            className="hover:bg-gray-100 px-4 py-1 rounded-full"
+            onClick={() => handleBreadcrumbClick(index)}
+          >
+            {breadcrumb.label}
+          </Link>,
+          <ChevronRight
+            key={`breadcrumb-${index}-arrow`}
+            className="w-5 h-5 "
+          />,
+        ];
+      })}
     </div>
   );
 };
