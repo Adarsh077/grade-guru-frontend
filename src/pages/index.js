@@ -3,3 +3,4 @@ export { default as DepartmentsScreen } from "./Departments";
 export { default as SemestersScreen } from "./Semesters";
 export { default as SubjectsScreen } from "./Subjects";
 export { default as MySubjectsScreen } from "./MySubjects";
+export { default as StudentsBySemester } from "./StudentsBySemester";

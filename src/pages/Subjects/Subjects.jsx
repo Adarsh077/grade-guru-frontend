@@ -6,7 +6,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -15,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, Plus } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { subjectSelector } from "@/store/subject/subject.selectors";
@@ -24,11 +23,9 @@ const Subjects = () => {
   const { semesterId } = useParams();
 
   const subjects = useSelector(subjectSelector(semesterId));
-  // const navigate = useNavigate();
 
   const handleSubjectClick = (subject) => {
     if (!subject) return;
-    // navigate(`/subjects/${subjec._id}/subjects`);
   };
 
   return (

@@ -3,6 +3,7 @@ import {
   DepartmentsScreen,
   MySubjectsScreen,
   SemestersScreen,
+  StudentsBySemester,
   SubjectsScreen,
 } from "@/pages";
 import { Route, Routes } from "react-router-dom";
@@ -58,6 +59,21 @@ const ProtectedRoutes = () => {
               ]}
             >
               <SubjectsScreen />
+            </CaslCan>
+          }
+        />
+        <Route
+          path=":semesterId/students"
+          element={
+            <CaslCan
+              requiredAbilities={[
+                {
+                  action: caslEnum.actions.read,
+                  subject: caslEnum.subjects.semesters,
+                },
+              ]}
+            >
+              <StudentsBySemester />
             </CaslCan>
           }
         />
