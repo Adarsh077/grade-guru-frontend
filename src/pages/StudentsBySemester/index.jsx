@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { studentsBySemesterErrorSelector } from "@/store/students-by-semester/students-by-semester.selectors";
 import { getStudentsBySemester } from "@/store/students-by-semester/students-by-semester.actions";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { LogIn } from "lucide-react";
 
 const StudentsBySemesterRoot = () => {
   const { semesterId } = useParams();
@@ -29,7 +29,7 @@ const StudentsBySemesterRoot = () => {
               View Subjects
             </Link>
             <Button variant="secondary">
-              <Plus className="mr-2 h-4 w-4" /> Import
+              <LogIn className="mr-2 h-4 w-4" /> Import
             </Button>
           </div>
         </div>

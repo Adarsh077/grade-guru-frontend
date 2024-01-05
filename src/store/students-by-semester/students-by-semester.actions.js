@@ -40,6 +40,8 @@ export const updateStudentsBySemester =
   ({ semesterId, students }) =>
   async (dispatch) => {
     try {
+      dispatch(updateStudentsBySemesterId({ semesterId, students }));
+
       dispatch(
         setUpdateStudentsBySemesterError({
           error: null,
@@ -58,9 +60,9 @@ export const updateStudentsBySemester =
 
       if (status !== "success") {
         throw new AppError({ message: "Something went wrong!" });
+      } else if (students.find((student) => !student.name)) {
+        await dispatch(getStudentsBySemester({ semesterId }));
       }
-
-      dispatch(updateStudentsBySemesterId({ semesterId, students }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(
