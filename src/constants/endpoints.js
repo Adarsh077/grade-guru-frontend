@@ -23,6 +23,7 @@ const endpoints = {
       `/departments/${departmentId}/semesters`,
     addSemesterBy: (departmentId) => `/departments/${departmentId}/semesters`,
     getStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
+    addStudents: (semesterId) => `/semesters/${semesterId}/students`,
     updateStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
   },
   subjects: {

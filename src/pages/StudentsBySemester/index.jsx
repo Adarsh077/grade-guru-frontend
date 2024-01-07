@@ -7,8 +7,6 @@ import FetchData from "@/components/FetchData";
 import { useSelector } from "react-redux";
 import { studentsBySemesterErrorSelector } from "@/store/students-by-semester/students-by-semester.selectors";
 import { getStudentsBySemester } from "@/store/students-by-semester/students-by-semester.actions";
-import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
 
 const StudentsBySemesterRoot = () => {
   const { semesterId } = useParams();
@@ -20,13 +18,13 @@ const StudentsBySemesterRoot = () => {
         <div className="md:col-span-7 xl:col-span-8">
           <Breadcrumb className="-translate-x-4" />
         </div>
-        <div className="md:col-span-5 xl:col-span-4">
+        {/* <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
             <Button variant="secondary">
               <LogIn className="mr-2 h-4 w-4" /> Import
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <FetchData

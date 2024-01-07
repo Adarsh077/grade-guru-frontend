@@ -6,6 +6,9 @@ import {
   setIsCallingUpdateStudentsBySemesterApi,
   setUpdateStudentsBySemesterError,
   updateStudentsBySemesterId,
+  addStudentsBySemesterId,
+  setAddStudentsBySemesterError,
+  setIsCallingAddStudentsBySemesterApi,
 } from "./students-by-semester.slice";
 
 export const getStudentsBySemester =
@@ -74,6 +77,48 @@ export const updateStudentsBySemester =
     } finally {
       dispatch(
         setIsCallingUpdateStudentsBySemesterApi({
+          isLoading: false,
+        })
+      );
+    }
+  };
+
+export const addStudentsBySemester =
+  ({ semesterId, students }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setAddStudentsBySemesterError({
+          error: null,
+        })
+      );
+      dispatch(
+        setIsCallingAddStudentsBySemesterApi({
+          isLoading: true,
+        })
+      );
+      const { studentsBySemester } =
+        await StudentsBySemesterService.addStudentsBySemester({
+          semesterId,
+          students,
+        });
+
+      if (studentsBySemester && studentsBySemester.length) {
+        await dispatch(
+          addStudentsBySemesterId({ students: studentsBySemester, semesterId })
+        );
+      }
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setAddStudentsBySemesterError({
+          error: appError,
+        })
+      );
+      return false;
+    } finally {
+      dispatch(
+        setIsCallingAddStudentsBySemesterApi({
           isLoading: false,
         })
       );

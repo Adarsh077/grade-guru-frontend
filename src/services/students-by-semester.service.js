@@ -18,6 +18,24 @@ class StudentsBySemesterService {
     return { studentsBySemester: [] };
   });
 
+  static addStudentsBySemester = catchAsync(
+    async ({ semesterId, students }) => {
+      const response = await appAxios.post(
+        endpoints.semesters.addStudents(semesterId),
+        { students }
+      );
+
+      if (
+        response.data.status === "success" &&
+        response.data.body?.studentsBySemester
+      ) {
+        return { studentsBySemester: response.data.body?.studentsBySemester };
+      }
+
+      return { studentsBySemester: [] };
+    }
+  );
+
   static updateStudentsBySemester = catchAsync(
     async ({ semesterId, students }) => {
       const response = await appAxios.patch(

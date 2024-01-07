@@ -4,10 +4,15 @@ import "react-data-grid/lib/styles.css";
 import DataGrid, { textEditor } from "react-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { studentsBySemesterSelector } from "@/store/students-by-semester/students-by-semester.selectors";
-import { updateStudentsBySemester } from "@/store/students-by-semester/students-by-semester.actions";
+import {
+  addStudentsBySemester,
+  updateStudentsBySemester,
+} from "@/store/students-by-semester/students-by-semester.actions";
 import { AddMoreRows } from "@/features";
 
-const columns = [{ key: "name", name: "Name", renderEditCell: textEditor }];
+const columns = [
+  { key: "name", name: "Name", renderEditCell: textEditor, editable: true },
+];
 
 const StudentsBySemester = ({ semesterId }) => {
   const gridRef = useRef(null);
@@ -36,7 +41,7 @@ const StudentsBySemester = ({ semesterId }) => {
 
   const handleAddMoreRows = (rowsCount) => {
     dispatch(
-      updateStudentsBySemester({
+      addStudentsBySemester({
         semesterId,
         students: Array(rowsCount)
           .fill(0)
