@@ -82,3 +82,6 @@
 .rdg .rdg-cell {
   @apply border-b border-l border-r border-slate-300;
 }
+html {
+  scrollbar-gutter: stable both-edges;
+}

@@ -1,13 +1,13 @@
 import "react-data-grid/lib/styles.css";
 
 import Breadcrumb from "@/components/Breadcrumb";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StudentsBySemester from "./StudentsBySemester";
 import FetchData from "@/components/FetchData";
 import { useSelector } from "react-redux";
 import { studentsBySemesterErrorSelector } from "@/store/students-by-semester/students-by-semester.selectors";
 import { getStudentsBySemester } from "@/store/students-by-semester/students-by-semester.actions";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 
 const StudentsBySemesterRoot = () => {
@@ -22,12 +22,6 @@ const StudentsBySemesterRoot = () => {
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
-            <Link
-              className={buttonVariants({ variant: "ghost" })}
-              to={`/semesters/${semesterId}/subjects`}
-            >
-              View Subjects
-            </Link>
             <Button variant="secondary">
               <LogIn className="mr-2 h-4 w-4" /> Import
             </Button>
