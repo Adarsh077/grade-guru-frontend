@@ -2,7 +2,7 @@ import catchAsync from "@/utils";
 import appAxios from "./axios.service";
 import endpoints from "@/constants/endpoints";
 
-class UserService {
+class BatchService {
   static getAllBatches = catchAsync(async () => {
     const response = await appAxios.get(endpoints.batch.getAllBatches);
 
@@ -14,4 +14,4 @@ class UserService {
   });
 }
 
-export default UserService;
+export default BatchService;

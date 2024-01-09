@@ -30,6 +30,8 @@ const endpoints = {
     getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
     addSubject: (semesterId) => `/semesters/${semesterId}/subjects`,
     getMySubjects: `/subjects/my`,
+    getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
+    updateMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
   },
 };
 

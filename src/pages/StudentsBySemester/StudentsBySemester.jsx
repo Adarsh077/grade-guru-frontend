@@ -10,9 +10,7 @@ import {
 } from "@/store/students-by-semester/students-by-semester.actions";
 import { AddMoreRows } from "@/features";
 
-const columns = [
-  { key: "name", name: "Name", renderEditCell: textEditor, editable: true },
-];
+const columns = [{ key: "name", name: "Name", renderEditCell: textEditor }];
 
 const StudentsBySemester = ({ semesterId }) => {
   const gridRef = useRef(null);
@@ -20,10 +18,10 @@ const StudentsBySemester = ({ semesterId }) => {
   const studentsBySemester = useSelector(
     studentsBySemesterSelector(semesterId)
   );
+  const isEditingRef = useRef(false);
 
   const handleChange = (updatedRows, data) => {
     const updatedRow = updatedRows[data.indexes[0]];
-
     dispatch(updateStudentsBySemester({ semesterId, students: [updatedRow] }));
   };
 
@@ -31,11 +29,15 @@ const StudentsBySemester = ({ semesterId }) => {
     if (event.key === "Enter" && gridRef.current) {
       gridRef.current.selectCell(
         {
-          rowIdx: data.rowIdx + 1,
+          rowIdx: isEditingRef.current ? data.rowIdx + 1 : data.rowIdx,
           idx: data.column.idx,
         },
         true
       );
+      isEditingRef.current = !isEditingRef.current;
+    }
+    if ("qwertyuiopasdfghjklzxcvbnm1234567890 ".split("").includes(event.key)) {
+      isEditingRef.current = true;
     }
   };
 

@@ -57,8 +57,11 @@ const DeleteDepartmentAlertDailog = (props) => {
             </Alert>
           )}
           <AlertDialogDescription>
-            This action will delete <b>{department.name}</b> department and no
-            one will be able to see it.
+            This action will delete{" "}
+            <span className="font-semibold bg-slate-200 text-slate-600 px-1 py-[3px] rounded-md">
+              {department.name}
+            </span>{" "}
+            department and no one will be able to see it.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

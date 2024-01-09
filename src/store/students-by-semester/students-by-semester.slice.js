@@ -23,10 +23,7 @@ export const studentsBySemesterSlice = createSlice({
         state.studentsBySemester[semesterId] = [];
       }
 
-      state.studentsBySemester[semesterId] = [
-        ...state.studentsBySemester[semesterId],
-        ...students,
-      ];
+      state.studentsBySemester[semesterId] = students;
     },
     setStudentsBySemester: (state, action) => {
       const { students, semesterId } = action.payload;

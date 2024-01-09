@@ -8,6 +8,7 @@ import semesterSlice from "./semester/semester.slice";
 import subjectSlice from "./subject/subject.slice";
 import breadcrumbSlice from "./breadcrumb/breadcrumb.slice";
 import studentsBySemesterSlice from "./students-by-semester/students-by-semester.slice";
+import marksBySubjectSlice from "./marks-by-subject/marks-by-subject.slice";
 
 const rootReducer = combineReducers({
   authReducer: authSlice,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   subjectReducer: subjectSlice,
   breadcrumbReducer: breadcrumbSlice,
   studentsBySemesterReducer: studentsBySemesterSlice,
+  marksBySubjectReducer: marksBySubjectSlice,
 });
 
 export const store = configureStore({

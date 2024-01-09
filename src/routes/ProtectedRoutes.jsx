@@ -1,6 +1,7 @@
 import { DashbordLayout, MySubjectsLayout } from "@/layouts";
 import {
   DepartmentsScreen,
+  MarksBySubject,
   MySubjectsScreen,
   SemestersScreen,
   StudentsBySemester,
@@ -94,6 +95,7 @@ const ProtectedRoutes = () => {
             </CaslCan>
           }
         />
+        <Route path=":subjectId/marks" element={<MarksBySubject />} />
       </Route>
       <Route path="*" element={<Redirect />} />
     </Routes>

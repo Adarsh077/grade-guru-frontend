@@ -4,3 +4,4 @@ export { default as SemestersScreen } from "./Semesters";
 export { default as SubjectsScreen } from "./Subjects";
 export { default as MySubjectsScreen } from "./MySubjects";
 export { default as StudentsBySemester } from "./StudentsBySemester";
+export { default as MarksBySubject } from "./MarksBySubject";

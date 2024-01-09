@@ -15,17 +15,34 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { subjectSelector } from "@/store/subject/subject.selectors";
+import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
+import { useQueryString } from "@/hooks";
 
 const Subjects = () => {
   const { semesterId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { queryString, parsedQueryString } = useQueryString();
 
   const subjects = useSelector(subjectSelector(semesterId));
 
   const handleSubjectClick = (subject) => {
     if (!subject) return;
+
+    dispatch(
+      pushBreadcrumbItem({
+        label: subject.name,
+        link: `/subjects/${subject._id}/marks`,
+      })
+    );
+
+    navigate({
+      pathname: `/subjects/${subject._id}/marks`,
+      search: queryString.stringify(parsedQueryString),
+    });
   };
 
   return (
