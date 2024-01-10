@@ -21,6 +21,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { semestersSelector } from "@/store/semester/semester.selectors";
 import { useQueryString } from "@/hooks";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
+import { toast } from "sonner";
 
 const Semesters = () => {
   const { departmentId } = useParams();
@@ -41,6 +42,24 @@ const Semesters = () => {
     navigate({
       pathname: `/semesters/${semester._id}/subjects`,
       search: queryString.stringify(parsedQueryString),
+    });
+  };
+
+  const handleGenerateResult = (e) => {
+    e.stopPropagation();
+
+    const promise = () =>
+      new Promise((resolve) => setTimeout(() => resolve(), 2000));
+    toast.promise(promise, {
+      loading: "Generating result...",
+      success: () => {
+        var link = document.createElement("a");
+        link.href = "/result.pdf";
+        link.download = "result.pdf";
+        link.dispatchEvent(new MouseEvent("click"));
+        return `Result generated!`;
+      },
+      error: "Error",
     });
   };
 
@@ -72,6 +91,9 @@ const Semesters = () => {
                   <DropdownMenuContent className="w-40" align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleGenerateResult}>
+                      Generate Result
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={(event) => event.stopPropagation()}
                     >
