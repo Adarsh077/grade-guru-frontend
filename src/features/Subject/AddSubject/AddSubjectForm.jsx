@@ -22,10 +22,12 @@ import {
 } from "@/store/subject/subject.selectors";
 import { addSubject } from "@/store/subject/subject.actions";
 import UserAutocomplete from "@/components/UserAutocomplete";
+import SubjectExamsSelector from "../SubjectExamsSelector";
 
 const addSubjectSchema = z.object({
   name: z.string().min(1, "Name is required!"),
   code: z.string().min(2, "Code is required!"),
+  exams: z.enum(["ESE", "PROR"]).default("ESE"),
   staff: z
     .object(
       {
@@ -49,6 +51,7 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
       name: "",
       staff: null,
       code: "",
+      exams: "ESE",
     },
   });
 
@@ -64,6 +67,9 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
       if (addSubjectError.errors.code) {
         form.setError("code", { message: addSubjectError.errors.code });
       }
+      if (addSubjectError.errors.exams) {
+        form.setError("exams", { message: addSubjectError.errors.exams });
+      }
     }
     if (addSubjectError.message) {
       form.setError("root", { message: addSubjectError.message });
@@ -77,6 +83,7 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
         staffId: values.staff.value,
         code: values.code,
         semesterId,
+        exams: values.exams,
       })
     );
     if (isAdded) {
@@ -137,6 +144,31 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
               );
             }}
           />
+          <FormField
+            control={form.control}
+            name="exams"
+            render={({ field }) => {
+              const { value, ...rest } = field;
+
+              return (
+                <FormItem>
+                  <FormLabel>Exams</FormLabel>
+                  <FormControl>
+                    <div {...rest}>
+                      <SubjectExamsSelector
+                        value={value}
+                        onChange={(newValue) =>
+                          form.setValue("exams", newValue)
+                        }
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+
           <div className="h-1"></div>
           <DialogFooter>
             <Button

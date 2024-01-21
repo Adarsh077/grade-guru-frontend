@@ -28,13 +28,14 @@ class SubjectService {
   });
 
   static addSubject = catchAsync(
-    async ({ semesterId, name, staffId, code }) => {
+    async ({ semesterId, name, staffId, code, exams }) => {
       const response = await appAxios.post(
         endpoints.subjects.addSubject(semesterId),
         {
           name,
           staffId,
           code,
+          exams,
         }
       );
 
