@@ -25,6 +25,7 @@ import UserAutocomplete from "@/components/UserAutocomplete";
 
 const addSubjectSchema = z.object({
   name: z.string().min(1, "Name is required!"),
+  code: z.string().min(2, "Code is required!"),
   staff: z
     .object(
       {
@@ -47,6 +48,7 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
     defaultValues: {
       name: "",
       staff: null,
+      code: "",
     },
   });
 
@@ -59,6 +61,9 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
       if (addSubjectError.errors.hod) {
         form.setError("hod", { message: addSubjectError.errors.hod });
       }
+      if (addSubjectError.errors.code) {
+        form.setError("code", { message: addSubjectError.errors.code });
+      }
     }
     if (addSubjectError.message) {
       form.setError("root", { message: addSubjectError.message });
@@ -70,6 +75,7 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
       addSubject({
         name: values.name,
         staffId: values.staff.value,
+        code: values.code,
         semesterId,
       })
     );
@@ -92,6 +98,21 @@ const AddSubjectForm = ({ semesterId, handleClose }) => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter Subject name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            control={form.control}
+            name="code"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Subject Code</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Subject code" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

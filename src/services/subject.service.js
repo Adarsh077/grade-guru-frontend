@@ -27,21 +27,24 @@ class SubjectService {
     return { subjects: null };
   });
 
-  static addSubject = catchAsync(async ({ semesterId, name, staffId }) => {
-    const response = await appAxios.post(
-      endpoints.subjects.addSubject(semesterId),
-      {
-        name,
-        staffId,
+  static addSubject = catchAsync(
+    async ({ semesterId, name, staffId, code }) => {
+      const response = await appAxios.post(
+        endpoints.subjects.addSubject(semesterId),
+        {
+          name,
+          staffId,
+          code,
+        }
+      );
+
+      if (response.data.status === "success" && response.data.body?.subject) {
+        return { subject: response.data.body.subject };
       }
-    );
 
-    if (response.data.status === "success" && response.data.body?.subject) {
-      return { subject: response.data.body.subject };
+      return { subject: null };
     }
-
-    return { subject: null };
-  });
+  );
 }
 
 export default SubjectService;

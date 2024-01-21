@@ -58,7 +58,7 @@ export const getMySubjects =
   };
 
 export const addSubject =
-  ({ semesterId, name, staffId }) =>
+  ({ semesterId, name, staffId, code }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -75,6 +75,7 @@ export const addSubject =
         semesterId,
         name,
         staffId,
+        code,
       });
 
       if (subject) {
