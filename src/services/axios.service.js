@@ -9,4 +9,8 @@ export const setAuthHeader = (token) => {
   appAxios.defaults.headers["Authorization"] = token ? `Bearer ${token}` : "";
 };
 
+export const resultGeneratorAxios = axios.create({
+  baseURL: appConfig.resultGeneratorBaseUrl,
+});
+
 export default appAxios;

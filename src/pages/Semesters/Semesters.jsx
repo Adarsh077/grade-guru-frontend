@@ -22,6 +22,7 @@ import { semestersSelector } from "@/store/semester/semester.selectors";
 import { useQueryString } from "@/hooks";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { toast } from "sonner";
+import ResultService from "@/services/result.service";
 
 const Semesters = () => {
   const { departmentId } = useParams();
@@ -45,17 +46,13 @@ const Semesters = () => {
     });
   };
 
-  const handleGenerateResult = (e) => {
-    e.stopPropagation();
-
-    const promise = () =>
-      new Promise((resolve) => setTimeout(() => resolve(), 2000));
-    toast.promise(promise, {
+  const handleGenerateResult = (semesterId) => {
+    toast.promise(ResultService.generateResult({ semesterId }), {
       loading: "Generating result...",
       success: () => {
         var link = document.createElement("a");
-        link.href = "/result.pdf";
-        link.download = "result.pdf";
+        link.href = "http://localhost:3001/result.pdf";
+        link.target = "_blank";
         link.dispatchEvent(new MouseEvent("click"));
         return `Result generated!`;
       },
@@ -91,7 +88,12 @@ const Semesters = () => {
                   <DropdownMenuContent className="w-40" align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleGenerateResult}>
+                    <DropdownMenuItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleGenerateResult(semester._id);
+                      }}
+                    >
                       Generate Result
                     </DropdownMenuItem>
                     <DropdownMenuItem

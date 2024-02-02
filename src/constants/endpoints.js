@@ -33,6 +33,10 @@ const endpoints = {
     getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
     updateMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
   },
+  result: {
+    generateResult: (semesterId) => `/semesters/${semesterId}/result/generate`,
+    generateResultPdf: (semesterId) => `/semesters/${semesterId}`,
+  },
 };
 
 export default endpoints;
