@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from "@/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -15,13 +17,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useDispatch, useSelector } from "react-redux";
-import { batchesSelector } from "@/store/batch/batch.selectors";
 import { useQueryString } from "@/hooks";
-import { useNavigate } from "react-router-dom";
+import { batchesSelector } from "@/store/batch/batch.selectors";
 import { reset } from "@/store/breadcrumb/breadcrumb.slice";
+import { cn } from "@/utils";
 
-const BatchSelector = () => {
+const BatchSelector = (props) => {
+  const { disabled } = props;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
@@ -52,6 +55,7 @@ const BatchSelector = () => {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
+            disabled={disabled}
             variant="outline"
             role="combobox"
             aria-expanded={open}

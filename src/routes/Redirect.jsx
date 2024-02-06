@@ -1,6 +1,7 @@
+import { Navigate } from "react-router-dom";
+
 import caslEnum from "@/constants/casl.enum";
 import { useCaslCan, useQueryString } from "@/hooks";
-import { Navigate } from "react-router-dom";
 
 const Redirect = () => {
   const { parsedQueryString } = useQueryString();

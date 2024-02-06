@@ -1,13 +1,15 @@
-import FetchData from "@/components/FetchData";
-import Semesters from "./Semesters";
-import { useSelector } from "react-redux";
-import { semesterErrorSelector } from "@/store/semester/semester.selectors";
-import { getAllSemesters } from "@/store/semester/semester.actions";
-import { useParams } from "react-router-dom";
-import Breadcrumb from "@/components/Breadcrumb";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import Breadcrumb from "@/components/Breadcrumb";
+import FetchData from "@/components/FetchData";
+import { Button } from "@/components/ui/button";
 import { AddSemesterDailog } from "@/features";
+import { getAllSemesters } from "@/store/semester/semester.actions";
+import { semesterErrorSelector } from "@/store/semester/semester.selectors";
+
+import Semesters from "./Semesters";
 
 const SemestersRoot = () => {
   const { departmentId } = useParams();

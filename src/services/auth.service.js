@@ -1,4 +1,5 @@
 import catchAsync, { AppError } from "@/utils";
+
 import appAxios from "./axios.service";
 
 class AuthService {

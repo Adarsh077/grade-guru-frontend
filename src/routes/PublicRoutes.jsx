@@ -1,5 +1,6 @@
-import { LoginScreen } from "@/pages";
 import { Navigate, Route, Routes } from "react-router-dom";
+
+import { LoginScreen } from "@/pages";
 
 const PublicRoutes = () => {
   return (

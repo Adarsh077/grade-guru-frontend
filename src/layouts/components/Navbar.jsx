@@ -1,17 +1,26 @@
 import { Link, useLocation } from "react-router-dom";
-import UserProfile from "./UserProfile";
-import { BatchSelector } from "@/features";
-import { cn } from "@/utils";
-import { useCaslCan, useQueryString } from "@/hooks";
-import caslEnum from "@/constants/casl.enum";
 
-const Navbar = () => {
+import caslEnum from "@/constants/casl.enum";
+import { BatchSelector } from "@/features";
+import { useCaslCan, useQueryString } from "@/hooks";
+import { cn } from "@/utils";
+
+import UserProfile from "./UserProfile";
+
+const Navbar = (props) => {
+  const { disableBatchSelector = false } = props;
+
   const { parsedQueryString } = useQueryString();
   const location = useLocation();
 
   const isNotStaff = useCaslCan([
     { action: caslEnum.actions.manage, subject: caslEnum.subjects.subjects },
   ]);
+
+  const isDashboardSelected =
+    ["/departments", "/semesters", "/subjects"].find((path) =>
+      location.pathname.startsWith(path)
+    ) && location.pathname !== "/subjects/my";
 
   return (
     <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -26,16 +35,16 @@ const Navbar = () => {
             )}
           >
             <Link
-              to={`/?batch=${parsedQueryString.batch}`}
+              to={`/?batch=${parsedQueryString.batch || ""}`}
               className={cn(
                 "text-sm text-muted-foreground font-medium transition-colors hover:text-primary",
-                location.pathname !== "/subjects/my" && "text-primary"
+                isDashboardSelected && "text-primary"
               )}
             >
               Dashboard
             </Link>
             <Link
-              to={`/subjects/my?batch=${parsedQueryString.batch}`}
+              to={`/subjects/my?batch=${parsedQueryString.batch || ""}`}
               className={cn(
                 "text-sm text-muted-foreground font-medium transition-colors hover:text-primary",
                 location.pathname === "/subjects/my" && "text-primary"
@@ -46,7 +55,7 @@ const Navbar = () => {
           </nav>
         )}
         <div className="flex items-center space-x-4">
-          <BatchSelector />
+          <BatchSelector disabled={disableBatchSelector} />
           <UserProfile />
         </div>
       </div>

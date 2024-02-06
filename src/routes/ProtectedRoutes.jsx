@@ -1,16 +1,19 @@
-import { DashbordLayout, MySubjectsLayout } from "@/layouts";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import CaslCan from "@/components/CaslCan";
+import caslEnum from "@/constants/casl.enum";
+import { DashbordLayout, MySubjectsLayout, MasterListLayout } from "@/layouts";
 import {
   DepartmentsScreen,
   MarksBySubject,
+  MasterListStudents,
   MySubjectsScreen,
   SemestersScreen,
   StudentsBySemester,
   SubjectsScreen,
 } from "@/pages";
-import { Route, Routes } from "react-router-dom";
+
 import Redirect from "./Redirect";
-import CaslCan from "@/components/CaslCan";
-import caslEnum from "@/constants/casl.enum";
 
 const ProtectedRoutes = () => {
   return (
@@ -96,6 +99,13 @@ const ProtectedRoutes = () => {
           }
         />
         <Route path=":subjectId/marks" element={<MarksBySubject />} />
+      </Route>
+      <Route path="/master-list" element={<MasterListLayout />}>
+        <Route path="students" element={<MasterListStudents />} />
+        <Route
+          path=""
+          element={<Navigate to="/master-list/students" replace />}
+        />
       </Route>
       <Route path="*" element={<Redirect />} />
     </Routes>

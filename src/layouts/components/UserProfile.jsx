@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +16,6 @@ import caslEnum from "@/constants/casl.enum";
 import { useCaslCan } from "@/hooks";
 import { logout } from "@/store/auth/auth.actions";
 import { userSelector } from "@/store/user/user.selectors";
-import { useDispatch, useSelector } from "react-redux";
 
 const UserProfile = () => {
   const user = useSelector(userSelector);
@@ -52,8 +54,11 @@ const UserProfile = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          {isAdmin && <DropdownMenuItem>My Team</DropdownMenuItem>}
+          {isAdmin && (
+            <Link to="/master-list">
+              <DropdownMenuItem>Master List</DropdownMenuItem>
+            </Link>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => dispatch(logout())}>
