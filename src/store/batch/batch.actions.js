@@ -1,5 +1,6 @@
 import { BatchService } from "@/services";
 import { gracelyHandleError } from "@/utils";
+
 import { setBatches, setError } from "./batch.slice";
 
 export const getAllBatches = () => async (dispatch) => {

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 
-import { checkIsAuthenticated } from "@/store/auth/auth.actions";
-
-import PublicRoutes from "./PublicRoutes";
-import ProtectedRoutes from "./ProtectedRoutes";
-import { isAutenticatedSelector } from "@/store/auth/auth.selectors";
 import FetchData from "@/components/FetchData";
+import { checkIsAuthenticated } from "@/store/auth/auth.actions";
+import { isAutenticatedSelector } from "@/store/auth/auth.selectors";
+import { getAllBatches } from "@/store/batch/batch.actions";
+import { batchErrorSelector } from "@/store/batch/batch.selectors";
 import {
   getUserDetails,
   getUserAbilityStatements,
@@ -15,8 +15,9 @@ import {
   userAbilityStatementsErrorSelector,
   userErrorSelector,
 } from "@/store/user/user.selectors";
-import { getAllBatches } from "@/store/batch/batch.actions";
-import { batchErrorSelector } from "@/store/batch/batch.selectors";
+
+import ProtectedRoutes from "./ProtectedRoutes";
+import PublicRoutes from "./PublicRoutes";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();

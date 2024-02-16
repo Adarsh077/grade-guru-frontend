@@ -1,5 +1,6 @@
 import { SemesterService } from "@/services";
 import { gracelyHandleError } from "@/utils";
+
 import {
   setSemesters,
   setError,

@@ -4,11 +4,12 @@ import CaslCan from "@/components/CaslCan";
 import caslEnum from "@/constants/casl.enum";
 import { DashbordLayout, MySubjectsLayout, MasterListLayout } from "@/layouts";
 import {
+  BatchList,
   DepartmentsScreen,
   MarksBySubject,
-  MasterListStudents,
   MySubjectsScreen,
   SemestersScreen,
+  StudentsByBatch,
   StudentsBySemester,
   SubjectsScreen,
 } from "@/pages";
@@ -101,10 +102,14 @@ const ProtectedRoutes = () => {
         <Route path=":subjectId/marks" element={<MarksBySubject />} />
       </Route>
       <Route path="/master-list" element={<MasterListLayout />}>
-        <Route path="students" element={<MasterListStudents />} />
+        <Route path="batches" element={<BatchList />} />
+        <Route
+          path="batches/:batchYear/students"
+          element={<StudentsByBatch />}
+        />
         <Route
           path=""
-          element={<Navigate to="/master-list/students" replace />}
+          element={<Navigate to="/master-list/batches" replace />}
         />
       </Route>
       <Route path="*" element={<Redirect />} />

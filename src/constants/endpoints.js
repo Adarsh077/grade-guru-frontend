@@ -37,6 +37,9 @@ const endpoints = {
     generateResult: (semesterId) => `/semesters/${semesterId}/result/generate`,
     generateResultPdf: (semesterId) => `/semesters/${semesterId}`,
   },
+  students: {
+    getAllStudents: `/students`,
+  },
 };
 
 export default endpoints;

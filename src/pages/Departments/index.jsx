@@ -1,17 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
-import Departments from "./Departments";
-import { departmentErrorSelector } from "@/store/department/department.selectors";
-import Breadcrumb from "@/components/Breadcrumb";
-import { AddDepartmentDailog } from "@/features";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import FetchData from "@/components/FetchData";
-import { useQueryString } from "@/hooks";
-import { getAllDepartments } from "@/store/department/department.actions";
-import CaslCan from "@/components/CaslCan";
-import caslEnum from "@/constants/casl.enum";
 import { useEffect } from "react";
+
+import { Plus } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Breadcrumb from "@/components/Breadcrumb";
+import CaslCan from "@/components/CaslCan";
+import FetchData from "@/components/FetchData";
+import { Button } from "@/components/ui/button";
+import caslEnum from "@/constants/casl.enum";
+import { AddDepartmentDailog } from "@/features";
+import { useQueryString } from "@/hooks";
 import { reset } from "@/store/breadcrumb/breadcrumb.slice";
+import { getAllDepartments } from "@/store/department/department.actions";
+import { departmentErrorSelector } from "@/store/department/department.selectors";
+
+import Departments from "./Departments";
 
 const DepartmentRoot = () => {
   const dispatch = useDispatch();
