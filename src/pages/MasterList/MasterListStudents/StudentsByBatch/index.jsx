@@ -1,12 +1,19 @@
+import { useState } from "react";
+
 import { ArrowLeft, FileUp } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import readXlsxFile from "read-excel-file";
+import { toast } from "sonner";
 
 import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { singleBatchSelector } from "@/store/batch/batch.selectors";
-import { getAllStudentsByBatch } from "@/store/students/students.actions";
+import {
+  addStudent,
+  getAllStudentsByBatch,
+} from "@/store/students/students.actions";
 import {
   studentErrorSelector,
   studentSelector,
@@ -19,6 +26,33 @@ const StudentsByBatchRoot = () => {
   const studentsError = useSelector(studentErrorSelector);
   const batch = useSelector(singleBatchSelector(batchYear));
   const studentsByBatch = useSelector(studentSelector(batchYear));
+  const [selectedTab, setSelectedTab] = useState("regular");
+  const dispatch = useDispatch();
+
+  const handleImport = async (e) => {
+    let toastId = toast.loading("Reading Excel File...");
+
+    const students = await readXlsxFile(e.target.files[0]);
+    students.shift();
+
+    if (toastId) toast.dismiss(toastId);
+    toastId = toast("Importing Student list in database...", {
+      dismissible: false,
+    });
+
+    for (const student of students) {
+      await dispatch(
+        addStudent({
+          admissionYear: +batchYear,
+          email: student[1],
+          name: student[0],
+          studentType: selectedTab === "dse" ? "DSE" : "REGULAR",
+        })
+      );
+    }
+
+    if (toastId) toast.dismiss(toastId);
+  };
 
   return (
     <div>
@@ -41,18 +75,26 @@ const StudentsByBatchRoot = () => {
         dispatchFunction={getAllStudentsByBatch({ batch: batchYear })}
         dependencies={[batchYear]}
       >
-        <Tabs defaultValue="regular">
+        <Tabs
+          onValueChange={(value) => setSelectedTab(value)}
+          value={selectedTab}
+        >
           <div className="flex items-center justify-between w-full">
             <TabsList className="grid w-[400px] grid-cols-2">
               <TabsTrigger value="regular">REGULAR</TabsTrigger>
               <TabsTrigger value="dse">DSE</TabsTrigger>
             </TabsList>
             <div className="flex justify-end">
-              {/* <AddDepartmentDailog> */}
-              <Button variant="ghost">
-                <FileUp className="mr-2 h-4 w-4" /> Import
-              </Button>
-              {/* </AddDepartmentDailog> */}
+              <div className="relative">
+                <input
+                  type="file"
+                  className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                  onChange={handleImport}
+                />
+                <Button variant="ghost">
+                  <FileUp className="mr-2 h-4 w-4" /> Import
+                </Button>
+              </div>
             </div>
           </div>
           <TabsContent value="regular">

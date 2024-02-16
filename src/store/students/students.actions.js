@@ -27,3 +27,31 @@ export const getAllStudentsByBatch =
       );
     }
   };
+
+export const addStudent =
+  ({ name, email, studentType, admissionYear }) =>
+  async (dispatch) => {
+    try {
+      const { student } = await StudentsService.addStudent({
+        name,
+        email,
+        studentType,
+        admissionYear,
+      });
+
+      if (student) {
+        await dispatch(
+          getAllStudentsByBatch({
+            batch: admissionYear,
+          })
+        );
+      }
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setError({
+          error: appError,
+        })
+      );
+    }
+  };

@@ -39,6 +39,7 @@ const endpoints = {
   },
   students: {
     getAllStudents: `/students`,
+    addStudent: `/students`,
   },
 };
 
