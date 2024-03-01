@@ -41,6 +41,25 @@ const endpoints = {
     getAllStudents: `/students`,
     addStudent: `/students`,
   },
+  masterList: {
+    departments: {
+      addDepartment: "/master/departments",
+      getAllDepartments: "/master/departments",
+      updateDepartment: (departmentId) => `/master/departments/${departmentId}`,
+      deleteDepartment: (departmentId) => `/master/departments/${departmentId}`,
+    },
+    semesters: {
+      getAllSemestersBy: (departmentId) =>
+        `/master/departments/${departmentId}/semesters`,
+      addSemesterBy: (departmentId) =>
+        `/master/departments/${departmentId}/semesters`,
+    },
+    subjects: {
+      getAllSubjectsBy: (semesterId) =>
+        `/master/semesters/${semesterId}/subjects`,
+      addSubject: (semesterId) => `/master/semesters/${semesterId}/subjects`,
+    },
+  },
 };
 
 export default endpoints;

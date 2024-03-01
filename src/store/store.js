@@ -5,6 +5,7 @@ import batchSlice from "./batch/batch.slice";
 import breadcrumbSlice from "./breadcrumb/breadcrumb.slice";
 import departmentSlice from "./department/department.slice";
 import marksBySubjectSlice from "./marks-by-subject/marks-by-subject.slice";
+import masterDepartmentSlice from "./master-list/department/department.slice";
 import semesterSlice from "./semester/semester.slice";
 import studentSlice from "./students/students.slice";
 import studentsBySemesterSlice from "./students-by-semester/students-by-semester.slice";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   studentsBySemesterReducer: studentsBySemesterSlice,
   marksBySubjectReducer: marksBySubjectSlice,
   studentReducer: studentSlice,
+  masterDepartmentReducer: masterDepartmentSlice,
 });
 
 export const store = configureStore({

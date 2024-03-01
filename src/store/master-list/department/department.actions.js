@@ -1,4 +1,4 @@
-import { DepartmentService } from "@/services";
+import { MasterDepartmentService } from "@/services";
 import { gracelyHandleError } from "@/utils";
 
 import {
@@ -12,36 +12,32 @@ import {
   setUpdateDepartmentError,
 } from "./department.slice";
 
-export const getAllDepartments =
-  ({ batch }) =>
-  async (dispatch) => {
-    try {
-      dispatch(
-        setError({
-          error: null,
-        })
-      );
+export const getAllMasterDepartments = () => async (dispatch) => {
+  try {
+    dispatch(
+      setError({
+        error: null,
+      })
+    );
 
-      const { departments } = await DepartmentService.getAllDepartments({
-        batch,
-      });
+    const { departments } = await MasterDepartmentService.getAllDepartments();
 
-      dispatch(setDepartments({ departments }));
-    } catch (err) {
-      const appError = gracelyHandleError(err);
-      dispatch(
-        setError({
-          error: appError,
-        })
-      );
-    }
-  };
+    dispatch(setDepartments({ departments }));
+  } catch (err) {
+    const appError = gracelyHandleError(err);
+    dispatch(
+      setError({
+        error: appError,
+      })
+    );
+  }
+};
 
-export const addDepartment =
+export const addMasterDepartment =
   (data = {}) =>
   async (dispatch) => {
     try {
-      const { name, hod, batch } = data;
+      const { name, hod } = data;
       dispatch(
         setAddDepartmentError({
           error: null,
@@ -53,15 +49,15 @@ export const addDepartment =
         })
       );
 
-      const { department } = await DepartmentService.addDepartment({
+      const { department } = await MasterDepartmentService.addDepartment({
         name,
         hod,
-        batch,
       });
 
       if (department) {
-        await dispatch(getAllDepartments({ batch }));
+        await dispatch(getAllMasterDepartments());
       }
+
       return true;
     } catch (err) {
       const appError = gracelyHandleError(err);
@@ -80,7 +76,7 @@ export const addDepartment =
     }
   };
 
-export const updateDepartment =
+export const updateMasterDepartment =
   (data = {}) =>
   async (dispatch) => {
     try {
@@ -96,14 +92,14 @@ export const updateDepartment =
         })
       );
 
-      const { department } = await DepartmentService.updateDepartment({
+      const { department } = await MasterDepartmentService.updateDepartment({
         name,
         hod,
         departmentId,
       });
 
       if (department) {
-        await dispatch(getAllDepartments({ batch: department.batch }));
+        await dispatch(getAllMasterDepartments({ batch: department.batch }));
       }
       return true;
     } catch (err) {
@@ -123,7 +119,7 @@ export const updateDepartment =
     }
   };
 
-export const deleteDepartment =
+export const deleteMasterDepartment =
   (data = {}) =>
   async (dispatch) => {
     try {
@@ -139,12 +135,12 @@ export const deleteDepartment =
         })
       );
 
-      const { department } = await DepartmentService.deleteDepartment({
+      const { department } = await MasterDepartmentService.deleteDepartment({
         departmentId,
       });
 
       if (department) {
-        await dispatch(getAllDepartments({ batch: department.batch }));
+        await dispatch(getAllMasterDepartments());
       }
       return true;
     } catch (err) {
