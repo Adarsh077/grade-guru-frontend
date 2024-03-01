@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export const departmentSlice = createSlice({
-  name: "departmentSlice",
+  name: "masterDepartmentSlice",
   initialState,
   reducers: {
     reset: () => initialState,

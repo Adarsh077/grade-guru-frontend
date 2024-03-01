@@ -8,3 +8,4 @@ export { default as StudentsBySemesterService } from "./students-by-semester.ser
 export { default as MarksBySubjectService } from "./marks-by-subject.service";
 export { default as StudentsService } from "./students.service";
 export { default as MasterDepartmentService } from "./master-list/department.service";
+export { default as MasterSemesterService } from "./master-list/semester.service";

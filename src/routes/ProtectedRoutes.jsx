@@ -8,6 +8,7 @@ import {
   DepartmentsScreen,
   MarksBySubject,
   MasterDepartments,
+  MasterSemesters,
   MySubjectsScreen,
   SemestersScreen,
   StudentsByBatch,
@@ -109,6 +110,11 @@ const ProtectedRoutes = () => {
           element={<StudentsByBatch />}
         />
         <Route path="departments" element={<MasterDepartments />} />
+        <Route
+          path="departments/:departmentId/semesters"
+          element={<MasterSemesters />}
+        />
+
         <Route
           path=""
           element={<Navigate to="/master-list/batches" replace />}

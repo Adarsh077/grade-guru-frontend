@@ -40,11 +40,11 @@ const MasterDepartments = () => {
     dispatch(
       pushBreadcrumbItem({
         label: department.name,
-        link: `/departments/${department._id}/semesters`,
+        link: `/master-list/departments/${department._id}/semesters`,
       })
     );
     navigate({
-      pathname: `/departments/${department._id}/semesters`,
+      pathname: `/master-list/departments/${department._id}/semesters`,
       search: queryString.stringify(parsedQueryString),
     });
   };
