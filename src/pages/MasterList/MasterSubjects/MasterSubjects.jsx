@@ -1,6 +1,6 @@
 import { MoreHorizontal } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +8,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -19,49 +18,34 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useQueryString } from "@/hooks";
-import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
-import { masterSemestersSelector } from "@/store/master-list/semester/semester.selectors";
+import { masterSubjectSelector } from "@/store/master-list/subject/subject.selectors";
 
-const MasterSemesters = () => {
-  const { departmentId } = useParams();
-  const { queryString, parsedQueryString } = useQueryString();
+const MasterSubjects = () => {
+  const { semesterId } = useParams();
 
-  const masterSemesters = useSelector(masterSemestersSelector(departmentId));
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const masterSubjects = useSelector(masterSubjectSelector(semesterId));
 
-  const handleSemesterClick = (semester) => {
-    if (!semester) return;
-    dispatch(
-      pushBreadcrumbItem({
-        label: semester.name,
-        link: `/master-list/semesters/${semester._id}/subjects`,
-      })
-    );
-    navigate({
-      pathname: `/master-list/semesters/${semester._id}/subjects`,
-      search: queryString.stringify(parsedQueryString),
-    });
-  };
+  const handleSubjectClick = () => {};
 
   return (
     <Table className="border">
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
+          <TableHead>Staff</TableHead>
           <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {masterSemesters.map((semester) => {
+        {masterSubjects.map((subjects) => {
           return (
             <TableRow
               className="cursor-pointer"
-              onClick={() => handleSemesterClick(semester)}
-              key={semester._id}
+              onClick={() => handleSubjectClick(subjects)}
+              key={subjects._id}
             >
-              <TableCell className="font-medium">{semester.name}</TableCell>
+              <TableCell className="font-medium">{subjects.name}</TableCell>
+              <TableCell>{subjects.staff?.name}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -70,9 +54,8 @@ const MasterSemesters = () => {
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40" align="end">
+                  <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={(event) => event.stopPropagation()}
                     >
@@ -89,4 +72,5 @@ const MasterSemesters = () => {
     </Table>
   );
 };
-export default MasterSemesters;
+
+export default MasterSubjects;

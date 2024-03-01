@@ -9,6 +9,7 @@ import {
   MarksBySubject,
   MasterDepartments,
   MasterSemesters,
+  MasterSubjects,
   MySubjectsScreen,
   SemestersScreen,
   StudentsByBatch,
@@ -113,6 +114,10 @@ const ProtectedRoutes = () => {
         <Route
           path="departments/:departmentId/semesters"
           element={<MasterSemesters />}
+        />
+        <Route
+          path="semesters/:semesterId/subjects"
+          element={<MasterSubjects />}
         />
 
         <Route

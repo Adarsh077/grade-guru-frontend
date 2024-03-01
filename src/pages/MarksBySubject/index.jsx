@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
 import Breadcrumb from "@/components/Breadcrumb";
 import FetchData from "@/components/FetchData";
 import { getMarksBySubjectId } from "@/store/marks-by-subject/marks-by-subject.actions";
 import { marksBySubjectIdErrorSelector } from "@/store/marks-by-subject/marks-by-subject.selectors";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+
 import MarksBySubject from "./MarksBySubject";
 
 const MarksBySubjectRoot = () => {

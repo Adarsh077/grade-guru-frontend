@@ -1,12 +1,12 @@
 import endpoints from "@/constants/endpoints";
 import catchAsync from "@/utils";
 
-import appAxios from "./axios.service";
+import appAxios from "../axios.service";
 
-class SubjectService {
+class MasterSubjectService {
   static getAllSubjects = catchAsync(async ({ semesterId }) => {
     const response = await appAxios.get(
-      endpoints.subjects.getAllSubjectsBy(semesterId)
+      endpoints.masterList.subjects.getAllSubjectsBy(semesterId)
     );
 
     if (response.data.status === "success" && response.data.body?.subjects) {
@@ -16,27 +16,15 @@ class SubjectService {
     return { subjects: null };
   });
 
-  static getMySubjects = catchAsync(async ({ batch }) => {
-    const response = await appAxios.get(endpoints.subjects.getMySubjects, {
-      params: { batch },
-    });
-
-    if (response.data.status === "success" && response.data.body?.subjects) {
-      return { subjects: response.data.body.subjects };
-    }
-
-    return { subjects: null };
-  });
-
-  static addSubject = catchAsync(
-    async ({ semesterId, name, staffId, code, exams }) => {
+  static addMasterSubject = catchAsync(
+    async ({ semesterId, name, staffId, code, subjectType }) => {
       const response = await appAxios.post(
-        endpoints.subjects.addSubject(semesterId),
+        endpoints.masterList.subjects.addSubject(semesterId),
         {
           name,
           staffId,
           code,
-          exams,
+          subjectType,
         }
       );
 
@@ -49,4 +37,4 @@ class SubjectService {
   );
 }
 
-export default SubjectService;
+export default MasterSubjectService;
