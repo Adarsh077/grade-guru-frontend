@@ -6,3 +6,4 @@ export { default as AddSubjectDailog } from "./Subject/AddSubject";
 export { default as SubjectExamsSelector } from "./Subject/SubjectExamsSelector";
 export { default as AddMoreRows } from "./AddMoreRows";
 export { default as BatchSelector } from "./BatchSelector";
+export { default as UpdateSemester } from "./Semester/UpdateSemester";

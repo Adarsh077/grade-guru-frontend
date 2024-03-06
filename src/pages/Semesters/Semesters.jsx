@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { MoreHorizontal } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { UpdateSemester } from "@/features";
 import { useQueryString } from "@/hooks";
 import ResultService from "@/services/result.service";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
@@ -30,6 +33,7 @@ const Semesters = () => {
   const { queryString, parsedQueryString } = useQueryString();
 
   const semesters = useSelector(semestersSelector(departmentId));
+  const [editSemester, setEditSemester] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -62,55 +66,67 @@ const Semesters = () => {
   };
 
   return (
-    <Table className="border">
-      <TableHeader>
-        <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {semesters.map((semester) => {
-          return (
-            <TableRow
-              className="cursor-pointer"
-              onClick={() => handleSemesterClick(semester)}
-              key={semester._id}
-            >
-              <TableCell className="font-medium">{semester.name}</TableCell>
-              <TableCell className="text-right">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
-                      <span className="sr-only">Open menu</span>
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40" align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleGenerateResult(semester._id);
-                      }}
-                    >
-                      Generate Result
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+    <>
+      {editSemester && (
+        <UpdateSemester
+          semester={editSemester}
+          open
+          handleClose={() => setEditSemester(null)}
+        />
+      )}
+      <Table className="border">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {semesters.map((semester) => {
+            return (
+              <TableRow
+                className="cursor-pointer"
+                onClick={() => handleSemesterClick(semester)}
+                key={semester._id}
+              >
+                <TableCell className="font-medium">{semester.name}</TableCell>
+                <TableCell className="text-right">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-40" align="end">
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleGenerateResult(semester._id);
+                        }}
+                      >
+                        Generate Result
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setEditSemester(semester);
+                        }}
+                      >
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 export default Semesters;

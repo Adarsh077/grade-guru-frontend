@@ -28,6 +28,19 @@ class MasterSemesterService {
 
     return { semester: null };
   });
+
+  static updateSemester = catchAsync(async ({ semesterId, name, number }) => {
+    const response = await appAxios.post(
+      endpoints.masterList.semesters.updateSemesterBy(semesterId),
+      { name, number: +number }
+    );
+
+    if (response.data.status === "success" && response.data.body?.semester) {
+      return { semester: response.data.body.semester };
+    }
+
+    return { semester: null };
+  });
 }
 
 export default MasterSemesterService;

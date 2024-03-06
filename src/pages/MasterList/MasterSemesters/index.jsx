@@ -18,10 +18,10 @@ const MasterSemestersRoot = () => {
   return (
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
-        <div className="md:col-span-9 xl:col-span-10">
+        <div className="md:col-span-9">
           <Breadcrumb className="-translate-x-4" />
         </div>
-        <div className="md:col-span-3 xl:col-span-2">
+        <div className="md:col-span-3">
           <div className="flex justify-end">
             <AddMasterSemesterDailog departmentId={departmentId}>
               <Button>

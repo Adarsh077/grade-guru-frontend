@@ -6,6 +6,9 @@ const initialState = {
 
   isCallingAddSemesterApi: false,
   addSemesterError: null,
+
+  isCallingUpdateSemesterApi: false,
+  addSemesterError: null,
 };
 
 export const masterSemesterSlice = createSlice({

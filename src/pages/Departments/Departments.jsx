@@ -1,3 +1,9 @@
+import { useState } from "react";
+
+import { MoreHorizontal } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,10 +27,6 @@ import {
 import { useQueryString } from "@/hooks";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { departmentSelector } from "@/store/department/department.selectors";
-import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Departments = () => {
   const departments = useSelector(departmentSelector);

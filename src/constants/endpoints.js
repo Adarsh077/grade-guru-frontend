@@ -22,6 +22,8 @@ const endpoints = {
     getAllSemestersBy: (departmentId) =>
       `/departments/${departmentId}/semesters`,
     addSemesterBy: (departmentId) => `/departments/${departmentId}/semesters`,
+    updateSemester: (semesterId) => `/semesters/${semesterId}`,
+
     getStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
     addStudents: (semesterId) => `/semesters/${semesterId}/students`,
     updateStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
@@ -53,6 +55,7 @@ const endpoints = {
         `/master/departments/${departmentId}/semesters`,
       addSemesterBy: (departmentId) =>
         `/master/departments/${departmentId}/semesters`,
+      updateSemesterBy: (semesterId) => `/master/semesters/${semesterId}/`,
     },
     subjects: {
       getAllSubjectsBy: (semesterId) =>

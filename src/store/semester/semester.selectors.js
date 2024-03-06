@@ -10,3 +10,10 @@ export const isCallingAddSemesterApiSelector = (state) => {
 
 export const addSemesterErrorSelector = (state) =>
   state.semesterReducer.addSemesterError;
+
+export const isCallingUpdateSemesterApiSelector = (state) => {
+  return state.semesterReducer.isCallingUpdateSemesterApi;
+};
+
+export const updateSemesterErrorSelector = (state) =>
+  state.semesterReducer.updateSemesterError;

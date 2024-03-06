@@ -6,6 +6,8 @@ import {
   setError,
   setIsCallingAddSemesterApi,
   setAddSemesterError,
+  setIsCallingUpdateSemesterApi,
+  setUpdateSemesterError,
 } from "./semester.slice";
 
 export const getAllSemesters =
@@ -67,6 +69,47 @@ export const addSemesters =
     } finally {
       dispatch(
         setIsCallingAddSemesterApi({
+          isLoading: false,
+        })
+      );
+    }
+  };
+
+export const updateSemesters =
+  ({ semesterId, name }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setUpdateSemesterError({
+          error: null,
+        })
+      );
+      dispatch(
+        setIsCallingUpdateSemesterApi({
+          isLoading: true,
+        })
+      );
+      const { semester } = await SemesterService.updateSemester({
+        semesterId,
+        name,
+      });
+
+      if (semester) {
+        await dispatch(getAllSemesters({ departmentId: semester.department }));
+      }
+
+      return true;
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setUpdateSemesterError({
+          error: appError,
+        })
+      );
+      return false;
+    } finally {
+      dispatch(
+        setIsCallingUpdateSemesterApi({
           isLoading: false,
         })
       );
