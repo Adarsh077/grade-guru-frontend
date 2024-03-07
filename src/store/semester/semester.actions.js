@@ -8,6 +8,8 @@ import {
   setAddSemesterError,
   setIsCallingUpdateSemesterApi,
   setUpdateSemesterError,
+  setIsCallingDeleteSemesterApi,
+  setDeleteSemesterError,
 } from "./semester.slice";
 
 export const getAllSemesters =
@@ -110,6 +112,46 @@ export const updateSemesters =
     } finally {
       dispatch(
         setIsCallingUpdateSemesterApi({
+          isLoading: false,
+        })
+      );
+    }
+  };
+
+  export const deleteSemesters =
+  ({ semesterId }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setDeleteSemesterError({
+          error: null,
+        })
+      );
+      dispatch(
+        setIsCallingDeleteSemesterApi({
+          isLoading: true,
+        })
+      );
+      const { semester } = await SemesterService.deleteSemester({
+        semesterId,
+      });
+
+      if (semester) {
+        await dispatch(getAllSemesters({ departmentId: semester.department }));
+      }
+
+      return true;
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setDeleteSemesterError({
+          error: appError,
+        })
+      );
+      return false;
+    } finally {
+      dispatch(
+        setIsCallingDeleteSemesterApi({
           isLoading: false,
         })
       );

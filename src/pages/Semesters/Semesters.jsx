@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { UpdateSemester } from "@/features";
+import { UpdateSemester, DeleteSemester } from "@/features";
 import { useQueryString } from "@/hooks";
 import ResultService from "@/services/result.service";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
@@ -34,6 +34,7 @@ const Semesters = () => {
 
   const semesters = useSelector(semestersSelector(departmentId));
   const [editSemester, setEditSemester] = useState(null);
+  const [deleteSemester, setDeleteSemester] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -72,6 +73,14 @@ const Semesters = () => {
           semester={editSemester}
           open
           handleClose={() => setEditSemester(null)}
+        />
+      )}
+
+      {deleteSemester && (
+        <DeleteSemester
+          semester={deleteSemester}
+          open
+          handleClose={() => setDeleteSemester(null)}
         />
       )}
       <Table className="border">
@@ -117,7 +126,12 @@ const Semesters = () => {
                       >
                         Edit
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setDeleteSemester(semester);
+                        }}
+                      >Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

@@ -41,6 +41,18 @@ class SemesterService {
 
     return { semester: null };
   });
+
+  static deleteSemester = catchAsync(async ({ semesterId }) => {
+    const response = await appAxios.patch(
+      endpoints.semesters.deleteSemester(semesterId),
+    );
+
+    if (response.data.status === "success" && response.data.body?.semester) {
+      return { semester: response.data.body.semester };
+    }
+
+    return { semester: null };
+  });
 }
 
 export default SemesterService;
