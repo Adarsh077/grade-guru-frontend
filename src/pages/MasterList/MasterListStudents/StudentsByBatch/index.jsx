@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { ArrowLeft, FileUp } from "lucide-react";
+import { ArrowLeft, Download, FileUp } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
@@ -14,6 +14,7 @@ import {
   addStudent,
   getAllStudentsByBatch,
 } from "@/store/students/students.actions";
+
 import {
   studentErrorSelector,
   studentSelector,
@@ -52,6 +53,18 @@ const StudentsByBatchRoot = () => {
     }
 
     if (toastId) toast.dismiss(toastId);
+  };
+
+  const downloadFormat = async (e) => {
+    
+    const fileUrl = "http://127.0.0.1:5173/students_list.xlsx";
+    const fileName = fileUrl.split('/').pop()
+    const aTag = document.createElement('a')
+    aTag.href = fileUrl
+    aTag.setAttribute('download', fileName)
+    aTag.click();
+    aTag.remove();
+
   };
 
   return (
@@ -95,6 +108,9 @@ const StudentsByBatchRoot = () => {
                   <FileUp className="mr-2 h-4 w-4" /> Import
                 </Button>
               </div>
+              <Button variant="ghost" onClick={downloadFormat}>
+                <Download className="mr-2 h-4 w-4" /> Download
+              </Button>
             </div>
           </div>
           <TabsContent value="regular">
