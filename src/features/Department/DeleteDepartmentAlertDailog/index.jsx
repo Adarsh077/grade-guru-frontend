@@ -1,3 +1,6 @@
+import { AlertCircle, Loader2 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   AlertDialog,
@@ -14,8 +17,6 @@ import {
   deleteDepartmentErrorSelector,
   isCallingDeleteDepartmentApiSelector,
 } from "@/store/department/department.selectors";
-import { AlertCircle, Loader2 } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
 
 const DeleteDepartmentAlertDailog = (props) => {
   const { department, handleClose } = props;

@@ -5,12 +5,15 @@ import Breadcrumb from "@/components/Breadcrumb";
 import FetchData from "@/components/FetchData";
 import { getMarksBySubjectId } from "@/store/marks-by-subject/marks-by-subject.actions";
 import { marksBySubjectIdErrorSelector } from "@/store/marks-by-subject/marks-by-subject.selectors";
+import { getSingleSubject } from "@/store/subject/subject.actions";
+import { subjectByIdErrorSelector } from "@/store/subject/subject.selectors";
 
 import MarksBySubject from "./MarksBySubject";
 
 const MarksBySubjectRoot = () => {
   const { subjectId } = useParams();
-  const studentsBySemesterError = useSelector(marksBySubjectIdErrorSelector);
+  const marksBySubjectIdError = useSelector(marksBySubjectIdErrorSelector);
+  const subjectByIdError = useSelector(subjectByIdErrorSelector);
 
   return (
     <div>
@@ -21,12 +24,20 @@ const MarksBySubjectRoot = () => {
       </div>
       <FetchData
         loadFirstThenRender
-        error={studentsBySemesterError}
+        error={subjectByIdError}
         shouldNotFetch={!subjectId}
-        dispatchFunction={getMarksBySubjectId({ subjectId })}
+        dispatchFunction={getSingleSubject({ subjectId })}
         dependencies={[subjectId]}
       >
-        <MarksBySubject subjectId={subjectId} />
+        <FetchData
+          loadFirstThenRender
+          error={marksBySubjectIdError}
+          shouldNotFetch={!subjectId}
+          dispatchFunction={getMarksBySubjectId({ subjectId })}
+          dependencies={[subjectId]}
+        >
+          <MarksBySubject subjectId={subjectId} />
+        </FetchData>
       </FetchData>
     </div>
   );

@@ -31,10 +31,14 @@ const endpoints = {
   },
   subjects: {
     getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
+    getSingleSubject: (subjectId) => `/subjects/${subjectId}`,
     addSubject: (semesterId) => `/semesters/${semesterId}/subjects`,
     getMySubjects: `/subjects/my`,
+  },
+  marksBySubject: {
     getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
-    updateMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
+    enterMarks: ({ subjectId, studentId }) =>
+      `/subjects/${subjectId}/students/${studentId}/marks`,
   },
   result: {
     generateResult: (semesterId) => `/semesters/${semesterId}/result/generate`,

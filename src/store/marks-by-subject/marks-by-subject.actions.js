@@ -1,11 +1,14 @@
+import { toast } from "sonner";
+
 import { MarksBySubjectService } from "@/services";
 import { gracelyHandleError } from "@/utils";
+
 import {
   setError,
   setIsCallingUpdateMarksBySubjectIdApi,
   setMarksBySubjectId,
   setUpdateMarksBySubjectIdError,
-  updateMarksForStudent,
+  updateMarksOfStudent,
 } from "./marks-by-subject.slice";
 
 export const getMarksBySubjectId =
@@ -36,8 +39,8 @@ export const getMarksBySubjectId =
 export const updateMarksBySubjectId =
   (data = {}) =>
   async (dispatch) => {
+    const { subjectId, studentId, examName, marksScored } = data;
     try {
-      const { subjectId, marksOfStudent } = data;
       dispatch(
         setUpdateMarksBySubjectIdError({
           error: null,
@@ -49,13 +52,19 @@ export const updateMarksBySubjectId =
         })
       );
 
+      await dispatch(
+        updateMarksOfStudent({ subjectId, studentId, examName, marksScored })
+      );
+
       const { status } = await MarksBySubjectService.updateMarksBySubject({
         subjectId,
-        marksOfStudent,
+        studentId,
+        examName,
+        marksScored,
       });
 
-      if (status === "success") {
-        await dispatch(updateMarksForStudent({ subjectId, marksOfStudent }));
+      if (status !== "success") {
+        await dispatch(getMarksBySubjectId({ subjectId }));
       }
       return true;
     } catch (err) {
@@ -64,6 +73,12 @@ export const updateMarksBySubjectId =
         setUpdateMarksBySubjectIdError({
           error: appError,
         })
+      );
+      toast.error(
+        appError.message ||
+          Object.keys(appError.errors)
+            .map((error) => appError.errors[error])
+            .join(", ")
       );
       return false;
     } finally {

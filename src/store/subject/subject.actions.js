@@ -1,11 +1,13 @@
 import { SubjectService } from "@/services";
 import { gracelyHandleError } from "@/utils";
+
 import {
   setSubjects,
   setError,
   setMySubjects,
   setMySubjectsError,
   setAddSubjectError,
+  setSubjectById,
 } from "./subject.slice";
 import { setIsCallingAddSemesterApi } from "../semester/semester.slice";
 
@@ -24,6 +26,31 @@ export const getAllSubjects =
       });
 
       dispatch(setSubjects({ subjects, semesterId }));
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setError({
+          error: appError,
+        })
+      );
+    }
+  };
+
+export const getSingleSubject =
+  ({ subjectId }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setError({
+          error: null,
+        })
+      );
+
+      const { subject } = await SubjectService.getSingleSubject({
+        subjectId,
+      });
+
+      dispatch(setSubjectById({ subject }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(

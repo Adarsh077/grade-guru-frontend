@@ -1,10 +1,14 @@
 import "react-data-grid/lib/styles.css";
 
-import DataGrid, { textEditor } from "react-data-grid";
 import { useRef } from "react";
+
+import DataGrid, { textEditor } from "react-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { marksBySubjectIdSelector } from "@/store/marks-by-subject/marks-by-subject.selectors";
+
+import { ExamsBySubjectType, ReadableExamNamesEnum } from "@/constants/enum";
 import { updateMarksBySubjectId } from "@/store/marks-by-subject/marks-by-subject.actions";
+import { marksBySubjectIdSelector } from "@/store/marks-by-subject/marks-by-subject.selectors";
+import { subjectByIdSelector } from "@/store/subject/subject.selectors";
 // const columns = [{ key: "name", name: "Name", renderEditCell: textEditor }];
 
 const MarksBySubject = ({ subjectId }) => {
@@ -12,27 +16,29 @@ const MarksBySubject = ({ subjectId }) => {
   const gridRef = useRef(null);
 
   const marksBySubject = useSelector(marksBySubjectIdSelector(subjectId));
+  const subject = useSelector(subjectByIdSelector(subjectId));
+  console.log({ marksBySubject, subject });
   const isEditingRef = useRef(false);
 
   const columns = [
     { key: "student", name: "Student Name" },
-    ...marksBySubject.exams.map((exam) => ({
-      key: exam.name,
-      name: exam.name,
+    ...ExamsBySubjectType[subject.subjectType].map((exam) => ({
+      key: exam,
+      name: ReadableExamNamesEnum[exam],
       renderEditCell: textEditor,
     })),
   ];
 
-  const rows = marksBySubject.marksOfStudents.map((marksOfStudent) => {
+  const rows = marksBySubject.marks.map((marks) => {
     const row = {
-      student: marksOfStudent.student.name,
-      studentId: marksOfStudent.student._id,
+      student: marks.student.name,
+      studentId: marks.student._id,
     };
-    marksBySubject.exams.forEach((exam) => {
-      row[exam.name] =
-        marksOfStudent.marksOfStudentByExam.find(
+    ExamsBySubjectType[subject.subjectType].forEach((exam) => {
+      row[exam] =
+        marks.exams.find(
           (marksOfStudentByExamRecord) =>
-            marksOfStudentByExamRecord.examName === exam.name
+            marksOfStudentByExamRecord.examName === exam
         )?.marksScored ?? "";
     });
     return row;
@@ -41,19 +47,13 @@ const MarksBySubject = ({ subjectId }) => {
   const handleChange = (updatedRows, data) => {
     const updatedRow = updatedRows[data.indexes[0]];
 
-    const body = {
-      student: updatedRow.studentId,
-      marksOfStudentByExam: [],
-    };
+    const examName = data.column.key;
+    const marksScored = updatedRow[examName];
+    const studentId = updatedRow.studentId;
 
-    marksBySubject.exams.forEach((exam) => {
-      body.marksOfStudentByExam.push({
-        examName: exam.name,
-        marksScored: updatedRow[exam.name],
-      });
-    });
-
-    dispatch(updateMarksBySubjectId({ subjectId, marksOfStudent: body }));
+    dispatch(
+      updateMarksBySubjectId({ subjectId, studentId, examName, marksScored })
+    );
   };
 
   const handleKeyDown = (data, event) => {

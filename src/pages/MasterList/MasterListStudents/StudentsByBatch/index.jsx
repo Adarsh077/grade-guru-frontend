@@ -14,7 +14,6 @@ import {
   addStudent,
   getAllStudentsByBatch,
 } from "@/store/students/students.actions";
-
 import {
   studentErrorSelector,
   studentSelector,
@@ -55,16 +54,14 @@ const StudentsByBatchRoot = () => {
     if (toastId) toast.dismiss(toastId);
   };
 
-  const downloadFormat = async (e) => {
-    
+  const downloadFormat = async () => {
     const fileUrl = "http://127.0.0.1:5173/students_list.xlsx";
-    const fileName = fileUrl.split('/').pop()
-    const aTag = document.createElement('a')
-    aTag.href = fileUrl
-    aTag.setAttribute('download', fileName)
+    const fileName = fileUrl.split("/").pop();
+    const aTag = document.createElement("a");
+    aTag.href = fileUrl;
+    aTag.setAttribute("download", fileName);
     aTag.click();
     aTag.remove();
-
   };
 
   return (

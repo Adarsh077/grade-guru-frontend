@@ -1,16 +1,17 @@
+import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { subjectErrorSelector } from "@/store/subject/subject.selectors";
-import { getAllSubjects } from "@/store/subject/subject.actions";
-import FetchData from "@/components/FetchData";
-import Subjects from "./Subjects";
 import Breadcrumb from "@/components/Breadcrumb";
+import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { AddSubjectDailog } from "@/features";
-import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { useQueryString } from "@/hooks";
+import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
+import { getAllSubjects } from "@/store/subject/subject.actions";
+import { subjectErrorSelector } from "@/store/subject/subject.selectors";
+
+import Subjects from "./Subjects";
 
 const SubjectsRoot = () => {
   const { semesterId } = useParams();

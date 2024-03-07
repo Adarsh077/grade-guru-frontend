@@ -1,11 +1,12 @@
-import catchAsync from "@/utils";
-import appAxios from "./axios.service";
 import endpoints from "@/constants/endpoints";
+import catchAsync from "@/utils";
+
+import appAxios from "./axios.service";
 
 class MarksBySubjectService {
   static getMarksBySubject = catchAsync(async ({ subjectId }) => {
     const response = await appAxios.get(
-      endpoints.subjects.getMarksBySubjectId(subjectId)
+      endpoints.marksBySubject.getMarksBySubjectId(subjectId)
     );
 
     if (
@@ -19,10 +20,10 @@ class MarksBySubjectService {
   });
 
   static updateMarksBySubject = catchAsync(
-    async ({ subjectId, marksOfStudent }) => {
-      const response = await appAxios.patch(
-        endpoints.subjects.updateMarksBySubjectId(subjectId),
-        { marksOfStudent }
+    async ({ subjectId, studentId, examName, marksScored }) => {
+      const response = await appAxios.post(
+        endpoints.marksBySubject.enterMarks({ subjectId, studentId }),
+        { examName, marksScored }
       );
 
       return { status: response.data.status };

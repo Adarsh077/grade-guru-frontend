@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
+
 import FetchData from "@/components/FetchData";
 import { useQueryString } from "@/hooks";
 import { getMySubjects } from "@/store/subject/subject.actions";
 import { mySubjectsErrorSelector } from "@/store/subject/subject.selectors";
-import { useSelector } from "react-redux";
+
 import MySubjects from "./MySubjects";
 
 const MySubjectsRoot = () => {

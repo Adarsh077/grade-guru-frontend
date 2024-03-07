@@ -79,9 +79,13 @@
   padding-left: 8px;
 }
 
-.rdg .rdg-cell {
-  @apply border-b border-l border-r border-slate-300;
+.rdg {
+  @apply border-l border-slate-300;
 }
+.rdg .rdg-cell {
+  @apply border-b border-r border-slate-300;
+}
+
 html {
   scrollbar-gutter: stable both-edges;
 }
