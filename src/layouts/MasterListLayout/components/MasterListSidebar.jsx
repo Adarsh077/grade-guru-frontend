@@ -17,7 +17,7 @@ const MasterListSidebar = () => {
             (path) => location.pathname.includes(path)
           )}
           startIcon={<Users className="w-4 h-4" />}
-          to="/master-list/students"
+          to="/master-list/batches"
         >
           Students
         </MasterListSidebarItem>
