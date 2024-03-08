@@ -11,3 +11,11 @@ export const isCallingAddMasterSemesterApiSelector = (state) => {
 
 export const addMasterSemesterErrorSelector = (state) =>
   state.masterSemesterReducer.addSemesterError;
+
+  export const isCallingDeleteMasterSemesterApiSelector = (state) => {
+    return state.masterSemesterReducer.isCallingAddSemesterApi;
+  };
+  
+  export const deleteMasterSemesterErrorSelector = (state) =>
+    state.masterSemesterReducer.addSemesterError;
+  

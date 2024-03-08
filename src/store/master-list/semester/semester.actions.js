@@ -6,6 +6,8 @@ import {
   setError,
   setIsCallingAddSemesterApi,
   setAddSemesterError,
+  setIsCallingDeleteSemesterApi,
+  setDeleteSemesterError,
 } from "./semester.slice";
 
 export const getAllMasterSemesters =
@@ -68,6 +70,47 @@ export const addMasterSemesters =
     } finally {
       dispatch(
         setIsCallingAddSemesterApi({
+          isLoading: false,
+        })
+      );
+    }
+  };
+
+export const deleteMasterSemesters =
+  ({ semesterId }) =>
+  async (dispatch) => {
+    try {
+      dispatch(
+        setDeleteSemesterError({
+          error: null,
+        })
+      );
+      dispatch(
+        setIsCallingDeleteSemesterApi({
+          isLoading: true,
+        })
+      );
+      const { semester } = await MasterSemesterService.deleteSemester({
+        semesterId,
+      });
+
+      if (semester) {
+        await dispatch(
+          getAllMasterSemesters({ departmentId: semester.department })
+        );
+      }
+      return true;
+    } catch (err) {
+      const appError = gracelyHandleError(err);
+      dispatch(
+        setDeleteSemesterError({
+          error: appError,
+        })
+      );
+      return false;
+    } finally {
+      dispatch(
+        setIsCallingDeleteSemesterApi({
           isLoading: false,
         })
       );

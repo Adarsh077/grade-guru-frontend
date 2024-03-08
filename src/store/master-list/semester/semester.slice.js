@@ -7,8 +7,8 @@ const initialState = {
   isCallingAddSemesterApi: false,
   addSemesterError: null,
 
-  isCallingUpdateSemesterApi: false,
-  addSemesterError: null,
+  isCallingDeleteSemesterApi: false,
+  deleteSemesterError: null,
 };
 
 export const masterSemesterSlice = createSlice({
@@ -35,6 +35,15 @@ export const masterSemesterSlice = createSlice({
     setAddSemesterError: (state, action) => {
       state.addSemesterError = action.payload.error;
     },
+
+    setIsCallingDeleteSemesterApi: (state, action) => {
+      const { isLoading } = action.payload;
+
+      state.isCallingAddSemesterApi = isLoading;
+    },
+    setDeleteSemesterError: (state, action) => {
+      state.addSemesterError = action.payload.error;
+    },
   },
 });
 
@@ -44,6 +53,8 @@ export const {
   setError,
   setAddSemesterError,
   setIsCallingAddSemesterApi,
+  setDeleteSemesterError,
+  setIsCallingDeleteSemesterApi,
 } = masterSemesterSlice.actions;
 
 export default masterSemesterSlice.reducer;

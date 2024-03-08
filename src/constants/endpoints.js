@@ -57,6 +57,7 @@ const endpoints = {
       addSemesterBy: (departmentId) =>
         `/master/departments/${departmentId}/semesters`,
       updateSemesterBy: (semesterId) => `/master/semesters/${semesterId}/`,
+      deleteSemesterBy: (semesterId) => `/master/semesters/${semesterId}/`,
     },
     subjects: {
       getAllSubjectsBy: (semesterId) =>
