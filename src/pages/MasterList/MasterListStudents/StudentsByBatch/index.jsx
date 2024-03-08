@@ -22,9 +22,10 @@ import {
 import StudentsByBatch from "./StudentsByBatch";
 
 const StudentsByBatchRoot = () => {
-  const { batchYear } = useParams();
+  const { batchYear, departmentId } = useParams();
   const studentsError = useSelector(studentErrorSelector);
   const batch = useSelector(singleBatchSelector(batchYear));
+
   const studentsByBatch = useSelector(studentSelector(batchYear));
   const [selectedTab, setSelectedTab] = useState("regular");
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const StudentsByBatchRoot = () => {
           email: student[1],
           name: student[0],
           studentType: selectedTab === "dse" ? "DSE" : "REGULAR",
+          departmentId,
         })
       );
     }
@@ -82,7 +84,10 @@ const StudentsByBatchRoot = () => {
       <FetchData
         loadFirstThenRender
         error={studentsError}
-        dispatchFunction={getAllStudentsByBatch({ batch: batchYear })}
+        dispatchFunction={getAllStudentsByBatch({
+          batch: batchYear,
+          departmentId,
+        })}
         dependencies={[batchYear]}
       >
         <Tabs

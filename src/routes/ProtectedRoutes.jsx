@@ -11,6 +11,7 @@ import {
   MasterSemesters,
   MasterSubjects,
   MySubjectsScreen,
+  SelectDepartments,
   SemestersScreen,
   StudentsByBatch,
   SubjectsScreen,
@@ -91,10 +92,16 @@ const ProtectedRoutes = () => {
 
       <Route path="/master-list" element={<MasterListLayout />}>
         <Route path="batches" element={<BatchList />} />
+
         <Route
-          path="batches/:batchYear/students"
+          path="batches/:batchYear/departments"
+          element={<SelectDepartments />}
+        />
+        <Route
+          path="batches/:batchYear/departments/:departmentId/students"
           element={<StudentsByBatch />}
         />
+
         <Route path="departments" element={<MasterDepartments />} />
         <Route
           path="departments/:departmentId/semesters"

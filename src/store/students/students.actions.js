@@ -4,7 +4,7 @@ import { gracelyHandleError } from "@/utils";
 import { setStudents, setError } from "./students.slice";
 
 export const getAllStudentsByBatch =
-  ({ batch }) =>
+  ({ batch, departmentId }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -15,6 +15,7 @@ export const getAllStudentsByBatch =
 
       const { students } = await StudentsService.getAllStudentsBy({
         batch,
+        departmentId,
       });
 
       dispatch(setStudents({ students, batchYear: batch }));
@@ -29,7 +30,7 @@ export const getAllStudentsByBatch =
   };
 
 export const addStudent =
-  ({ name, email, studentType, admissionYear }) =>
+  ({ name, email, studentType, admissionYear, departmentId }) =>
   async (dispatch) => {
     try {
       const { student } = await StudentsService.addStudent({
@@ -37,6 +38,7 @@ export const addStudent =
         email,
         studentType,
         admissionYear,
+        departmentId,
       });
 
       if (student) {
