@@ -1,3 +1,7 @@
+import { MoreHorizontal } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,12 +18,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { subjectSelector } from "@/store/subject/subject.selectors";
-import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { useQueryString } from "@/hooks";
+import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
+import { subjectSelector } from "@/store/subject/subject.selectors";
 
 const Subjects = () => {
   const { semesterId } = useParams();

@@ -26,8 +26,6 @@ const endpoints = {
     deleteSemester: (semesterId) => `/semesters/${semesterId}`,
 
     getStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
-    addStudents: (semesterId) => `/semesters/${semesterId}/students`,
-    updateStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
   },
   subjects: {
     getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
