@@ -14,7 +14,6 @@ import {
   addStudent,
   getAllStudentsByBatch,
 } from "@/store/students/students.actions";
-
 import {
   studentErrorSelector,
   studentSelector,
@@ -23,9 +22,10 @@ import {
 import StudentsByBatch from "./StudentsByBatch";
 
 const StudentsByBatchRoot = () => {
-  const { batchYear } = useParams();
+  const { batchYear, departmentId } = useParams();
   const studentsError = useSelector(studentErrorSelector);
   const batch = useSelector(singleBatchSelector(batchYear));
+
   const studentsByBatch = useSelector(studentSelector(batchYear));
   const [selectedTab, setSelectedTab] = useState("regular");
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const StudentsByBatchRoot = () => {
           email: student[1],
           name: student[0],
           studentType: selectedTab === "dse" ? "DSE" : "REGULAR",
+          departmentId,
         })
       );
     }
@@ -55,16 +56,14 @@ const StudentsByBatchRoot = () => {
     if (toastId) toast.dismiss(toastId);
   };
 
-  const downloadFormat = async (e) => {
-    
+  const downloadFormat = async () => {
     const fileUrl = "http://127.0.0.1:5173/students_list.xlsx";
-    const fileName = fileUrl.split('/').pop()
-    const aTag = document.createElement('a')
-    aTag.href = fileUrl
-    aTag.setAttribute('download', fileName)
+    const fileName = fileUrl.split("/").pop();
+    const aTag = document.createElement("a");
+    aTag.href = fileUrl;
+    aTag.setAttribute("download", fileName);
     aTag.click();
     aTag.remove();
-
   };
 
   return (
@@ -85,7 +84,10 @@ const StudentsByBatchRoot = () => {
       <FetchData
         loadFirstThenRender
         error={studentsError}
-        dispatchFunction={getAllStudentsByBatch({ batch: batchYear })}
+        dispatchFunction={getAllStudentsByBatch({
+          batch: batchYear,
+          departmentId,
+        })}
         dependencies={[batchYear]}
       >
         <Tabs

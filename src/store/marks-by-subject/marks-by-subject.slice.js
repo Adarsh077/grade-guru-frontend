@@ -17,20 +17,6 @@ export const marksBySubjectSlice = createSlice({
       const { subjectId, marksBySubject } = action.payload;
       state.marksBySubjectId[subjectId] = marksBySubject;
     },
-    updateMarksForStudent: (state, action) => {
-      const { subjectId, marksOfStudent } = action.payload;
-      const currentStudentMarksIndex = state.marksBySubjectId[
-        subjectId
-      ].marksOfStudents.findIndex(
-        (marksOfStudentRecord) =>
-          marksOfStudentRecord.student._id === marksOfStudent.student
-      );
-      if (currentStudentMarksIndex === -1) return state;
-
-      state.marksBySubjectId[subjectId].marksOfStudents[
-        currentStudentMarksIndex
-      ].marksOfStudentByExam = marksOfStudent.marksOfStudentByExam;
-    },
     setError: (state, action) => {
       state.error = action.payload.error;
     },
@@ -42,6 +28,34 @@ export const marksBySubjectSlice = createSlice({
     setUpdateMarksBySubjectIdError: (state, action) => {
       state.updateMarksBySubjectIdError = action.payload.error;
     },
+
+    updateMarksOfStudent: (state, action) => {
+      const { subjectId, studentId, examName, marksScored } = action.payload;
+
+      const marksBySubjectId = state.marksBySubjectId[subjectId];
+
+      if (!marksBySubjectId) return state;
+
+      const marksIndex = marksBySubjectId.marks.findIndex(
+        (marks) => marks.student._id === studentId
+      );
+
+      if (marksIndex === -1) return state;
+
+      const examIndex = marksBySubjectId.marks[marksIndex].exams.findIndex(
+        (exam) => exam.examName === examName
+      );
+
+      if (examIndex > -1) {
+        marksBySubjectId.marks[marksIndex].exams[examIndex].marksScored =
+          marksScored;
+      } else {
+        marksBySubjectId.marks[marksIndex].exams.push({
+          examName,
+          marksScored,
+        });
+      }
+    },
   },
 });
 
@@ -51,7 +65,7 @@ export const {
   setError,
   setIsCallingUpdateMarksBySubjectIdApi,
   setUpdateMarksBySubjectIdError,
-  updateMarksForStudent,
+  updateMarksOfStudent,
 } = marksBySubjectSlice.actions;
 
 export default marksBySubjectSlice.reducer;

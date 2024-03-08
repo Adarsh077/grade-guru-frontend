@@ -10,7 +10,6 @@ import masterSemesterSlice from "./master-list/semester/semester.slice";
 import masterSubjectSlice from "./master-list/subject/subject.slice";
 import semesterSlice from "./semester/semester.slice";
 import studentSlice from "./students/students.slice";
-import studentsBySemesterSlice from "./students-by-semester/students-by-semester.slice";
 import subjectSlice from "./subject/subject.slice";
 import userSlice from "./user/user.slice";
 
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   semesterReducer: semesterSlice,
   subjectReducer: subjectSlice,
   breadcrumbReducer: breadcrumbSlice,
-  studentsBySemesterReducer: studentsBySemesterSlice,
   marksBySubjectReducer: marksBySubjectSlice,
   studentReducer: studentSlice,
   masterDepartmentReducer: masterDepartmentSlice,

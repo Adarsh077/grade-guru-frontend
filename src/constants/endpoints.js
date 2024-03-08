@@ -26,15 +26,17 @@ const endpoints = {
     deleteSemester: (semesterId) => `/semesters/${semesterId}`,
 
     getStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
-    addStudents: (semesterId) => `/semesters/${semesterId}/students`,
-    updateStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
   },
   subjects: {
     getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
+    getSingleSubject: (subjectId) => `/subjects/${subjectId}`,
     addSubject: (semesterId) => `/semesters/${semesterId}/subjects`,
     getMySubjects: `/subjects/my`,
+  },
+  marksBySubject: {
     getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
-    updateMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
+    enterMarks: ({ subjectId, studentId }) =>
+      `/subjects/${subjectId}/students/${studentId}/marks`,
   },
   result: {
     generateResult: (semesterId) => `/semesters/${semesterId}/result/generate`,

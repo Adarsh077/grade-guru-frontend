@@ -7,6 +7,9 @@ const initialState = {
   mySubjects: [],
   mySubjectsError: null,
 
+  subjectById: {},
+  subjectByIdError: null,
+
   isCallingAddSubjectApi: false,
   addSubjectError: null,
 };
@@ -23,6 +26,17 @@ export const subjectSlice = createSlice({
         ...state.subjects,
         [semesterId]: subjects,
       };
+    },
+    setSubjectById: (state, action) => {
+      const { subject } = action.payload;
+
+      state.subjectById = {
+        ...state.subjectById,
+        [subject._id]: subject,
+      };
+    },
+    setSubjectByIdError: (state, action) => {
+      state.subjectByIdError = action.payload.error;
     },
     setError: (state, action) => {
       state.error = action.payload.error;
@@ -52,6 +66,8 @@ export const {
   setMySubjectsError,
   setAddSubjectError,
   setIsCallingAddSubjectApi,
+  setSubjectById,
+  setSubjectByIdError,
 } = subjectSlice.actions;
 
 export default subjectSlice.reducer;

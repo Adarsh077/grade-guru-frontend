@@ -44,7 +44,7 @@ class SemesterService {
 
   static deleteSemester = catchAsync(async ({ semesterId }) => {
     const response = await appAxios.patch(
-      endpoints.semesters.deleteSemester(semesterId),
+      endpoints.semesters.deleteSemester(semesterId)
     );
 
     if (response.data.status === "success" && response.data.body?.semester) {
@@ -52,6 +52,18 @@ class SemesterService {
     }
 
     return { semester: null };
+  });
+
+  static getStudentsBySemesterId = catchAsync(async ({ semesterId }) => {
+    const response = await appAxios.get(
+      endpoints.semesters.getStudentsBy(semesterId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.students) {
+      return { students: response.data.body.students };
+    }
+
+    return { students: [] };
   });
 }
 

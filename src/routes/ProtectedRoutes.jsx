@@ -11,9 +11,9 @@ import {
   MasterSemesters,
   MasterSubjects,
   MySubjectsScreen,
+  SelectDepartments,
   SemestersScreen,
   StudentsByBatch,
-  StudentsBySemester,
   SubjectsScreen,
 } from "@/pages";
 
@@ -70,21 +70,6 @@ const ProtectedRoutes = () => {
             </CaslCan>
           }
         />
-        <Route
-          path=":semesterId/students"
-          element={
-            <CaslCan
-              requiredAbilities={[
-                {
-                  action: caslEnum.actions.read,
-                  subject: caslEnum.subjects.semesters,
-                },
-              ]}
-            >
-              <StudentsBySemester />
-            </CaslCan>
-          }
-        />
       </Route>
       <Route path="/subjects" element={<MySubjectsLayout />}>
         <Route
@@ -104,12 +89,19 @@ const ProtectedRoutes = () => {
         />
         <Route path=":subjectId/marks" element={<MarksBySubject />} />
       </Route>
+
       <Route path="/master-list" element={<MasterListLayout />}>
         <Route path="batches" element={<BatchList />} />
+
         <Route
-          path="batches/:batchYear/students"
+          path="batches/:batchYear/departments"
+          element={<SelectDepartments />}
+        />
+        <Route
+          path="batches/:batchYear/departments/:departmentId/students"
           element={<StudentsByBatch />}
         />
+
         <Route path="departments" element={<MasterDepartments />} />
         <Route
           path="departments/:departmentId/semesters"

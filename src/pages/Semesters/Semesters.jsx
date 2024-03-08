@@ -3,7 +3,6 @@ import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +23,6 @@ import {
 } from "@/components/ui/table";
 import { UpdateSemester, DeleteSemester } from "@/features";
 import { useQueryString } from "@/hooks";
-import ResultService from "@/services/result.service";
 import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { semestersSelector } from "@/store/semester/semester.selectors";
 
@@ -53,17 +51,17 @@ const Semesters = () => {
   };
 
   const handleGenerateResult = (semesterId) => {
-    toast.promise(ResultService.generateResult({ semesterId }), {
-      loading: "Generating result...",
-      success: () => {
-        var link = document.createElement("a");
-        link.href = "http://localhost:3001/result.pdf";
-        link.target = "_blank";
-        link.dispatchEvent(new MouseEvent("click"));
-        return `Result generated!`;
-      },
-      error: "Error",
-    });
+    // toast.promise(ResultService.generateResult({ semesterId }), {
+    //   loading: "Generating result...",
+    //   success: () => {
+    //     var link = document.createElement("a");
+    //     link.href = "http://localhost:3001/result.pdf";
+    //     link.target = "_blank";
+    //     link.dispatchEvent(new MouseEvent("click"));
+    //     return `Result generated!`;
+    //   },
+    //   error: "Error",
+    // });
   };
 
   return (
@@ -131,7 +129,9 @@ const Semesters = () => {
                           event.stopPropagation();
                           setDeleteSemester(semester);
                         }}
-                      >Delete</DropdownMenuItem>
+                      >
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

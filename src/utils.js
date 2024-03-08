@@ -1,7 +1,8 @@
+import { isAxiosError } from "axios";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
 import appConfig from "./appConfig";
-import { isAxiosError } from "axios";
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
