@@ -21,6 +21,7 @@ const MarksBySubject = ({ subjectId }) => {
   const isEditingRef = useRef(false);
 
   const columns = [
+    { key: "seatNo", name: "Seat No" },
     { key: "student", name: "Student Name" },
     ...ExamsBySubjectType[subject.subjectType].map((exam) => ({
       key: exam,
@@ -31,6 +32,7 @@ const MarksBySubject = ({ subjectId }) => {
 
   const rows = marksBySubject.marks.map((marks) => {
     const row = {
+      seatNo: marks.iatSeatNo,
       student: marks.student.name,
       studentId: marks.student._id,
     };

@@ -52,12 +52,6 @@ const SubjectsRoot = () => {
 
   return (
     <div>
-      <input
-        type="file"
-        className="opacity-0"
-        onChange={handleImportStudents}
-        ref={inputFile}
-      />
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-7 xl:col-span-8">
           <Breadcrumb className="-translate-x-4" />
@@ -69,6 +63,12 @@ const SubjectsRoot = () => {
                 <Plus className="mr-2 h-4 w-4" /> Add Subject
               </Button>
             </AddSubjectDailog>
+            <input
+              type="file"
+              className="opacity-0 h-0 w-0"
+              onChange={handleImportStudents}
+              ref={inputFile}
+            />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-10 w-10 p-0">
