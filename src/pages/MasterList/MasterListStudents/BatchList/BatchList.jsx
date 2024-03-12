@@ -28,7 +28,7 @@ const BatchList = () => {
               <TableRow key={batch._id} className="cursor-pointer">
                 <Link
                   className="h-full w-full block"
-                  to={`/master-list/batches/${batch.year}/students`}
+                  to={`/master-list/batches/${batch.year}/departments`}
                 >
                   <TableCell className="w-full font-medium">
                     {batch.name}

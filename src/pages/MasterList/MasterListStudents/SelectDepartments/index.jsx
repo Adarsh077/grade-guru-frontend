@@ -8,6 +8,8 @@ import { singleBatchSelector } from "@/store/batch/batch.selectors";
 import { getAllMasterDepartments } from "@/store/master-list/department/department.actions";
 import { masterDepartmentErrorSelector } from "@/store/master-list/department/department.selectors";
 
+import SelectDepartments from "./SelectDepartments";
+
 const SelectDepartmentRoot = () => {
   const { batchYear } = useParams();
   const batch = useSelector(singleBatchSelector(batchYear));
@@ -32,7 +34,9 @@ const SelectDepartmentRoot = () => {
         loadFirstThenRender
         error={masterDepartmentErrorSelector}
         dispatchFunction={getAllMasterDepartments()}
-      ></FetchData>
+      >
+        <SelectDepartments />
+      </FetchData>
     </div>
   );
 };
