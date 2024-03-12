@@ -1,3 +1,7 @@
+import { MoreHorizontal } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,17 +18,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useQueryString } from "@/hooks";
 import { mySubjectsSelector } from "@/store/subject/subject.selectors";
 
 const MySubjects = () => {
   const subjects = useSelector(mySubjectsSelector);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { parsedQueryString, queryString } = useQueryString();
 
   const handleSubjectClick = (subject) => {
     if (!subject) return;
-    // navigate(`/subjects/${subjec._id}/subjects`);
+    navigate({
+      pathname: `/subjects/${subject._id}/marks`,
+      search: queryString.stringify(parsedQueryString),
+    });
   };
 
   return (

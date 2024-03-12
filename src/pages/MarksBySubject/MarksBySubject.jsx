@@ -5,7 +5,13 @@ import { useRef } from "react";
 import DataGrid, { textEditor } from "react-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ExamsBySubjectType, ReadableExamNamesEnum } from "@/constants/enum";
+import caslEnum from "@/constants/casl.enum";
+import {
+  ExamNamesEnum,
+  ExamsBySubjectType,
+  ReadableExamNamesEnum,
+} from "@/constants/enum";
+import { useCaslCan } from "@/hooks";
 import { updateMarksBySubjectId } from "@/store/marks-by-subject/marks-by-subject.actions";
 import { marksBySubjectIdSelector } from "@/store/marks-by-subject/marks-by-subject.selectors";
 import { subjectByIdSelector } from "@/store/subject/subject.selectors";
@@ -17,17 +23,23 @@ const MarksBySubject = ({ subjectId }) => {
 
   const marksBySubject = useSelector(marksBySubjectIdSelector(subjectId));
   const subject = useSelector(subjectByIdSelector(subjectId));
-  console.log({ marksBySubject, subject });
+
+  const isAdmin = useCaslCan([
+    { action: caslEnum.actions.manage, subject: caslEnum.subjects.all },
+  ]);
+
   const isEditingRef = useRef(false);
 
   const columns = [
     { key: "seatNo", name: "Seat No" },
     { key: "student", name: "Student Name" },
-    ...ExamsBySubjectType[subject.subjectType].map((exam) => ({
-      key: exam,
-      name: ReadableExamNamesEnum[exam],
-      renderEditCell: textEditor,
-    })),
+    ...ExamsBySubjectType[subject.subjectType]
+      .filter((exam) => (isAdmin ? true : exam !== ExamNamesEnum.ESE))
+      .map((exam) => ({
+        key: exam,
+        name: ReadableExamNamesEnum[exam],
+        renderEditCell: textEditor,
+      })),
   ];
 
   const rows = marksBySubject.marks.map((marks) => {
