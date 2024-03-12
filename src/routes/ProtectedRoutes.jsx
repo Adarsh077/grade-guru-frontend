@@ -14,7 +14,7 @@ import {
   SelectDepartments,
   SemestersScreen,
   StudentsByBatch,
-  SubjectsScreen,
+  SubjectGroups,
 } from "@/pages";
 
 import Redirect from "./Redirect";
@@ -55,21 +55,7 @@ const ProtectedRoutes = () => {
         />
       </Route>
       <Route path="/semesters" element={<DashbordLayout />}>
-        <Route
-          path=":semesterId/subjects"
-          element={
-            <CaslCan
-              requiredAbilities={[
-                {
-                  action: caslEnum.actions.read,
-                  subject: caslEnum.subjects.subjects,
-                },
-              ]}
-            >
-              <SubjectsScreen />
-            </CaslCan>
-          }
-        />
+        <Route path=":semesterId/subject-groups" element={<SubjectGroups />} />
       </Route>
       <Route path="/subjects" element={<MySubjectsLayout />}>
         <Route

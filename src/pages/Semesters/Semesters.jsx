@@ -41,11 +41,11 @@ const Semesters = () => {
     dispatch(
       pushBreadcrumbItem({
         label: semester.name,
-        link: `/semesters/${semester._id}/subjects`,
+        link: `/semesters/${semester._id}/subject-groups`,
       })
     );
     navigate({
-      pathname: `/semesters/${semester._id}/subjects`,
+      pathname: `/semesters/${semester._id}/subject-groups`,
       search: queryString.stringify(parsedQueryString),
     });
   };

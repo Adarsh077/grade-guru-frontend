@@ -35,6 +35,12 @@ const endpoints = {
     addSubject: (semesterId) => `/semesters/${semesterId}/subjects`,
     getMySubjects: `/subjects/my`,
   },
+  subjectGroups: {
+    getAllSubjectGroupsBy: (semesterId) =>
+      `/semesters/${semesterId}/subject-groups`,
+    enrollStudents: (subjectGroupId) =>
+      `/subject-groups/${subjectGroupId}/students`,
+  },
   marksBySubject: {
     getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
     enterMarks: ({ subjectId, studentId }) =>
