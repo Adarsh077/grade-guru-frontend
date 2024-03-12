@@ -65,6 +65,18 @@ class SemesterService {
 
     return { students: [] };
   });
+
+  static getEnrolledStudentsBySemester = catchAsync(async ({ semesterId }) => {
+    const response = await appAxios.get(
+      endpoints.semesters.getEnrolledStudentsBy(semesterId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.students) {
+      return { students: response.data.body.students };
+    }
+
+    return { students: [] };
+  });
 }
 
 export default SemesterService;

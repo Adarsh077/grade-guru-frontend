@@ -65,6 +65,61 @@ const SubjectsRoot = () => {
     );
   };
 
+  const handleDownloadEnrolledStudents = async (e) => {
+    e.stopPropagation();
+
+    toast.promise(
+      SemesterService.getEnrolledStudentsBySemester({
+        semesterId,
+      }),
+      {
+        loading: "Downloading Students list",
+        success: ({ students }) => {
+          if (!students || !students.length) {
+            throw new Error("No students added yet!");
+          }
+
+          const schema = [
+            {
+              column: "Name",
+              type: String,
+              width: 20,
+              value: (student) => {
+                return student.name;
+              },
+            },
+            {
+              column: "IAT Seat No",
+              type: String,
+              width: 20,
+              value: (student) => {
+                return student.iatSeatNo;
+              },
+            },
+            {
+              column: "ESE Seat No",
+              type: String,
+              width: 20,
+              value: (student) => {
+                return student.eseSeatNo;
+              },
+            },
+          ];
+
+          writeXlsxFile(students, {
+            schema,
+            fileName: "students.xlsx",
+            sheet: "Students",
+            stickyRowsCount: 1,
+          });
+
+          return "Downloaded Students list";
+        },
+        error: (error) => error.message || "Something went wrong",
+      }
+    );
+  };
+
   return (
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
@@ -89,6 +144,9 @@ const SubjectsRoot = () => {
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem onClick={handleDownloadStudents}>
                   Download Students List
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDownloadEnrolledStudents}>
+                  Download Student Seat No
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
