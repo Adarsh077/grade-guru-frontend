@@ -70,6 +70,12 @@ const endpoints = {
       updateSemesterBy: (semesterId) => `/master/semesters/${semesterId}/`,
       deleteSemesterBy: (semesterId) => `/master/semesters/${semesterId}/`,
     },
+    subjectGroups: {
+      getAllSubjectGroupsBy: (semesterId) =>
+        `/master/semesters/${semesterId}/subject-groups`,
+      enrollStudents: (subjectGroupId) =>
+        `/master/subject-groups/${subjectGroupId}/students`,
+    },
     subjects: {
       getAllSubjectsBy: (semesterId) =>
         `/master/semesters/${semesterId}/subjects`,

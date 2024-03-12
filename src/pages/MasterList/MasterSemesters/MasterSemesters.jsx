@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import { MoreHorizontal } from "lucide-react";
@@ -32,8 +31,7 @@ const MasterSemesters = () => {
   const { queryString, parsedQueryString } = useQueryString();
 
   const masterSemesters = useSelector(masterSemestersSelector(departmentId));
-  
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [deleteMasterSemester, setDeleteMasterSemester] = useState(null);
@@ -43,11 +41,11 @@ const MasterSemesters = () => {
     dispatch(
       pushBreadcrumbItem({
         label: semester.name,
-        link: `/master-list/semesters/${semester._id}/subjects`,
+        link: `/master-list/semesters/${semester._id}/subject-groups`,
       })
     );
     navigate({
-      pathname: `/master-list/semesters/${semester._id}/subjects`,
+      pathname: `/master-list/semesters/${semester._id}/subject-groups`,
       search: queryString.stringify(parsedQueryString),
     });
   };
@@ -98,7 +96,9 @@ const MasterSemesters = () => {
                           event.stopPropagation();
                           setDeleteMasterSemester(semester);
                         }}
-                      >Delete</DropdownMenuItem>
+                      >
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
@@ -108,7 +108,6 @@ const MasterSemesters = () => {
         </TableBody>
       </Table>
     </>
-
   );
 };
 export default MasterSemesters;

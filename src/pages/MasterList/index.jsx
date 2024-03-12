@@ -4,3 +4,4 @@ export { default as MasterDepartments } from "./MasterDepartments";
 export { default as MasterSemesters } from "./MasterSemesters";
 export { default as MasterSubjects } from "./MasterSubjects";
 export { default as SelectDepartments } from "./MasterListStudents/SelectDepartments";
+export { default as MasterSubjectGroups } from "./MasterSubjectGroups";

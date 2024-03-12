@@ -10,3 +10,4 @@ export { default as StudentsService } from "./students.service";
 export { default as MasterDepartmentService } from "./master-list/department.service";
 export { default as MasterSemesterService } from "./master-list/semester.service";
 export { default as MasterSubjectService } from "./master-list/subject.service";
+export { default as MasterSubjectGroupService } from "./master-list/subject-group.service";
