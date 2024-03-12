@@ -30,9 +30,10 @@ const endpoints = {
       `/semesters/${semesterId}/enrolled-students`,
   },
   subjects: {
-    getAllSubjectsBy: (semesterId) => `/semesters/${semesterId}/subjects`,
+    getAllSubjectsBy: (subjectGroupId) =>
+      `/subject-groups/${subjectGroupId}/subjects`,
     getSingleSubject: (subjectId) => `/subjects/${subjectId}`,
-    addSubject: (semesterId) => `/semesters/${semesterId}/subjects`,
+    addSubject: (subjectGroupId) => `/semesters/${subjectGroupId}/subjects`,
     getMySubjects: `/subjects/my`,
   },
   subjectGroups: {

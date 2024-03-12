@@ -18,7 +18,7 @@ const MarksBySubjectRoot = () => {
   return (
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
-        <div className="md:col-span-7 xl:col-span-8">
+        <div className="md:col-span-8 xl:col-span-8">
           <Breadcrumb className="-translate-x-4" />
         </div>
       </div>

@@ -4,9 +4,9 @@ import catchAsync from "@/utils";
 import appAxios from "./axios.service";
 
 class SubjectService {
-  static getAllSubjects = catchAsync(async ({ semesterId }) => {
+  static getAllSubjects = catchAsync(async ({ subjectGroupId }) => {
     const response = await appAxios.get(
-      endpoints.subjects.getAllSubjectsBy(semesterId)
+      endpoints.subjects.getAllSubjectsBy(subjectGroupId)
     );
 
     if (response.data.status === "success" && response.data.body?.subjects) {
@@ -41,9 +41,9 @@ class SubjectService {
   });
 
   static addSubject = catchAsync(
-    async ({ semesterId, name, staffId, code, exams }) => {
+    async ({ subjectGroupId, name, staffId, code, exams }) => {
       const response = await appAxios.post(
-        endpoints.subjects.addSubject(semesterId),
+        endpoints.subjects.addSubject(subjectGroupId),
         {
           name,
           staffId,

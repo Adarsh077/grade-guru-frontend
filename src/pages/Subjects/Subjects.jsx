@@ -23,12 +23,12 @@ import { pushBreadcrumbItem } from "@/store/breadcrumb/breadcrumb.actions";
 import { subjectSelector } from "@/store/subject/subject.selectors";
 
 const Subjects = () => {
-  const { semesterId } = useParams();
+  const { subjectGroupId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { queryString, parsedQueryString } = useQueryString();
 
-  const subjects = useSelector(subjectSelector(semesterId));
+  const subjects = useSelector(subjectSelector(subjectGroupId));
 
   const handleSubjectClick = (subject) => {
     if (!subject) return;
@@ -80,7 +80,11 @@ const Subjects = () => {
                     >
                       Edit
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      Delete
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

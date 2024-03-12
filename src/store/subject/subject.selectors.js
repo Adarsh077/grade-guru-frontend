@@ -1,5 +1,5 @@
-export const subjectSelector = (semesterId) => (state) => {
-  return state.subjectReducer.subjects[semesterId];
+export const subjectSelector = (subjectGroupId) => (state) => {
+  return state.subjectReducer.subjects[subjectGroupId];
 };
 
 export const subjectByIdSelector = (subjectId) => (state) => {

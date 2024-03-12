@@ -12,7 +12,7 @@ import {
 import { setIsCallingAddSemesterApi } from "../semester/semester.slice";
 
 export const getAllSubjects =
-  ({ semesterId }) =>
+  ({ subjectGroupId }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -22,10 +22,10 @@ export const getAllSubjects =
       );
 
       const { subjects } = await SubjectService.getAllSubjects({
-        semesterId,
+        subjectGroupId,
       });
 
-      dispatch(setSubjects({ subjects, semesterId }));
+      dispatch(setSubjects({ subjects, subjectGroupId }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(
@@ -85,7 +85,7 @@ export const getMySubjects =
   };
 
 export const addSubject =
-  ({ semesterId, name, staffId, code, exams }) =>
+  ({ subjectGroupId, name, staffId, code, exams }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -99,7 +99,7 @@ export const addSubject =
         })
       );
       const { subject } = await SubjectService.addSubject({
-        semesterId,
+        subjectGroupId,
         name,
         staffId,
         code,
@@ -107,7 +107,7 @@ export const addSubject =
       });
 
       if (subject) {
-        await dispatch(getAllSubjects({ semesterId }));
+        await dispatch(getAllSubjects({ subjectGroupId }));
       }
       return true;
     } catch (err) {

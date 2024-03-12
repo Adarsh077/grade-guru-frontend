@@ -15,6 +15,7 @@ import {
   SemestersScreen,
   StudentsByBatch,
   SubjectGroups,
+  SubjectsScreen,
 } from "@/pages";
 
 import Redirect from "./Redirect";
@@ -56,6 +57,9 @@ const ProtectedRoutes = () => {
       </Route>
       <Route path="/semesters" element={<DashbordLayout />}>
         <Route path=":semesterId/subject-groups" element={<SubjectGroups />} />
+      </Route>
+      <Route path="/subject-groups" element={<DashbordLayout />}>
+        <Route path=":subjectGroupId/subjects" element={<SubjectsScreen />} />
       </Route>
       <Route path="/subjects" element={<MySubjectsLayout />}>
         <Route
