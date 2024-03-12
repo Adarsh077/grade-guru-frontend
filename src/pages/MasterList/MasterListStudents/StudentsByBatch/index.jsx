@@ -57,7 +57,7 @@ const StudentsByBatchRoot = () => {
   };
 
   const downloadFormat = async () => {
-    const fileUrl = "http://127.0.0.1:5173/students_list.xlsx";
+    const fileUrl = `${window.origin}/students_list.xlsx`;
     const fileName = fileUrl.split("/").pop();
     const aTag = document.createElement("a");
     aTag.href = fileUrl;

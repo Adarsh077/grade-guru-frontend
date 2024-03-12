@@ -34,7 +34,7 @@ export const getAllSubjectGroups =
   };
 
 export const enrollStudents =
-  ({ semesterId, enrolledStudents }) =>
+  ({ subjectGroupId, enrolledStudents }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -48,14 +48,11 @@ export const enrollStudents =
         })
       );
 
-      const { subject } = await SubjectGroupService.enrollStudents({
-        semesterId,
+      await SubjectGroupService.enrollStudents({
+        subjectGroupId,
         enrolledStudents,
       });
 
-      if (subject) {
-        await dispatch(getAllSubjectGroups({ semesterId }));
-      }
       return true;
     } catch (err) {
       const appError = gracelyHandleError(err);
