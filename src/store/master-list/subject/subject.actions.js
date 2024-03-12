@@ -5,7 +5,7 @@ import { setSubjects, setError, setAddSubjectError } from "./subject.slice";
 import { setIsCallingAddSemesterApi } from "../semester/semester.slice";
 
 export const getAllMasterSubjects =
-  ({ semesterId }) =>
+  ({ subjectGroupId }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -15,10 +15,10 @@ export const getAllMasterSubjects =
       );
 
       const { subjects } = await MasterSubjectService.getAllSubjects({
-        semesterId,
+        subjectGroupId,
       });
 
-      dispatch(setSubjects({ subjects, semesterId }));
+      dispatch(setSubjects({ subjects, subjectGroupId }));
     } catch (err) {
       const appError = gracelyHandleError(err);
       dispatch(

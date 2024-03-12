@@ -77,9 +77,8 @@ const endpoints = {
         `/master/subject-groups/${subjectGroupId}/students`,
     },
     subjects: {
-      getAllSubjectsBy: (semesterId) =>
-        `/master/semesters/${semesterId}/subjects`,
-      addSubject: (semesterId) => `/master/semesters/${semesterId}/subjects`,
+      getAllSubjectsBy: (subjectGroupId) =>
+        `/master/subject-groups/${subjectGroupId}/subjects`,
     },
   },
 };

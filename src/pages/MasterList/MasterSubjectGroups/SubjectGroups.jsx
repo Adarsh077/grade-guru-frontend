@@ -38,12 +38,12 @@ const SubjectGroups = () => {
     dispatch(
       pushBreadcrumbItem({
         label: subjectGroup.name,
-        link: `/master/subject-groups/${subjectGroup._id}/subjects`,
+        link: `/master-list/subject-groups/${subjectGroup._id}/subjects`,
       })
     );
 
     navigate({
-      pathname: `/master/subject-groups/${subjectGroup._id}/subjects`,
+      pathname: `/master-list/subject-groups/${subjectGroup._id}/subjects`,
       search: queryString.stringify(parsedQueryString),
     });
   };

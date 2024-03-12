@@ -14,11 +14,11 @@ export const masterSubjectSlice = createSlice({
   reducers: {
     reset: () => initialState,
     setSubjects: (state, action) => {
-      const { subjects, semesterId } = action.payload;
+      const { subjects, subjectGroupId } = action.payload;
 
       state.subjects = {
         ...state.subjects,
-        [semesterId]: subjects,
+        [subjectGroupId]: subjects,
       };
     },
     setError: (state, action) => {

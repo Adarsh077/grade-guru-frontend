@@ -102,6 +102,10 @@ const ProtectedRoutes = () => {
           path="semesters/:semesterId/subject-groups"
           element={<MasterSubjectGroups />}
         />
+        <Route
+          path="subject-groups/:subjectGroupId/subjects"
+          element={<MasterSubjects />}
+        />
 
         <Route
           path=""

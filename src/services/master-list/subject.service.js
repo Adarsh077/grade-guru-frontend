@@ -4,9 +4,9 @@ import catchAsync from "@/utils";
 import appAxios from "../axios.service";
 
 class MasterSubjectService {
-  static getAllSubjects = catchAsync(async ({ semesterId }) => {
+  static getAllSubjects = catchAsync(async ({ subjectGroupId }) => {
     const response = await appAxios.get(
-      endpoints.masterList.subjects.getAllSubjectsBy(semesterId)
+      endpoints.masterList.subjects.getAllSubjectsBy(subjectGroupId)
     );
 
     if (response.data.status === "success" && response.data.body?.subjects) {

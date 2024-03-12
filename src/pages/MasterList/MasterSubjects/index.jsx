@@ -12,7 +12,7 @@ import { masterSubjectErrorSelector } from "@/store/master-list/subject/subject.
 import MasterSubjects from "./MasterSubjects";
 
 const MasterSubjectsRoot = () => {
-  const { semesterId } = useParams();
+  const { subjectGroupId } = useParams();
   const masterSubjectError = useSelector(masterSubjectErrorSelector);
 
   return (
@@ -23,7 +23,7 @@ const MasterSubjectsRoot = () => {
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
-            <AddMasterSubjectDailog semesterId={semesterId}>
+            <AddMasterSubjectDailog subjectGroupId={subjectGroupId}>
               <Button>
                 <Plus className="mr-2 h-4 w-4" /> Add Subject
               </Button>
@@ -34,9 +34,9 @@ const MasterSubjectsRoot = () => {
       <FetchData
         loadFirstThenRender
         error={masterSubjectError}
-        shouldNotFetch={!semesterId}
-        dispatchFunction={getAllMasterSubjects({ semesterId })}
-        dependencies={[semesterId]}
+        shouldNotFetch={!subjectGroupId}
+        dispatchFunction={getAllMasterSubjects({ subjectGroupId })}
+        dependencies={[subjectGroupId]}
       >
         <MasterSubjects />
       </FetchData>

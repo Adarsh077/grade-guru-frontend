@@ -21,9 +21,9 @@ import {
 import { masterSubjectSelector } from "@/store/master-list/subject/subject.selectors";
 
 const MasterSubjects = () => {
-  const { semesterId } = useParams();
+  const { subjectGroupId } = useParams();
 
-  const masterSubjects = useSelector(masterSubjectSelector(semesterId));
+  const masterSubjects = useSelector(masterSubjectSelector(subjectGroupId));
 
   const handleSubjectClick = () => {};
 
