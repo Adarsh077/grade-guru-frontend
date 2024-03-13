@@ -31,7 +31,9 @@ const MarksBySubject = ({ subjectId }) => {
   const isEditingRef = useRef(false);
 
   const columns = [
-    { key: "seatNo", name: "Seat No" },
+    { key: "eseSeatNo", name: "ESE Seat No" },
+    { key: "iatSeatNo", name: "IAT Seat No" },
+    
     { key: "student", name: "Student Name" },
     ...ExamsBySubjectType[subject.subjectType]
       .filter((exam) => (isAdmin ? true : exam !== ExamNamesEnum.ESE))
@@ -42,9 +44,10 @@ const MarksBySubject = ({ subjectId }) => {
       })),
   ];
 
-  const rows = marksBySubject.marks.map((marks) => {
+  const rows = (marksBySubject?.marks || []).map((marks) => {
     const row = {
-      seatNo: marks.iatSeatNo,
+      iatSeatNo: marks.iatSeatNo,
+      eseSeatNo: marks.eseSeatNo,
       student: marks.student.name,
       studentId: marks.student._id,
     };
@@ -91,7 +94,7 @@ const MarksBySubject = ({ subjectId }) => {
       <DataGrid
         ref={gridRef}
         className="rdg-light fill-grid"
-        style={{ height: "auto" }}
+        style={{ height: "auto", resize: "both" }}
         headerRowHeight={50}
         columns={columns}
         rows={rows}
