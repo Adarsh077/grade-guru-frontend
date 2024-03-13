@@ -75,9 +75,6 @@ const AddMasterDepartmentForm = ({ handleClose }) => {
   }, [addMasterDepartmentError, form]);
 
   const onSubmit = async (values) => {
-    if (!parsedQueryString.batch) {
-      form.setError("root", { message: "Please select batch from navbar." });
-    }
     const isCompletedWithoutError = await dispatch(
       addMasterDepartment({
         name: values.name,
