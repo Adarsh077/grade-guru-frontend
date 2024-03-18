@@ -1,5 +1,9 @@
-import * as z from "zod";
+import { useEffect } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,14 +23,11 @@ import {
   FormRootError,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/auth/auth.actions";
 import {
   authErrorSelector,
   isCallingLoginApiSelector,
 } from "@/store/auth/auth.selectors";
-import { useEffect } from "react";
 
 const loginSchema = z.object({
   email: z
@@ -44,8 +45,8 @@ const Login = () => {
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "adarsh@gmail.co",
-      password: "123",
+      email: "",
+      password: "",
     },
   });
 
