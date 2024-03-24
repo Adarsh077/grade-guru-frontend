@@ -10,7 +10,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -48,20 +47,6 @@ const Semesters = () => {
       pathname: `/semesters/${semester._id}/subject-groups`,
       search: queryString.stringify(parsedQueryString),
     });
-  };
-
-  const handleGenerateResult = (semesterId) => {
-    // toast.promise(ResultService.generateResult({ semesterId }), {
-    //   loading: "Generating result...",
-    //   success: () => {
-    //     var link = document.createElement("a");
-    //     link.href = "http://localhost:3001/result.pdf";
-    //     link.target = "_blank";
-    //     link.dispatchEvent(new MouseEvent("click"));
-    //     return `Result generated!`;
-    //   },
-    //   error: "Error",
-    // });
   };
 
   return (
@@ -107,15 +92,6 @@ const Semesters = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-40" align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleGenerateResult(semester._id);
-                        }}
-                      >
-                        Generate Result
-                      </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={(event) => {
                           event.stopPropagation();
