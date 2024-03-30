@@ -6,3 +6,4 @@ export { default as MySubjectsScreen } from "./MySubjects";
 export { default as MarksBySubject } from "./MarksBySubject";
 export { default as SubjectGroups } from "./SubjectGroups";
 export * from "./MasterList";
+export * from "./Exporters";

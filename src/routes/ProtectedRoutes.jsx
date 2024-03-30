@@ -17,6 +17,7 @@ import {
   StudentsByBatch,
   SubjectGroups,
   SubjectsScreen,
+  GazzetExporter,
 } from "@/pages";
 
 import Redirect from "./Redirect";
@@ -24,6 +25,10 @@ import Redirect from "./Redirect";
 const ProtectedRoutes = () => {
   return (
     <Routes>
+      <Route path="/exporters">
+        <Route path="gazzet/:subjectGroupId" element={<GazzetExporter />} />
+      </Route>
+
       <Route path="/departments" element={<DashbordLayout />}>
         <Route
           path=""

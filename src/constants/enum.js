@@ -38,3 +38,16 @@ export const ExamsBySubjectType = {
   ],
   [SubjectTypeEnum.LAB]: [ExamNamesEnum.PROR, ExamNamesEnum.TW],
 };
+
+export const ExamsWithMarksBySubjectType = {
+  [SubjectTypeEnum.WRITTEN]: [
+    { name: ExamNamesEnum.ESE, maxMarks: 80, minMarks: 32 },
+    { name: ExamNamesEnum.IA, maxMarks: 80, minMarks: 32 },
+    { name: ExamNamesEnum.TOT, maxMarks: 100, minMarks: 40 },
+  ],
+  [SubjectTypeEnum.LAB]: [
+    { name: ExamNamesEnum.PROR, maxMarks: 25, minMarks: 10 },
+    { name: ExamNamesEnum.TW, maxMarks: 25, minMarks: 10 },
+    { name: ExamNamesEnum.TOT, maxMarks: 50, minMarks: 20 },
+  ],
+};

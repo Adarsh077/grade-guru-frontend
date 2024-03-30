@@ -48,8 +48,9 @@ const endpoints = {
       `/subjects/${subjectId}/students/${studentId}/marks`,
   },
   result: {
-    generateResult: (semesterId) => `/semesters/${semesterId}/result/generate`,
-    generateResultPdf: (semesterId) => `/semesters/${semesterId}`,
+    generateResult: (subjectGroupId) =>
+      `/subject-groups/${subjectGroupId}/result`,
+    getResult: (subjectGroupId) => `/subject-groups/${subjectGroupId}/result`,
   },
   students: {
     getAllStudents: `/students`,

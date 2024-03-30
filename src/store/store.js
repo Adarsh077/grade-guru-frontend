@@ -9,6 +9,7 @@ import masterDepartmentSlice from "./master-list/department/department.slice";
 import masterSemesterSlice from "./master-list/semester/semester.slice";
 import masterSubjectSlice from "./master-list/subject/subject.slice";
 import masterSubjectGroupSlice from "./master-list/subject-group/subject-group.slice";
+import resultSlice from "./result/result.slice";
 import semesterSlice from "./semester/semester.slice";
 import studentSlice from "./students/students.slice";
 import subjectSlice from "./subject/subject.slice";
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   masterSubjectReducer: masterSubjectSlice,
   subjectGroupReducer: subjectGroupSlice,
   masterSubjectGroupReducer: masterSubjectGroupSlice,
+  resultReducer: resultSlice,
 });
 
 export const store = configureStore({
