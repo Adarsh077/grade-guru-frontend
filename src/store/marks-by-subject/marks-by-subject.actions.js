@@ -39,7 +39,13 @@ export const getMarksBySubjectId =
 export const updateMarksBySubjectId =
   (data = {}) =>
   async (dispatch) => {
-    const { subjectId, studentId, examName, marksScored } = data;
+    const {
+      subjectId,
+      studentId,
+      examName,
+      marksScored,
+      hasParticipatedInNss,
+    } = data;
     try {
       dispatch(
         setUpdateMarksBySubjectIdError({
@@ -53,7 +59,13 @@ export const updateMarksBySubjectId =
       );
 
       await dispatch(
-        updateMarksOfStudent({ subjectId, studentId, examName, marksScored })
+        updateMarksOfStudent({
+          subjectId,
+          studentId,
+          examName,
+          marksScored,
+          hasParticipatedInNss,
+        })
       );
 
       const { status } = await MarksBySubjectService.updateMarksBySubject({
@@ -61,6 +73,7 @@ export const updateMarksBySubjectId =
         studentId,
         examName,
         marksScored,
+        hasParticipatedInNss,
       });
 
       if (status !== "success") {

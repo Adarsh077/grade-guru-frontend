@@ -20,10 +20,16 @@ class MarksBySubjectService {
   });
 
   static updateMarksBySubject = catchAsync(
-    async ({ subjectId, studentId, examName, marksScored }) => {
+    async ({
+      subjectId,
+      studentId,
+      examName,
+      marksScored,
+      hasParticipatedInNss,
+    }) => {
       const response = await appAxios.post(
         endpoints.marksBySubject.enterMarks({ subjectId, studentId }),
-        { examName, marksScored }
+        { examName, marksScored, hasParticipatedInNss }
       );
 
       return { status: response.data.status };
