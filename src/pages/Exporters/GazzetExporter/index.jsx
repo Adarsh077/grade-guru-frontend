@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import FetchData from "@/components/FetchData";
 import { getResult } from "@/store/result/result.actions";
 import { resultsErrorSelector } from "@/store/result/result.selectors";
-
-import GazzetExporter from "./Gazzet";
 import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
+
+import GazzetExporter from "./Gazzet";
 
 const GazzetExporterRoot = () => {
   const resultError = useSelector(resultsErrorSelector);

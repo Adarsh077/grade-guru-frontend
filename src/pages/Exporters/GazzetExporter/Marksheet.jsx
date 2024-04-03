@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 const MarkSheet = (props) => {
-  const { subjects = [], maxTotal, studentRecords } = props;
+  const { subjects = [], maxTotal, minMarks, studentRecords } = props;
 
   return (
     <div className="ritz grid-container" dir="ltr">
@@ -263,7 +263,9 @@ const MarkSheet = (props) => {
                 );
               });
             })}
-            <td className="s5" />
+            <td className="s6" dir="ltr">
+              {minMarks}
+            </td>
           </tr>
           {studentRecords.map((record) => {
             return [

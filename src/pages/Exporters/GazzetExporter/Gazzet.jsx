@@ -85,7 +85,6 @@ const GazzetExporter = () => {
       },
     };
   });
-  console.log(studentsResult);
   subjects = subjects.map((subject) => ({
     ...subject,
     exams: ExamsWithMarksBySubjectType[subject.subjectType],
@@ -93,13 +92,28 @@ const GazzetExporter = () => {
 
   const sortedSubjects = subjects.sort((a, b) => a.code.localeCompare(b.code));
 
+  const maxTotal = sortedSubjects.reduce((total, subject) => {
+    return (total +=
+      subject.exams.find((exam) => exam.name === ExamNamesEnum.TOT)?.maxMarks ||
+      0);
+  }, 0);
+
+  const minMarks = sortedSubjects.reduce((total, subject) => {
+    return (total +=
+      subject.exams.find((exam) => exam.name === ExamNamesEnum.TOT)?.minMarks ||
+      0);
+  }, 0);
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <Marksheet
-        studentRecords={studentsResult}
-        subjects={sortedSubjects}
-        maxTotal={800}
-      />
+    <div className="h-screen">
+      <div className="flex items-center justify-center break-after-page">
+        <Marksheet
+          studentRecords={studentsResult}
+          subjects={sortedSubjects}
+          maxTotal={maxTotal}
+          minMarks={minMarks}
+        />
+      </div>
     </div>
   );
 };
