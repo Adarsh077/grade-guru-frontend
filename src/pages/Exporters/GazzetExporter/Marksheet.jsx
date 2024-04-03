@@ -1,10 +1,22 @@
 import { v4 as uuid } from "uuid";
 
+import GazzetFooter from "./components/GazzetFooter";
+
 const MarkSheet = (props) => {
   const { subjects = [], maxTotal, minMarks, studentRecords } = props;
 
   return (
-    <div className="ritz grid-container" dir="ltr">
+    <div
+      className="ritz grid-container"
+      style={{ position: "relative" }}
+      dir="ltr"
+    >
+      <img
+        src="/ucoe-logo.jpeg"
+        width={80}
+        height={80}
+        style={{ position: "absolute", top: 10, left: 10, zIndex: 1 }}
+      />
       <table
         className="waffle"
         cellSpacing={0}
@@ -21,6 +33,7 @@ const MarkSheet = (props) => {
             />
             <td className="s2" />
             <td
+              style={{ position: "relative" }}
               className="s3"
               dir="ltr"
               colSpan={9 + 3 * subjects.length}
@@ -34,7 +47,7 @@ const MarkSheet = (props) => {
               <span style={{ fontWeight: "bold" }}>
                 <br />
               </span>
-              <span style={{ fontSize: "15pt" }}>
+              <span contentEditable style={{ fontSize: "15pt" }}>
                 Kaman Bhiwandi Road, Survey no.146 (Part), Village Kaman, Taluka
                 - Vasai, District - Palghar - 401208
               </span>
@@ -45,6 +58,18 @@ const MarkSheet = (props) => {
               >
                 Result Sheet for T.E. Information Technology, (Semester VI), C
                 SCHEME , Exam : May 2023 (Regular)
+              </span>
+              <span
+                contentEditable
+                style={{
+                  fontSize: "10pt",
+                  fontWeight: "bold",
+                  position: "absolute",
+                  top: 10,
+                  right: 20,
+                }}
+              >
+                Centre:982, VVET
               </span>
             </td>
           </tr>
@@ -292,12 +317,23 @@ const MarkSheet = (props) => {
                     if (!MarksOForExam) return null;
                     return (
                       <td key={uuid()} className="s7">
-                        {MarksOForExam.marks}
+                        {MarksOForExam.marks}{" "}
+                        {MarksOForExam.symbols.map((symbol) => (
+                          <span key={uuid()}>{symbol}</span>
+                        ))}
+                        {MarksOForExam.graceMarks
+                          ? MarksOForExam.graceMarks
+                          : ""}
                       </td>
                     );
                   });
                 })}
-                <td className="s7">{record.marks.MarksOTotal}</td>
+                <td className="s7">
+                  {record.marks.MarksOTotal}
+                  {record.marks.MarksOTotalGrace
+                    ? `#${record.marks.MarksOTotalGrace}`
+                    : ""}
+                </td>
                 <td className="s7" rowSpan={4}>
                   {record.sgpi}
                 </td>
@@ -394,6 +430,7 @@ const MarkSheet = (props) => {
               </tr>,
             ];
           })}
+          <GazzetFooter />
         </tbody>
       </table>
     </div>

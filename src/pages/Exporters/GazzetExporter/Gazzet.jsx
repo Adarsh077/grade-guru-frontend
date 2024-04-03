@@ -15,6 +15,7 @@ const GazzetExporter = () => {
 
   const studentsResult = result.students.map((studentResult) => {
     let marksOTotal = 0;
+    let marksOTotalGrace = 0;
     let creditsTotal = 0;
     let gpcTotal = 0;
     return {
@@ -29,21 +30,28 @@ const GazzetExporter = () => {
           exams: marks.exams.map((exam) => {
             if (exam.examName === ExamNamesEnum.TOT) {
               marksOTotal += exam.marksO;
+            } else if (exam.graceMarks) {
+              marksOTotalGrace += exam.graceMarks;
             }
 
             return {
               name: exam.examName,
               marks: exam.marksO,
+              graceMarks: exam.graceMarks,
+              symbols: exam.symbols,
             };
           }),
         })),
         MarksOTotal: marksOTotal,
+        MarksOTotalGrace: marksOTotalGrace,
         Grade: studentResult.marks.map((marks) => ({
           subjectCode: marks.subjectCode,
           exams: marks.exams.map((exam) => {
             return {
               name: exam.examName,
               marks: exam.grade,
+              graceMarks: exam.graceMarks,
+              symbols: exam.symbols,
             };
           }),
         })),
@@ -56,11 +64,15 @@ const GazzetExporter = () => {
               return {
                 name: exam.examName,
                 marks: marks.credits,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
               };
             }
             return {
               name: exam.examName,
               marks: "",
+              graceMarks: exam.graceMarks,
+              symbols: exam.symbols,
             };
           }),
         })),
@@ -73,11 +85,15 @@ const GazzetExporter = () => {
               return {
                 name: exam.examName,
                 marks: marks.gpc,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
               };
             }
             return {
               name: exam.examName,
               marks: "",
+              graceMarks: exam.graceMarks,
+              symbols: exam.symbols,
             };
           }),
         })),
