@@ -33,7 +33,7 @@ const StudentsByBatchRoot = () => {
   const handleImport = async (e) => {
     let toastId = toast.loading("Reading Excel File...");
 
-    const students = await readXlsxFile(e.target.files[0]);
+    let students = await readXlsxFile(e.target.files[0]);
     students.shift();
 
     if (toastId) toast.dismiss(toastId);
@@ -41,6 +41,7 @@ const StudentsByBatchRoot = () => {
       dismissible: false,
     });
 
+    students = students.sort((a, b) => a[0].localeCompare(b[0]));
     for (const student of students) {
       await dispatch(
         addStudent({

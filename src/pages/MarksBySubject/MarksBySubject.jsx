@@ -34,10 +34,6 @@ const MarksBySubject = ({ subjectId }) => {
     { key: "eseSeatNo", name: "ESE Seat No" },
     { key: "iatSeatNo", name: "IAT Seat No" },
     { key: "student", name: "Student Name" },
-    {
-      key: "nss",
-      name: "NSS",
-    },
     ...ExamsBySubjectType[subject.subjectType]
       .filter((exam) => (isAdmin ? true : exam !== ExamNamesEnum.ESE))
       .map((exam) => ({
@@ -53,23 +49,6 @@ const MarksBySubject = ({ subjectId }) => {
       eseSeatNo: marks.eseSeatNo,
       student: marks.student.name,
       studentId: marks.student._id,
-      nss: (
-        <div className="flex items-center justify-center h-full">
-          <input
-            type="checkbox"
-            defaultChecked={marks.hasParticipatedInNss}
-            onChange={(e) => {
-              dispatch(
-                updateMarksBySubjectId({
-                  subjectId,
-                  studentId: marks.student._id,
-                  hasParticipatedInNss: e.target.checked,
-                })
-              );
-            }}
-          />
-        </div>
-      ),
     };
     ExamsBySubjectType[subject.subjectType].forEach((exam) => {
       row[exam] =
