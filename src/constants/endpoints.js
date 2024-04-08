@@ -80,6 +80,8 @@ const endpoints = {
     subjects: {
       getAllSubjectsBy: (subjectGroupId) =>
         `/master/subject-groups/${subjectGroupId}/subjects`,
+      addSubject: (subjectGroupId) =>
+        `/master/subject-groups/${subjectGroupId}/subjects`,
     },
   },
 };

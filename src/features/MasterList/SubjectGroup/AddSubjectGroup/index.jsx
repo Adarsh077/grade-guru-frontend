@@ -8,10 +8,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import AddMasterSubjectForm from "./AddMasterSubjectForm";
+import AddMasterSubjectGroupForm from "./AddMasterSubjectGroupForm";
 
-const AddMasterSubjectDailog = (props) => {
-  const { children, subjectGroupId } = props;
+const AddMasterSubjectGroupDailog = (props) => {
+  const { children, semesterId } = props;
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,12 +23,12 @@ const AddMasterSubjectDailog = (props) => {
         <DialogHeader>
           <DialogTitle>Add Subject</DialogTitle>
         </DialogHeader>
-        <AddMasterSubjectForm
-          subjectGroupId={subjectGroupId}
+        <AddMasterSubjectGroupForm
+          semesterId={semesterId}
           handleClose={() => setOpen(false)}
         />
       </DialogContent>
     </Dialog>
   );
 };
-export default AddMasterSubjectDailog;
+export default AddMasterSubjectGroupDailog;

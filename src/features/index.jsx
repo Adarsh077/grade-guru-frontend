@@ -9,3 +9,4 @@ export { default as BatchSelector } from "./BatchSelector";
 export { default as UpdateSemester } from "./Semester/UpdateSemester";
 export { default as DeleteSemester } from "./Semester/DeleteSemester";
 export { default as DeleteMasterSemester } from "./MasterList/Semester/DeleteSemester";
+export { default as AddMasterSubjectGroup } from "./MasterList/SubjectGroup/AddSubjectGroup";

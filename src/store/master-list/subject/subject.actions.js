@@ -30,7 +30,7 @@ export const getAllMasterSubjects =
   };
 
 export const addMasterSubject =
-  ({ semesterId, name, staffId, code, subjectType }) =>
+  ({ subjectGroupId, name, staffId, code, subjectType }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -44,7 +44,7 @@ export const addMasterSubject =
         })
       );
       const { subject } = await MasterSubjectService.addMasterSubject({
-        semesterId,
+        subjectGroupId,
         name,
         staffId,
         code,
@@ -52,7 +52,7 @@ export const addMasterSubject =
       });
 
       if (subject) {
-        await dispatch(getAllMasterSubjects({ semesterId }));
+        await dispatch(getAllMasterSubjects({ subjectGroupId }));
       }
       return true;
     } catch (err) {

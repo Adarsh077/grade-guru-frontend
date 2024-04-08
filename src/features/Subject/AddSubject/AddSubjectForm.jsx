@@ -1,6 +1,12 @@
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -10,18 +16,14 @@ import {
   FormMessage,
   FormRootError,
 } from "@/components/ui/form";
-import { DialogFooter } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import UserAutocomplete from "@/components/UserAutocomplete";
+import { addSubject } from "@/store/subject/subject.actions";
 import {
   addSubjectErrorSelector,
   isCallingAddSubjectApiSelector,
 } from "@/store/subject/subject.selectors";
-import { addSubject } from "@/store/subject/subject.actions";
-import UserAutocomplete from "@/components/UserAutocomplete";
+
 import SubjectExamsSelector from "../SubjectExamsSelector";
 
 const addSubjectSchema = z.object({

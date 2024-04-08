@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Breadcrumb from "@/components/Breadcrumb";
 import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
-import { AddSubjectDailog } from "@/features";
+import { AddMasterSubjectGroup } from "@/features";
 import { getAllMasterSubjectGroups } from "@/store/master-list/subject-group/subject-group.actions";
 import { masterSubjectGroupErrorSelector } from "@/store/master-list/subject-group/subject-group.selectors";
 
@@ -23,11 +23,11 @@ const SubjectGroupsRoot = () => {
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
-            <AddSubjectDailog semesterId={semesterId}>
+            <AddMasterSubjectGroup semesterId={semesterId}>
               <Button>
                 <Plus className="mr-2 h-4 w-4" /> Add Subject Group
               </Button>
-            </AddSubjectDailog>
+            </AddMasterSubjectGroup>
           </div>
         </div>
       </div>

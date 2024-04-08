@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
@@ -30,6 +31,7 @@ import SubjectExamsSelector from "../SubjectExamsSelector";
 const addMasterSubjectSchema = z.object({
   name: z.string().min(1, "Name is required!"),
   code: z.string().min(2, "Code is required!"),
+  isATKTSubject: z.boolean(),
   subjectType: z
     .enum(Object.values(SubjectTypeEnum))
     .default(SubjectTypeEnum.WRITTEN),
@@ -44,7 +46,7 @@ const addMasterSubjectSchema = z.object({
     .required("Staff is required!"),
 });
 
-const AddMasterSubjectForm = ({ semesterId, handleClose }) => {
+const AddMasterSubjectForm = ({ subjectGroupId, handleClose }) => {
   const dispatch = useDispatch();
 
   const isCallingAddMasterSubjectApi = useSelector(
@@ -59,6 +61,7 @@ const AddMasterSubjectForm = ({ semesterId, handleClose }) => {
       staff: null,
       code: "",
       subjectType: SubjectTypeEnum.WRITTEN,
+      isATKTSubject: false,
     },
   });
 
@@ -91,8 +94,9 @@ const AddMasterSubjectForm = ({ semesterId, handleClose }) => {
         name: values.name,
         staffId: values.staff.value,
         code: values.code,
-        semesterId,
+        subjectGroupId,
         subjectType: values.subjectType,
+        isATKTSubject: values.isATKTSubject,
       })
     );
     if (isAdded) {
@@ -176,6 +180,24 @@ const AddMasterSubjectForm = ({ semesterId, handleClose }) => {
                 </FormItem>
               );
             }}
+          />
+
+          <FormField
+            control={form.control}
+            name="isATKTSubject"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>ATKT</FormLabel>
+                </div>
+              </FormItem>
+            )}
           />
 
           <div className="h-1"></div>

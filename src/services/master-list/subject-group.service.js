@@ -18,6 +18,24 @@ class SubjectGroupService {
 
     return { subjectGroups: [] };
   });
+
+  static addSubjectGroups = catchAsync(
+    async ({ semesterId, name, isATKTSubjectGroup }) => {
+      const response = await appAxios.post(
+        endpoints.masterList.subjectGroups.getAllSubjectGroupsBy(semesterId),
+        { name, isATKTSubjectGroup }
+      );
+
+      if (
+        response.data.status === "success" &&
+        response.data.body?.subjectGroup
+      ) {
+        return { subjectGroup: response.data.body.subjectGroup };
+      }
+
+      return { subjectGroup: [] };
+    }
+  );
 }
 
 export default SubjectGroupService;
