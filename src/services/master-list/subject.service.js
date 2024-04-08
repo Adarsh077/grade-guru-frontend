@@ -17,7 +17,14 @@ class MasterSubjectService {
   });
 
   static addMasterSubject = catchAsync(
-    async ({ subjectGroupId, name, staffId, code, subjectType }) => {
+    async ({
+      subjectGroupId,
+      name,
+      staffId,
+      code,
+      subjectType,
+      isATKTSubject,
+    }) => {
       const response = await appAxios.post(
         endpoints.masterList.subjects.addSubject(subjectGroupId),
         {
@@ -25,6 +32,7 @@ class MasterSubjectService {
           staffId,
           code,
           subjectType,
+          isATKTSubject,
         }
       );
 
