@@ -32,6 +32,7 @@ const addMasterSubjectSchema = z.object({
   name: z.string().min(1, "Name is required!"),
   code: z.string().min(2, "Code is required!"),
   isATKTSubject: z.boolean(),
+  credits: z.string().min(1, "Credits is required!"),
   subjectType: z
     .enum(Object.values(SubjectTypeEnum))
     .default(SubjectTypeEnum.WRITTEN),
@@ -60,6 +61,7 @@ const AddMasterSubjectForm = ({ subjectGroupId, handleClose }) => {
       name: "",
       staff: null,
       code: "",
+      credits: 0,
       subjectType: SubjectTypeEnum.WRITTEN,
       isATKTSubject: false,
     },
@@ -96,6 +98,7 @@ const AddMasterSubjectForm = ({ subjectGroupId, handleClose }) => {
         code: values.code,
         subjectGroupId,
         subjectType: values.subjectType,
+        credits: values.credits,
         isATKTSubject: values.isATKTSubject,
       })
     );
@@ -139,6 +142,27 @@ const AddMasterSubjectForm = ({ subjectGroupId, handleClose }) => {
               );
             }}
           />
+
+          <FormField
+            control={form.control}
+            name="credits"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>credits</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter Credits"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+
           <FormField
             control={form.control}
             name="staff"
@@ -157,6 +181,7 @@ const AddMasterSubjectForm = ({ subjectGroupId, handleClose }) => {
               );
             }}
           />
+
           <FormField
             control={form.control}
             name="subjectType"

@@ -30,7 +30,15 @@ export const getAllMasterSubjects =
   };
 
 export const addMasterSubject =
-  ({ subjectGroupId, name, staffId, code, subjectType, isATKTSubject }) =>
+  ({
+    subjectGroupId,
+    name,
+    staffId,
+    code,
+    subjectType,
+    isATKTSubject,
+    credits,
+  }) =>
   async (dispatch) => {
     try {
       dispatch(
@@ -50,6 +58,7 @@ export const addMasterSubject =
         code,
         subjectType,
         isATKTSubject,
+        credits,
       });
 
       if (subject) {

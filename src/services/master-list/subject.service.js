@@ -24,6 +24,7 @@ class MasterSubjectService {
       code,
       subjectType,
       isATKTSubject,
+      credits,
     }) => {
       const response = await appAxios.post(
         endpoints.masterList.subjects.addSubject(subjectGroupId),
@@ -33,6 +34,7 @@ class MasterSubjectService {
           code,
           subjectType,
           isATKTSubject,
+          credits,
         }
       );
 
