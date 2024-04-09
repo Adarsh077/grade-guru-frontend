@@ -66,7 +66,7 @@ const AddMasterSubjectForm = ({ semesterId, handleClose }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter Subject name" {...field} />
+                    <Input placeholder="Enter Subject Group name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

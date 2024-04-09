@@ -21,7 +21,7 @@ const AddMasterSubjectGroupDailog = (props) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add Subject</DialogTitle>
+          <DialogTitle>Add Subject Group</DialogTitle>
         </DialogHeader>
         <AddMasterSubjectGroupForm
           semesterId={semesterId}
