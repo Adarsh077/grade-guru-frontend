@@ -1,11 +1,8 @@
-import { Plus } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Breadcrumb from "@/components/Breadcrumb";
 import FetchData from "@/components/FetchData";
-import { Button } from "@/components/ui/button";
-import { AddSemesterDailog } from "@/features";
 import { getAllSemesters } from "@/store/semester/semester.actions";
 import { semesterErrorSelector } from "@/store/semester/semester.selectors";
 
@@ -22,13 +19,20 @@ const SemestersRoot = () => {
           <Breadcrumb className="-translate-x-4" />
         </div>
         <div className="md:col-span-3 xl:col-span-2">
-          <div className="flex justify-end">
-            <AddSemesterDailog departmentId={departmentId}>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" /> Add Semester
-              </Button>
-            </AddSemesterDailog>
-          </div>
+          {/* <div className="flex justify-end gap-x-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-10 w-10 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem>Download Students List</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div> */}
         </div>
       </div>
       <FetchData

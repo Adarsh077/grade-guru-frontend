@@ -123,7 +123,7 @@ const GazzetExporter = () => {
 
   return (
     <div className="h-screen">
-      <div className="flex items-center justify-center break-after-page">
+      <div className="gazzet flex items-center justify-center break-after-page">
         <Marksheet
           studentRecords={studentsResult}
           subjects={sortedSubjects}

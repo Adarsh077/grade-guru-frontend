@@ -19,6 +19,21 @@ class SubjectGroupService {
     return { subjectGroups: [] };
   });
 
+  static getSubjectGroup = catchAsync(async (subjectGroupId) => {
+    const response = await appAxios.get(
+      endpoints.subjectGroups.getSubjectGroup(subjectGroupId)
+    );
+
+    if (
+      response.data.status === "success" &&
+      response.data.body?.subjectGroup
+    ) {
+      return { subjectGroup: response.data.body.subjectGroup };
+    }
+
+    return { subjectGroup: null };
+  });
+
   static enrollStudents = catchAsync(
     async ({ subjectGroupId, enrolledStudents }) => {
       const response = await appAxios.post(
@@ -29,6 +44,18 @@ class SubjectGroupService {
       return { status: response.data.status };
     }
   );
+
+  static getEnrollStudents = catchAsync(async (subjectGroupId) => {
+    const response = await appAxios.get(
+      endpoints.subjectGroups.enrollStudents(subjectGroupId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.students) {
+      return { students: response.data.body.students };
+    }
+
+    return { students: null };
+  });
 }
 
 export default SubjectGroupService;

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { MoreHorizontal, Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
 
+import ExamTimeForm from "./ExamTimeForm";
 import Subjects from "./Subjects";
 
 const SubjectsRoot = () => {
@@ -28,6 +29,7 @@ const SubjectsRoot = () => {
   const subjectError = useSelector(subjectErrorSelector);
   const dispatch = useDispatch();
   const inputFile = useRef(null);
+  const [isHallTicketDailogOpen, setIsHallTicketDailogOpen] = useState(false);
 
   const handleImportStudents = async (e) => {
     let toastId = toast.loading("Reading Excel File...");
@@ -52,6 +54,11 @@ const SubjectsRoot = () => {
 
   return (
     <div>
+      <ExamTimeForm
+        open={isHallTicketDailogOpen}
+        handleClose={() => setIsHallTicketDailogOpen(false)}
+        subjectGroupId={subjectGroupId}
+      />
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-7 xl:col-span-8">
           <Breadcrumb className="-translate-x-4" />
@@ -78,6 +85,11 @@ const SubjectsRoot = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => setIsHallTicketDailogOpen(true)}
+                >
+                  Generate HallTickets
+                </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => {
                     inputFile.current.click();

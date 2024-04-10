@@ -21,6 +21,7 @@ const endpoints = {
   semesters: {
     getAllSemestersBy: (departmentId) =>
       `/departments/${departmentId}/semesters`,
+    getSemester: (semesterId) => `/semesters/${semesterId}`,
     addSemesterBy: (departmentId) => `/departments/${departmentId}/semesters`,
     updateSemester: (semesterId) => `/semesters/${semesterId}`,
     deleteSemester: (semesterId) => `/semesters/${semesterId}`,
@@ -39,6 +40,7 @@ const endpoints = {
   subjectGroups: {
     getAllSubjectGroupsBy: (semesterId) =>
       `/semesters/${semesterId}/subject-groups`,
+    getSubjectGroup: (subjectGroupId) => `/subject-groups/${subjectGroupId}`,
     enrollStudents: (subjectGroupId) =>
       `/subject-groups/${subjectGroupId}/students`,
   },

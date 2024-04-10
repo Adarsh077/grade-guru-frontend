@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import { StudentGenderEnum } from "@/constants/enum";
 
 import GazzetFooter from "./components/GazzetFooter";
+import "./GazzetExporter.css";
 
 const MarkSheet = (props) => {
   const { subjects = [], maxTotal, minMarks, studentRecords } = props;

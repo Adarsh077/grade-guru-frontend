@@ -1,6 +1,7 @@
-import catchAsync from "@/utils";
-import appAxios from "./axios.service";
 import endpoints from "@/constants/endpoints";
+import catchAsync from "@/utils";
+
+import appAxios from "./axios.service";
 
 class DepartmentService {
   static getAllDepartments = catchAsync(async ({ batch }) => {
@@ -14,6 +15,18 @@ class DepartmentService {
     }
 
     return { departments: [] };
+  });
+
+  static getDepartment = catchAsync(async (departmentId) => {
+    const response = await appAxios.get(
+      endpoints.departments.getSingleDepartment(departmentId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.department) {
+      return { department: response.data.body.department };
+    }
+
+    return { department: null };
   });
 
   static addDepartment = catchAsync(async (data) => {
