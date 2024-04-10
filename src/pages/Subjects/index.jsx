@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
 import { toast } from "sonner";
 
-import Breadcrumb from "@/components/Breadcrumb";
+import AppBreadcrumb from "@/components/Breadcrumb";
 import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
 import {
@@ -61,7 +61,7 @@ const SubjectsRoot = () => {
       />
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-7 xl:col-span-8">
-          <Breadcrumb className="-translate-x-4" />
+          <AppBreadcrumb className="-translate-x-4" />
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">

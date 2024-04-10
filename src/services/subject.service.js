@@ -40,6 +40,19 @@ class SubjectService {
     return { subjects: null };
   });
 
+  static getAtktStudents = catchAsync(async (subjectId) => {
+    const response = await appAxios.get(
+      endpoints.subjects.getAtktStudents(subjectId),
+      {}
+    );
+
+    if (response.data.status === "success" && response.data.body?.students) {
+      return { students: response.data.body.students };
+    }
+
+    return { students: [] };
+  });
+
   static addSubject = catchAsync(
     async ({ subjectGroupId, name, staffId, code, exams }) => {
       const response = await appAxios.post(
@@ -59,6 +72,22 @@ class SubjectService {
       return { subject: null };
     }
   );
+
+  static enrollStudents = catchAsync(async ({ subjectId, students }) => {
+    const response = await appAxios.post(
+      endpoints.subjects.enrollStudent(subjectId),
+      { students }
+    );
+
+    if (
+      response.data.status === "success" &&
+      response.data.body?.marksBySubject
+    ) {
+      return { marksBySubject: response.data.body.marksBySubject };
+    }
+
+    return { marksBySubject: null };
+  });
 }
 
 export default SubjectService;

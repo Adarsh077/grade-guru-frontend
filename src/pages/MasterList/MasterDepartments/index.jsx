@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Breadcrumb from "@/components/Breadcrumb";
+import AppBreadcrumb from "@/components/Breadcrumb";
 import CaslCan from "@/components/CaslCan";
 import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ const MasterDepartmentRoot = () => {
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-9 xl:col-span-9">
-          <Breadcrumb className="-translate-x-4" />
+          <AppBreadcrumb className="-translate-x-4" />
         </div>
         <div className="md:col-span-3 xl:col-span-3">
           <div className="flex justify-end">

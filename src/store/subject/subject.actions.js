@@ -9,6 +9,7 @@ import {
   setAddSubjectError,
   setSubjectById,
 } from "./subject.slice";
+import { getMarksBySubjectId } from "../marks-by-subject/marks-by-subject.actions";
 import { setIsCallingAddSemesterApi } from "../semester/semester.slice";
 
 export const getAllSubjects =
@@ -125,4 +126,16 @@ export const addSubject =
         })
       );
     }
+  };
+
+export const enrollStudents =
+  ({ subjectId, students }) =>
+  async (dispatch) => {
+    await SubjectService.enrollStudents({
+      subjectId,
+      students,
+    });
+
+    await dispatch(getMarksBySubjectId({ subjectId }));
+    return true;
   };
