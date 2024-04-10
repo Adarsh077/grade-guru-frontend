@@ -2,12 +2,14 @@ import { ChevronRight } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { useQueryString } from "@/hooks";
 import { removeBreadcrumbItemUntil } from "@/store/breadcrumb/breadcrumb.actions";
 import { breadcrumbsSelector } from "@/store/breadcrumb/breadcrumb.selectors";
 import { cn } from "@/utils";
 
 const Breadcrumb = (props) => {
   const breadcrumbs = useSelector(breadcrumbsSelector);
+  const { parsedQueryString } = useQueryString();
   const dispatch = useDispatch();
 
   const handleBreadcrumbClick = (index) => {
@@ -40,7 +42,7 @@ const Breadcrumb = (props) => {
         return [
           <Link
             key={`breadcrumb-${index}`}
-            to={breadcrumb.link}
+            to={`${breadcrumb.link}?batch=${parsedQueryString.batch}`}
             className="hover:bg-gray-100 px-4 py-1 rounded-full"
             onClick={() => handleBreadcrumbClick(index)}
           >

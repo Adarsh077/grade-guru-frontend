@@ -21,6 +21,7 @@ const GazzetExporter = () => {
     return {
       seatNo: studentResult.seatNo,
       name: studentResult.student.name,
+      gender: studentResult.student.gender,
       sgpi: studentResult.sgpi,
       result: studentResult.finalResult,
       cgpi: studentResult.cgpi,

@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddSubjectDailog } from "@/features";
+import { useQueryString } from "@/hooks";
 import { SemesterService } from "@/services";
 import { getAllSubjectGroups } from "@/store/subject-group/subject-group.actions";
 import { subjectGroupErrorSelector } from "@/store/subject-group/subject-group.selectors";
@@ -23,6 +24,7 @@ import SubjectGroups from "./SubjectGroups";
 
 const SubjectGroupsRoot = () => {
   const { semesterId } = useParams();
+  const { parsedQueryString } = useQueryString();
   const subjectGroupError = useSelector(subjectGroupErrorSelector);
 
   const handleDownloadStudents = async (e) => {
@@ -31,6 +33,7 @@ const SubjectGroupsRoot = () => {
     toast.promise(
       SemesterService.getStudentsBySemesterId({
         semesterId,
+        batch: parsedQueryString.batch,
       }),
       {
         loading: "Downloading Students list",

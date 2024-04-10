@@ -54,9 +54,10 @@ class SemesterService {
     return { semester: null };
   });
 
-  static getStudentsBySemesterId = catchAsync(async ({ semesterId }) => {
+  static getStudentsBySemesterId = catchAsync(async ({ semesterId, batch }) => {
     const response = await appAxios.get(
-      endpoints.semesters.getStudentsBy(semesterId)
+      endpoints.semesters.getStudentsBy(semesterId),
+      { params: { batch } }
     );
 
     if (response.data.status === "success" && response.data.body?.students) {

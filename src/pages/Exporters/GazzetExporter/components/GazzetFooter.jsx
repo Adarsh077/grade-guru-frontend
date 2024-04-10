@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 const GazzetFooter = () => {
   return (
     <>
@@ -127,7 +129,7 @@ const GazzetFooter = () => {
         </td>
         <td></td>
         <td className="s23" colSpan="5">
-          Date: 15-Jan-24
+          Date: {DateTime.fromJSDate(new Date()).toFormat("dd-LLL-yyyy")}
         </td>
         <td className="s24"></td>
         <td className="s24"></td>
@@ -512,7 +514,6 @@ const GazzetFooter = () => {
         <td></td>
         <td className="s24"></td>
         <td className="s24"></td>
-        <td className="s25">Principal</td>
         <td></td>
         <td className="s24"></td>
         <td className="s24"></td>
@@ -559,34 +560,41 @@ const GazzetFooter = () => {
         <td className="s25" colSpan="2">
           Entered by
         </td>
+
+        <td></td>
+        <td></td>
         <td className="s25" colSpan="2">
           Read by
         </td>
+
+        <td></td>
+        <td></td>
         <td className="s25" colSpan="2">
           Checked by
         </td>
+        <td></td>
+        <td></td>
         <td className="s25" colSpan="2">
           Exam Incharge
         </td>
+
+        <td className="s25">Principal</td>
+
+        <td className="s24"></td>
+        <td className="s24"></td>
+
+        <td className="s24"></td>
+        <td></td>
         <td className="s26" colSpan="3">
           Page 1 of 1
         </td>
-        <td></td>
-        <td className="s24"></td>
-        <td className="s24"></td>
-        <td className="s24"></td>
-        <td></td>
-        <td className="s24"></td>
+
         <td></td>
         <td></td>
         <td></td>
         <td className="s24"></td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td className="s24"></td>
         <td></td>
       </tr>
       <tr style={{ height: "20px" }}>

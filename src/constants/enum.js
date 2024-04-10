@@ -51,3 +51,8 @@ export const ExamsWithMarksBySubjectType = {
     { name: ExamNamesEnum.TOT, maxMarks: 50, minMarks: 20 },
   ],
 };
+
+export const StudentGenderEnum = {
+  MALE: "MALE",
+  FEMALE: "FEMALE",
+};

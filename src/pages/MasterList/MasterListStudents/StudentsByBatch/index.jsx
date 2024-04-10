@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import FetchData from "@/components/FetchData";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { StudentGenderEnum } from "@/constants/enum";
 import { singleBatchSelector } from "@/store/batch/batch.selectors";
 import {
   addStudent,
@@ -42,12 +43,24 @@ const StudentsByBatchRoot = () => {
     });
 
     students = students.sort((a, b) => a[0].localeCompare(b[0]));
+    students = students.map((a) => {
+      if (a[2] === "M") {
+        a[2] = StudentGenderEnum.MALE;
+      }
+      if (a[2] === "F") {
+        a[2] = StudentGenderEnum.FEMALE;
+      }
+
+      return a;
+    });
+
     for (const student of students) {
       await dispatch(
         addStudent({
           admissionYear: +batchYear,
           email: student[1],
           name: student[0],
+          gender: student[2],
           studentType: selectedTab === "dse" ? "DSE" : "REGULAR",
           departmentId,
         })

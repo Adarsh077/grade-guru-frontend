@@ -30,7 +30,7 @@ export const getAllStudentsByBatch =
   };
 
 export const addStudent =
-  ({ name, email, studentType, admissionYear, departmentId }) =>
+  ({ name, email, studentType, admissionYear, departmentId, gender }) =>
   async (dispatch) => {
     try {
       const { student } = await StudentsService.addStudent({
@@ -39,6 +39,7 @@ export const addStudent =
         studentType,
         admissionYear,
         departmentId,
+        gender,
       });
 
       if (student) {

@@ -1,5 +1,7 @@
 import { v4 as uuid } from "uuid";
 
+import { StudentGenderEnum } from "@/constants/enum";
+
 import GazzetFooter from "./components/GazzetFooter";
 
 const MarkSheet = (props) => {
@@ -353,6 +355,7 @@ const MarkSheet = (props) => {
                 />
                 <td className="s2" />
                 <td className="s7" dir="ltr" colSpan={3} rowSpan={3}>
+                  {record.gender === StudentGenderEnum.FEMALE ? "/ " : ""}
                   {record.name}
                 </td>
                 <td className="s7">Grade</td>

@@ -17,13 +17,21 @@ class StudentsService {
   });
 
   static addStudent = catchAsync(
-    async ({ name, email, studentType, admissionYear, departmentId }) => {
+    async ({
+      name,
+      email,
+      studentType,
+      admissionYear,
+      departmentId,
+      gender,
+    }) => {
       const response = await appAxios.post(endpoints.students.addStudent, {
         name,
         email,
         studentType,
         admissionYear,
         departmentId,
+        gender,
       });
 
       if (response.data.status === "success" && response.data.body?.student) {
