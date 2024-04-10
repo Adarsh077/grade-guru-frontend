@@ -7,7 +7,8 @@ import { subjectSelector } from "@/store/subject/subject.selectors";
 
 import Marksheet from "./Marksheet";
 
-const GazzetExporter = () => {
+const GazzetExporter = (props) => {
+  const { examName } = props;
   const params = useParams();
 
   let subjects = useSelector(subjectSelector(params.subjectGroupId));
@@ -125,6 +126,7 @@ const GazzetExporter = () => {
     <div className="h-screen">
       <div className="gazzet flex items-center justify-center break-after-page">
         <Marksheet
+          examName={examName}
           studentRecords={studentsResult}
           subjects={sortedSubjects}
           maxTotal={maxTotal}

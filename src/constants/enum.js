@@ -52,6 +52,39 @@ export const ExamsWithMarksBySubjectType = {
   ],
 };
 
+export const shortYearBySemester = {
+  1: "F.E.",
+  2: "F.E.",
+  3: "S.E.",
+  4: "S.E.",
+  5: "T.E.",
+  6: "T.E.",
+  7: "B.E.",
+  8: "B.E.",
+};
+
+export const shortSemesterByNumber = {
+  1: "SEM-I",
+  2: "SEM-II",
+  3: "SEM-III",
+  4: "SEM-IV",
+  5: "SEM-V",
+  6: "SEM-VI",
+  7: "SEM-VII",
+  8: "SEM-VIII",
+};
+
+export const readableSemesterByNumber = {
+  1: "Semester I",
+  2: "Semester II",
+  3: "Semester III",
+  4: "Semester IV",
+  5: "Semester V",
+  6: "Semester VI",
+  7: "Semester VII",
+  8: "Semester VIII",
+};
+
 export const StudentGenderEnum = {
   MALE: "MALE",
   FEMALE: "FEMALE",

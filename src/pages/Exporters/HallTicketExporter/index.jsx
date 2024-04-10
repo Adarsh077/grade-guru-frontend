@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
+import { shortSemesterByNumber, shortYearBySemester } from "@/constants/enum";
 import {
   DepartmentService,
   SemesterService,
@@ -10,28 +11,6 @@ import {
 } from "@/services";
 
 import HallTicket from "./HallTicket";
-
-const shortYearBySemester = {
-  1: "F.E.",
-  2: "F.E.",
-  3: "S.E.",
-  4: "S.E.",
-  5: "T.E.",
-  6: "T.E.",
-  7: "B.E.",
-  8: "B.E.",
-};
-
-const shortSemesterByNumber = {
-  1: "SEM-I",
-  2: "SEM-II",
-  3: "SEM-III",
-  4: "SEM-IV",
-  5: "SEM-V",
-  6: "SEM-VI",
-  7: "SEM-VII",
-  8: "SEM-VIII",
-};
 
 const HallTicketExporter = () => {
   const location = useLocation();

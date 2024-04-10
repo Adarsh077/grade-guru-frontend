@@ -6,7 +6,7 @@ import GazzetFooter from "./components/GazzetFooter";
 import "./GazzetExporter.css";
 
 const MarkSheet = (props) => {
-  const { subjects = [], maxTotal, minMarks, studentRecords } = props;
+  const { subjects = [], maxTotal, minMarks, studentRecords, examName } = props;
 
   return (
     <div
@@ -59,8 +59,7 @@ const MarkSheet = (props) => {
                 contentEditable
                 style={{ fontSize: "14pt", fontWeight: "bold" }}
               >
-                Result Sheet for T.E. Information Technology, (Semester VI), C
-                SCHEME , Exam : May 2023 (Regular)
+                {examName}
               </span>
               <span
                 contentEditable
