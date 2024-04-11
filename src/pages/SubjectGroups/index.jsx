@@ -124,11 +124,6 @@ const SubjectGroupsRoot = () => {
     );
   };
 
-  const handleGenerateResult = async (e) => {
-    e.stopPropagation();
-    console.log("handleGenerateResult");
-  };
-
   return (
     <div>
       <div className="mb-4 grid grid-cols-12 justify-between">
@@ -151,10 +146,6 @@ const SubjectGroupsRoot = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleDownloadEnrolledStudents}>
                   Download Student Seat No
-                </DropdownMenuItem>
-
-                <DropdownMenuItem onClick={handleGenerateResult}>
-                  Generate Result
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

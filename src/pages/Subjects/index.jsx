@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddSubjectDailog } from "@/features";
+import { ResultService } from "@/services";
 import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
@@ -50,6 +51,24 @@ const SubjectsRoot = () => {
     );
 
     if (toastId) toast.dismiss(toastId);
+  };
+
+  const generateResult = async (e) => {
+    e.stopPropagation();
+
+    toast.promise(
+      ResultService.generateResult({
+        subjectGroupId,
+      }),
+      {
+        loading: "Generating result...",
+        success: () => {
+          window.open(`/exporters/gazzet/${subjectGroupId}`, "_blank");
+          return "Result generated!";
+        },
+        error: (error) => error.message || "Something went wrong",
+      }
+    );
   };
 
   return (
@@ -86,16 +105,19 @@ const SubjectsRoot = () => {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem
-                  onClick={() => setIsHallTicketDailogOpen(true)}
-                >
-                  Generate HallTickets
-                </DropdownMenuItem>
-                <DropdownMenuItem
                   onClick={() => {
                     inputFile.current.click();
                   }}
                 >
                   Import Students
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setIsHallTicketDailogOpen(true)}
+                >
+                  Generate HallTickets
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => generateResult(e)}>
+                  Generate Result
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
