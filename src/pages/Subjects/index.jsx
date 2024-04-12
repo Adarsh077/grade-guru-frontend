@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddSubjectDailog } from "@/features";
-import { ResultService } from "@/services";
+import { ResultService, SubjectGroupService } from "@/services";
 import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
@@ -71,6 +71,18 @@ const SubjectsRoot = () => {
     );
   };
 
+  const sendRevalutionReminder = async (e) => {
+    e.stopPropagation();
+
+    toast.promise(SubjectGroupService.sendRevalutionReminder(subjectGroupId), {
+      loading: "Sending reminders...",
+      success: () => {
+        return "Reminders sent!";
+      },
+      error: (error) => error.message || "Something went wrong",
+    });
+  };
+
   return (
     <div>
       <ExamTimeForm
@@ -118,6 +130,9 @@ const SubjectsRoot = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={(e) => generateResult(e)}>
                   Generate Result
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => sendRevalutionReminder(e)}>
+                  Send Revalution Reminder
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
