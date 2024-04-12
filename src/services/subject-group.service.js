@@ -45,6 +45,18 @@ class SubjectGroupService {
     }
   );
 
+  static getEnrollStudents = catchAsync(async (subjectGroupId) => {
+    const response = await appAxios.get(
+      endpoints.subjectGroups.enrollStudents(subjectGroupId)
+    );
+
+    if (response.data.status === "success" && response.data.body?.students) {
+      return { students: response.data.body.students };
+    }
+
+    return { students: null };
+  });
+
   static sendRevalutionReminder = catchAsync(async (subjectGroupId) => {
     const response = await appAxios.post(
       endpoints.subjectGroups.sendRevalutionReminder(subjectGroupId)

@@ -29,6 +29,7 @@ import {
   subjectByIdSelector,
 } from "@/store/subject/subject.selectors";
 
+import ATKTFormDate from "./ATKTFormDate";
 import MarksBySubject from "./MarksBySubject";
 
 const MarksBySubjectRoot = () => {
@@ -96,6 +97,8 @@ const MarksBySubjectRoot = () => {
   console.log({ subject });
   return (
     <div>
+      <ATKTFormDate open={true} handleClose={() => {}} subjectId={subjectId} />
+
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-8 xl:col-span-8">
           <AppBreadcrumb className="-translate-x-4" />
