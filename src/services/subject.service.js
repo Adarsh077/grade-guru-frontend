@@ -88,6 +88,15 @@ class SubjectService {
 
     return { marksBySubject: null };
   });
+
+  static sendAtktReminder = catchAsync(async (subjectId, date) => {
+    const response = await appAxios.post(
+      endpoints.subjects.sendAtktReminder(subjectId),
+      { date }
+    );
+
+    return { status: response.data.status };
+  });
 }
 
 export default SubjectService;

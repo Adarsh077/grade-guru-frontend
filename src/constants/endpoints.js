@@ -38,6 +38,7 @@ const endpoints = {
     enrollStudent: (subjectId) => `/subjects/${subjectId}/students`,
     getMySubjects: `/subjects/my`,
     getAtktStudents: (subjectId) => `/subjects/${subjectId}/atkt-students`,
+    sendAtktReminder: (subjectId) => `/subjects/${subjectId}/reminder/atkt`,
   },
   subjectGroups: {
     getAllSubjectGroupsBy: (semesterId) =>

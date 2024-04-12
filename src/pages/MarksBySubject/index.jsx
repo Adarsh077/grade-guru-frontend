@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { MoreHorizontal } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,6 +38,7 @@ const MarksBySubjectRoot = () => {
   const dispatch = useDispatch();
   const subject = useSelector(subjectByIdSelector(subjectId));
   const subjectByIdError = useSelector(subjectByIdErrorSelector);
+  const [isATKTSDailogOpen, setIsATKTDailogOpen] = useState(false);
 
   const inputFile = useRef(null);
 
@@ -94,10 +95,16 @@ const MarksBySubjectRoot = () => {
 
     if (toastId) toast.dismiss(toastId);
   };
-  console.log({ subject });
+
   return (
     <div>
-      <ATKTFormDate open={true} handleClose={() => {}} subjectId={subjectId} />
+      <ATKTFormDate
+        open={isATKTSDailogOpen}
+        handleClose={() => {
+          setIsATKTDailogOpen(false);
+        }}
+        subjectId={subjectId}
+      />
 
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-8 xl:col-span-8">
@@ -123,6 +130,9 @@ const MarksBySubjectRoot = () => {
                   <DropdownMenuLabel>Actions</DropdownMenuLabel>
                   <DropdownMenuItem onClick={(e) => handleDownloadStudents(e)}>
                     Download ATKT Students
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setIsATKTDailogOpen(false)}>
+                    Send ATKT Form Reminder
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => {
