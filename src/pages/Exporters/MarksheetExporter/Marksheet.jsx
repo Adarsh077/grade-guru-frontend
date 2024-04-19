@@ -1,8 +1,39 @@
+import {
+  ExamNamesEnum,
+  ExamsWithMarksBySubjectType,
+  SubjectTypeEnum,
+} from "@/constants/enum";
 import "./index.css";
 
+const gradePointByGrade = (grade) => {
+  const gradePointsByGrade = {
+    O: 10,
+    A: 9,
+    B: 8,
+    C: 7,
+    D: 6,
+    E: 5,
+    P: 4,
+    F: 0,
+  };
+
+  return gradePointsByGrade[grade];
+};
+
+const roundUpToTwoDecimals = (num) => {
+  return Math.round(num * 100) / 100;
+};
 const Marksheet = (props) => {
-  const { examName, studentResult, subjects, maxTotal, minMarks } = props;
-  console.log({ examName, studentResult, subjects, maxTotal, minMarks });
+  const {
+    studentResult,
+    subjects,
+    maxTotal,
+    department,
+    semester,
+    year,
+    isATKTSubjectGroup,
+  } = props;
+
   return (
     <div className="ritz grid-container" dir="ltr">
       <table className="waffle" cellSpacing={0} cellPadding={0}>
@@ -10,92 +41,92 @@ const Marksheet = (props) => {
           <tr>
             <th className="row-header freezebar-origin-ltr" />
             <th
-              id="753164042C0"
+              id="855677289C0"
               style={{ width: 1 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C1"
+              id="855677289C1"
               style={{ width: 112 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C2"
+              id="855677289C2"
               style={{ width: 150 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C3"
+              id="855677289C3"
               style={{ width: 44 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C4"
+              id="855677289C4"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C5"
+              id="855677289C5"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C6"
+              id="855677289C6"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C7"
+              id="855677289C7"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C8"
+              id="855677289C8"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C9"
+              id="855677289C9"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C10"
+              id="855677289C10"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C11"
+              id="855677289C11"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C12"
+              id="855677289C12"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C13"
+              id="855677289C13"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C14"
+              id="855677289C14"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C15"
+              id="855677289C15"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C16"
+              id="855677289C16"
               style={{ width: 60 }}
               className="column-headers-background"
             />
             <th
-              id="753164042C17"
+              id="855677289C17"
               style={{ width: 60 }}
               className="column-headers-background"
             />
@@ -104,7 +135,7 @@ const Marksheet = (props) => {
         <tbody>
           <tr style={{ height: 0 }}>
             <th
-              id="753164042R0"
+              id="855677289R0"
               style={{ height: 0 }}
               className="row-headers-background"
             />
@@ -129,7 +160,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R1"
+              id="855677289R1"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -140,7 +171,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R2"
+              id="855677289R2"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -148,7 +179,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R3"
+              id="855677289R3"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -169,7 +200,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R4"
+              id="855677289R4"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -178,7 +209,7 @@ const Marksheet = (props) => {
               EXAMINATION
             </td>
             <td className="s3" dir="ltr" colSpan={9}>
-              : SECOND YEAR ENGINEERING (SEMESTER-III)(C SCHEME)
+              : {year} ENGINEERING ({semester})(C SCHEME)
             </td>
             <td />
             <td className="s4" />
@@ -190,7 +221,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R5"
+              id="855677289R5"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -199,7 +230,7 @@ const Marksheet = (props) => {
               BRANCH
             </td>
             <td className="s2" dir="ltr" colSpan={9}>
-              : COMPUTER ENGINEERING
+              : {department?.name}
             </td>
             <td />
             <td className="s5" dir="ltr" />
@@ -211,7 +242,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R6"
+              id="855677289R6"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -220,7 +251,7 @@ const Marksheet = (props) => {
               HELD IN
             </td>
             <td className="s5" dir="ltr" colSpan={9}>
-              : DECEMBER 2023(REGULAR)
+              : MAY 2023 ({isATKTSubjectGroup ? "ATKT" : "Regular"})
             </td>
             <td />
             <td className="s6" dir="ltr" />
@@ -232,7 +263,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R7"
+              id="855677289R7"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -241,7 +272,7 @@ const Marksheet = (props) => {
               SEAT NUMBER
             </td>
             <td className="s7" dir="ltr">
-              : CC23223010
+              : {studentResult?.seatNo}
             </td>
             <td className="s7" dir="ltr" />
             <td className="s7" dir="ltr" />
@@ -261,7 +292,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R8"
+              id="855677289R8"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -393,7 +424,7 @@ const Marksheet = (props) => {
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R9"
+              id="855677289R9"
               style={{ height: 20 }}
               className="row-headers-background"
             />
@@ -487,661 +518,176 @@ const Marksheet = (props) => {
               </span>
             </td>
           </tr>
+          {subjects.map((subject) => {
+            const eseMarksObtained = studentResult.marks.MarksO.find(
+              (MarksOSubject) => MarksOSubject.subjectCode === subject.code
+            )?.exams.find((exam) => exam.name === ExamNamesEnum.ESE);
+
+            const iaMarksObtained = studentResult.marks.MarksO.find(
+              (MarksOSubject) => MarksOSubject.subjectCode === subject.code
+            )?.exams.find((exam) => exam.name === ExamNamesEnum.IA);
+
+            const maxMarks =
+              ExamsWithMarksBySubjectType[subject.subjectType][0].maxMarks +
+              ExamsWithMarksBySubjectType[subject.subjectType][1].maxMarks;
+            const obtained =
+              eseMarksObtained.marks +
+              eseMarksObtained.graceMarks +
+              iaMarksObtained.marks +
+              iaMarksObtained.graceMarks;
+
+            const grade = studentResult.marks.Grade.find(
+              (GradeSubject) => GradeSubject.subjectCode === subject.code
+            )?.exams.find((exam) => exam.name === ExamNamesEnum.TOT);
+
+            const gpc = studentResult.marks.GPC.find(
+              (GPCSubject) => GPCSubject.subjectCode === subject.code
+            )?.exams.find((exam) => exam.name === ExamNamesEnum.TOT);
+
+            const gradePoint = gradePointByGrade(grade.marks);
+
+            return (
+              <tr key={subject.code} style={{ height: 20 }}>
+                <th
+                  id="855677289R10"
+                  style={{ height: 20 }}
+                  className="row-headers-background"
+                />
+                <td className="s12" />
+                <td className="s13">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {subject.code}
+                  </span>
+                </td>
+                <td className="s14">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {subject.name}
+                  </span>
+                </td>
+                <td className="s15">3</td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {subject.subjectType === SubjectTypeEnum.WRITTEN
+                      ? "ESE"
+                      : "PR OR"}
+                  </span>
+                </td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {
+                      ExamsWithMarksBySubjectType[subject.subjectType][0]
+                        .minMarks
+                    }
+                    /
+                    {
+                      ExamsWithMarksBySubjectType[subject.subjectType][0]
+                        .maxMarks
+                    }
+                  </span>
+                </td>
+                <td className="s15">{eseMarksObtained.marks}</td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {eseMarksObtained.symbols.includes("F") ? "N" : "E"}
+                  </span>
+                </td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {`0${
+                      ExamsWithMarksBySubjectType[subject.subjectType][1]
+                        .minMarks
+                    }`.slice(-2)}
+                    /
+                    {
+                      ExamsWithMarksBySubjectType[subject.subjectType][1]
+                        .maxMarks
+                    }
+                  </span>
+                </td>
+                <td className="s15">{iaMarksObtained.marks}</td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {iaMarksObtained.symbols.includes("F") ? "N" : "E"}
+                  </span>
+                </td>
+                <td className="s15">{maxMarks}</td>
+                <td className="s15">{obtained}</td>
+                <td className="s15">{subject.credits}</td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {grade.marks}
+                  </span>
+                </td>
+                <td className="s15">{gradePoint}</td>
+                <td className="s15">{gpc.marks}</td>
+                <td className="s16">
+                  <span
+                    style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
+                  >
+                    {grade.marks === "F" ? "N" : "E"},C
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
+
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R10"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSC301
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ENGINEERING MATHEMATICS-III
-              </span>
-            </td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ESE
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                32/80
-              </span>
-            </td>
-            <td className="s15">51</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                08/20
-              </span>
-            </td>
-            <td className="s15">12</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">100</td>
-            <td className="s15">63</td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                C
-              </span>
-            </td>
-            <td className="s15">7</td>
-            <td className="s15">21</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R11"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSC302
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                DISCRETE STRUCTURES AND GRAPH THEORY
-              </span>
-            </td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ESE
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                32/80
-              </span>
-            </td>
-            <td className="s15">33</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                08/20
-              </span>
-            </td>
-            <td className="s15">14</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">100</td>
-            <td className="s15">47</td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">5</td>
-            <td className="s15">15</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R12"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSC303
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                DATA STRUCTURE
-              </span>
-            </td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ESE
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                32/80
-              </span>
-            </td>
-            <td className="s15">43</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                08/20
-              </span>
-            </td>
-            <td className="s15">14</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">100</td>
-            <td className="s15">57</td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                D
-              </span>
-            </td>
-            <td className="s15">6</td>
-            <td className="s15">18</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R13"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSC304
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                DIGITAL LOGIC &amp; COMPUTER
-                <br />
-              </span>
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ARCHITECTURE
-              </span>
-            </td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ESE
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                32/80
-              </span>
-            </td>
-            <td className="s15">33</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                08/20
-              </span>
-            </td>
-            <td className="s15">12</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">100</td>
-            <td className="s15">45</td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">5</td>
-            <td className="s15">15</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R14"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSC305
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                COMPUTER GRAPHICS
-              </span>
-            </td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ESE
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                32/80
-              </span>
-            </td>
-            <td className="s15">48</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                08/20
-              </span>
-            </td>
-            <td className="s15">14</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">100</td>
-            <td className="s15">62</td>
-            <td className="s15">3</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                C
-              </span>
-            </td>
-            <td className="s15">7</td>
-            <td className="s15">21</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R15"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSL301
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                DATA STRUCTURE LAB
-              </span>
-            </td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                PR OR
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">17</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">19</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">50</td>
-            <td className="s15">36</td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                B
-              </span>
-            </td>
-            <td className="s15">8</td>
-            <td className="s15">8</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R16"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSL302
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                DIGITAL LOGIC &amp; COMPUTER
-                <br />
-              </span>
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                ARCHITECTURE LAB
-              </span>
-            </td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                TW
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                --
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                --
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                --
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">22</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">25</td>
-            <td className="s15">22</td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                O
-              </span>
-            </td>
-            <td className="s15">10</td>
-            <td className="s15">10</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R17"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSL303
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                COMPUTER
-                <br />
-              </span>
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                GRAPHICS LAB
-              </span>
-            </td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                PR OR
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">18</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">19</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">50</td>
-            <td className="s15">37</td>
-            <td className="s15">1</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                B
-              </span>
-            </td>
-            <td className="s15">8</td>
-            <td className="s15">8</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R18"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSL304
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                OBJECT ORIENTED PROGRAMMING WITH JAVA
-              </span>
-            </td>
-            <td className="s15">2</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                PR OR
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">20</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                20/50
-              </span>
-            </td>
-            <td className="s15">43</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">75</td>
-            <td className="s15">63</td>
-            <td className="s15">2</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                O
-              </span>
-            </td>
-            <td className="s15">10</td>
-            <td className="s15">20</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R19"
-              style={{ height: 20 }}
-              className="row-headers-background"
-            />
-            <td className="s12" />
-            <td className="s13">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                CSM301
-              </span>
-            </td>
-            <td className="s14">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                MINI PROJECT - 1 A
-              </span>
-            </td>
-            <td className="s15">2</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                PR OR
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">18</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                10/25
-              </span>
-            </td>
-            <td className="s15">20</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E
-              </span>
-            </td>
-            <td className="s15">50</td>
-            <td className="s15">38</td>
-            <td className="s15">2</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                A
-              </span>
-            </td>
-            <td className="s15">9</td>
-            <td className="s15">18</td>
-            <td className="s16">
-              <span style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}>
-                E,C
-              </span>
-            </td>
-          </tr>
-          <tr style={{ height: 20 }}>
-            <th
-              id="753164042R20"
+              id="855677289R20"
               style={{ height: 20 }}
               className="row-headers-background"
             />
             <td className="s12" />
             <td className="s17" colSpan={3}>
               <span style={{ fontSize: "12pt", fontFamily: "Times New Roman" }}>
-                Credit : 23
+                Credit : {studentResult.marks.CTotal}
               </span>
             </td>
-            <td className="s17" colSpan={7} />
-            <td className="s17" colSpan={7} />
+            <td className="s17" dir="ltr" colSpan={7}>
+              CG : {studentResult.marks.GPCTotal}
+            </td>
+            <td className="s17" dir="ltr" colSpan={7}>
+              SGPI : {studentResult.sgpi}
+            </td>
           </tr>
           <tr style={{ height: 20 }}>
             <th
-              id="753164042R21"
+              id="855677289R21"
               style={{ height: 20 }}
               className="row-headers-background"
             />
             <td className="s12" />
             <td className="s17" colSpan={3}>
               <span style={{ fontSize: "12pt", fontFamily: "Times New Roman" }}>
-                Grand Total : 488/775
+                Grand Total : {studentResult.marks.MarksOTotal}/{maxTotal}
               </span>
             </td>
-            <td className="s17" dir="ltr" colSpan={7} />
-            <td className="s17" colSpan={7} />
+            <td className="s17" dir="ltr" colSpan={7}>
+              Percentage :{" "}
+              {roundUpToTwoDecimals(
+                studentResult.marks.MarksOTotal / maxTotal
+              ) * 100}
+            </td>
+            <td className="s17" dir="ltr" colSpan={7}>
+              Status :{" "}
+              {studentResult.result === "F" ? "UNSUCCESSFUL" : "SUCCESSFUL"}
+            </td>
           </tr>
         </tbody>
       </table>

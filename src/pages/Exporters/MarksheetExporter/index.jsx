@@ -29,7 +29,7 @@ const MarksheetExporterRoot = () => {
   const [department, setDepartment] = useState("");
   const [semester, setSemester] = useState("");
   const [year, setYear] = useState("");
-  const [heldIn, setHeldIn] = useState("");
+  const [isATKTSubjectGroup, setIsATKTSubjectGroup] = useState(false);
 
   useEffect(() => {
     generateExamName();
@@ -39,7 +39,6 @@ const MarksheetExporterRoot = () => {
     const { subjectGroup } = await SubjectGroupService.getSubjectGroup(
       params.subjectGroupId
     );
-
     if (!subjectGroup) return;
 
     const { semester } = await SemesterService.getSemester(
@@ -57,10 +56,12 @@ const MarksheetExporterRoot = () => {
     }), C SCHEME , Exam : May 2023 (${
       subjectGroup.isATKTSubjectGroup ? "ATKT" : "Regular"
     })`;
+    setIsATKTSubjectGroup(subjectGroup.isATKTSubjectGroup);
     setSemester(readableSemesterByNumber[semester.number]);
     setYear(longYearBySemester[semester.number]);
     setExamName(examName);
   };
+
   return (
     <FetchData
       loadFirstThenRender
@@ -76,7 +77,13 @@ const MarksheetExporterRoot = () => {
           subjectGroupId: params.subjectGroupId,
         })}
       >
-        <MarksheetExporter examName={examName} />
+        <MarksheetExporter
+          department={department}
+          semester={semester}
+          year={year}
+          examName={examName}
+          isATKTSubjectGroup={isATKTSubjectGroup}
+        />
       </FetchData>
     </FetchData>
   );

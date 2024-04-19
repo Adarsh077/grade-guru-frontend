@@ -9,9 +9,8 @@ import { subjectSelector } from "@/store/subject/subject.selectors";
 import Marksheet from "./Marksheet";
 
 const MarksheetExporter = (props) => {
-  const { examName } = props;
+  const { examName, department, semester, year, isATKTSubjectGroup } = props;
   const params = useParams();
-
   let subjects = useSelector(subjectSelector(params.subjectGroupId));
   const result = useSelector(resultsSelector(params.subjectGroupId));
 
@@ -127,13 +126,17 @@ const MarksheetExporter = (props) => {
     <div className="h-screen">
       {studentsResult.map((studentResult) => {
         return (
-          <div key={uuid()} className="marksheet break-after-page marksheet">
+          <div key={uuid()} className="marksheet break-after-page">
             <Marksheet
               examName={examName}
               studentResult={studentResult}
               subjects={sortedSubjects}
               maxTotal={maxTotal}
               minMarks={minMarks}
+              department={department}
+              semester={semester}
+              year={year}
+              isATKTSubjectGroup={isATKTSubjectGroup}
             />
           </div>
         );
