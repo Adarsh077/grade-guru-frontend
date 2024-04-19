@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import UserService from "@/services/user.service";
+
 import AutocompleteComponent from "./Autocomplete";
 
 const UserAutocompleteComponent = (props, ref) => {
@@ -35,8 +37,6 @@ const UserAutocompleteComponent = (props, ref) => {
       onChange={(newValue) => setValue(newValue)}
       value={value}
       placeholder="Select User"
-      onNewItemCreate={(inputValue) => console.log({ inputValue })}
-      creatable
       id="select-user"
       ref={ref}
       {...props}

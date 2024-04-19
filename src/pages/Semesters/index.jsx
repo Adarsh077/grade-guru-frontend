@@ -18,22 +18,7 @@ const SemestersRoot = () => {
         <div className="md:col-span-9 xl:col-span-10">
           <AppBreadcrumb className="-translate-x-4" />
         </div>
-        <div className="md:col-span-3 xl:col-span-2">
-          {/* <div className="flex justify-end gap-x-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-10 w-10 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Download Students List</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div> */}
-        </div>
+        <div className="md:col-span-3 xl:col-span-2"></div>
       </div>
       <FetchData
         loadFirstThenRender

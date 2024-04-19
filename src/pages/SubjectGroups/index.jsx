@@ -49,7 +49,6 @@ const SubjectGroupsRoot = () => {
               type: String,
               width: 20,
               value: (student) => {
-                console.log(student);
                 return student.name;
               },
             },

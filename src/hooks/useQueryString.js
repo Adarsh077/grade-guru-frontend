@@ -48,7 +48,6 @@ const useQueryString = () => {
   };
 
   const removeQueryString = (keys) => {
-    console.log(keys);
     const newParsed = { ...parsedQueryString };
     if (Array.isArray(keys)) {
       for (const key of keys) {

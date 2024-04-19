@@ -25,28 +25,14 @@ const roundUpToTwoDecimals = (num) => {
 };
 const Marksheet = (props) => {
   const {
-    examName,
     studentResult,
     subjects,
     maxTotal,
-    minMarks,
     department,
     semester,
     year,
     isATKTSubjectGroup,
   } = props;
-
-  console.log({
-    examName,
-    studentResult,
-    subjects,
-    maxTotal,
-    minMarks,
-    department,
-    semester,
-    year,
-    isATKTSubjectGroup,
-  });
 
   return (
     <div className="ritz grid-container" dir="ltr">

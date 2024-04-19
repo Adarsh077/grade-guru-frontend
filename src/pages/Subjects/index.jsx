@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { MoreHorizontal, Plus } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
@@ -16,8 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AddSubjectDailog } from "@/features";
-import { ResultService, SubjectGroupService } from "@/services";
+import { ResultService } from "@/services";
 import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
@@ -93,11 +92,6 @@ const SubjectsRoot = () => {
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
-            <AddSubjectDailog subjectGroupId={subjectGroupId}>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" /> Add Subject
-              </Button>
-            </AddSubjectDailog>
             <input
               type="file"
               className="opacity-0 h-0 w-0"

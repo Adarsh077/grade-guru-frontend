@@ -66,7 +66,6 @@ const HallTicketExporter = () => {
 
   const subjectsWithDates = location?.state?.subjectsWithDates;
   if (!subjectsWithDates) return null;
-  console.log(subjectsWithDates);
   return (
     <div className="hallticket">
       {students.map((student) => {
