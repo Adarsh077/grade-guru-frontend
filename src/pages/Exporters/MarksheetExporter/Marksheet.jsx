@@ -25,14 +25,28 @@ const roundUpToTwoDecimals = (num) => {
 };
 const Marksheet = (props) => {
   const {
+    examName,
     studentResult,
     subjects,
     maxTotal,
+    minMarks,
     department,
     semester,
     year,
     isATKTSubjectGroup,
   } = props;
+
+  console.log({
+    examName,
+    studentResult,
+    subjects,
+    maxTotal,
+    minMarks,
+    department,
+    semester,
+    year,
+    isATKTSubjectGroup,
+  });
 
   return (
     <div className="ritz grid-container" dir="ltr">
@@ -521,20 +535,28 @@ const Marksheet = (props) => {
           {subjects.map((subject) => {
             const eseMarksObtained = studentResult.marks.MarksO.find(
               (MarksOSubject) => MarksOSubject.subjectCode === subject.code
-            )?.exams.find((exam) => exam.name === ExamNamesEnum.ESE);
+            )?.exams.find((exam) =>
+              (exam.name === subject.subjectType) === SubjectTypeEnum.WRITTEN
+                ? ExamNamesEnum.ESE
+                : ExamNamesEnum.PROR
+            );
 
             const iaMarksObtained = studentResult.marks.MarksO.find(
               (MarksOSubject) => MarksOSubject.subjectCode === subject.code
-            )?.exams.find((exam) => exam.name === ExamNamesEnum.IA);
+            )?.exams.find((exam) =>
+              exam.name === SubjectTypeEnum.WRITTEN
+                ? ExamNamesEnum.IA
+                : ExamNamesEnum.TW
+            );
 
             const maxMarks =
               ExamsWithMarksBySubjectType[subject.subjectType][0].maxMarks +
               ExamsWithMarksBySubjectType[subject.subjectType][1].maxMarks;
             const obtained =
-              eseMarksObtained.marks +
-              eseMarksObtained.graceMarks +
-              iaMarksObtained.marks +
-              iaMarksObtained.graceMarks;
+              eseMarksObtained?.marks +
+              eseMarksObtained?.graceMarks +
+              iaMarksObtained?.marks +
+              iaMarksObtained?.graceMarks;
 
             const grade = studentResult.marks.Grade.find(
               (GradeSubject) => GradeSubject.subjectCode === subject.code
@@ -593,12 +615,12 @@ const Marksheet = (props) => {
                     }
                   </span>
                 </td>
-                <td className="s15">{eseMarksObtained.marks}</td>
+                <td className="s15">{eseMarksObtained?.marks}</td>
                 <td className="s16">
                   <span
                     style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
                   >
-                    {eseMarksObtained.symbols.includes("F") ? "N" : "E"}
+                    {eseMarksObtained?.symbols.includes("F") ? "N" : "E"}
                   </span>
                 </td>
                 <td className="s16">
@@ -616,12 +638,12 @@ const Marksheet = (props) => {
                     }
                   </span>
                 </td>
-                <td className="s15">{iaMarksObtained.marks}</td>
+                <td className="s15">{iaMarksObtained?.marks}</td>
                 <td className="s16">
                   <span
                     style={{ fontSize: "10pt", fontFamily: "Times New Roman" }}
                   >
-                    {iaMarksObtained.symbols.includes("F") ? "N" : "E"}
+                    {iaMarksObtained?.symbols.includes("F") ? "N" : "E"}
                   </span>
                 </td>
                 <td className="s15">{maxMarks}</td>
