@@ -1,0 +1,225 @@
+
+.marksheet .ritz .waffle a {
+  color: inherit;
+}
+.marksheet .ritz .waffle .s16 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s3 {
+  background-color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s8 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+}
+.marksheet .ritz .waffle .s12 {
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+}
+.marksheet .ritz .waffle .s11 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 11pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s7 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: top;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s2 {
+  background-color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s9 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: top;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s13 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s0 {
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Arial";
+  font-size: 10pt;
+  vertical-align: bottom;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s1 {
+  background-color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: "Arial";
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s6 {
+  background-color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Arial";
+  font-size: 10pt;
+  vertical-align: bottom;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s4 {
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: top;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s5 {
+  background-color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: bottom;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s15 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s10 {
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Arial";
+  font-size: 10pt;
+  vertical-align: bottom;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s14 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  vertical-align: top;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}
+.marksheet .ritz .waffle .s17 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: "Times New Roman";
+  font-size: 12pt;
+  vertical-align: top;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 2px 3px 2px 3px;
+}

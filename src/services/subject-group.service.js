@@ -57,9 +57,10 @@ class SubjectGroupService {
     return { students: null };
   });
 
-  static sendRevalutionReminder = catchAsync(async (subjectGroupId) => {
+  static sendRevalutionReminder = catchAsync(async (subjectGroupId, date) => {
     const response = await appAxios.post(
-      endpoints.subjectGroups.sendRevalutionReminder(subjectGroupId)
+      endpoints.subjectGroups.sendRevalutionReminder(subjectGroupId),
+      { date }
     );
 
     return { status: response.data.status };

@@ -131,7 +131,7 @@ const MarksBySubjectRoot = () => {
                   <DropdownMenuItem onClick={(e) => handleDownloadStudents(e)}>
                     Download ATKT Students
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setIsATKTDailogOpen(false)}>
+                  <DropdownMenuItem onClick={() => setIsATKTDailogOpen(true)}>
                     Send ATKT Form Reminder
                   </DropdownMenuItem>
                   <DropdownMenuItem

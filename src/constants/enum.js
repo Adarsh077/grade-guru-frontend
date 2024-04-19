@@ -63,6 +63,17 @@ export const shortYearBySemester = {
   8: "B.E.",
 };
 
+export const longYearBySemester = {
+  1: "First Year.",
+  2: "First Year",
+  3: "Second Year",
+  4: "Second Year",
+  5: "Third Year",
+  6: "Third Year",
+  7: "Fourth Year",
+  8: "Fourt Year",
+};
+
 export const shortSemesterByNumber = {
   1: "SEM-I",
   2: "SEM-II",

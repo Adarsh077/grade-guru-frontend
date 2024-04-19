@@ -19,6 +19,7 @@ import {
   SubjectsScreen,
   GazzetExporter,
   HallTicketExporter,
+  MarksheetExporter,
 } from "@/pages";
 
 import Redirect from "./Redirect";
@@ -31,6 +32,10 @@ const ProtectedRoutes = () => {
         <Route
           path="hallticket/:subjectGroupId"
           element={<HallTicketExporter />}
+        />
+        <Route
+          path="marksheet/:subjectGroupId"
+          element={<MarksheetExporter />}
         />
       </Route>
 

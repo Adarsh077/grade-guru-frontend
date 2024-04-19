@@ -22,6 +22,7 @@ import { getAllSubjects } from "@/store/subject/subject.actions";
 import { subjectErrorSelector } from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
 
+import ATKTFormDate from "./ATKTFormDate";
 import ExamTimeForm from "./ExamTimeForm";
 import Subjects from "./Subjects";
 
@@ -31,6 +32,7 @@ const SubjectsRoot = () => {
   const dispatch = useDispatch();
   const inputFile = useRef(null);
   const [isHallTicketDailogOpen, setIsHallTicketDailogOpen] = useState(false);
+  const [isATKTSDailogOpen, setIsATKTDailogOpen] = useState(false);
 
   const handleImportStudents = async (e) => {
     let toastId = toast.loading("Reading Excel File...");
@@ -71,23 +73,18 @@ const SubjectsRoot = () => {
     );
   };
 
-  const sendRevalutionReminder = async (e) => {
-    e.stopPropagation();
-
-    toast.promise(SubjectGroupService.sendRevalutionReminder(subjectGroupId), {
-      loading: "Sending reminders...",
-      success: () => {
-        return "Reminders sent!";
-      },
-      error: (error) => error.message || "Something went wrong",
-    });
-  };
-
   return (
     <div>
       <ExamTimeForm
         open={isHallTicketDailogOpen}
         handleClose={() => setIsHallTicketDailogOpen(false)}
+        subjectGroupId={subjectGroupId}
+      />
+      <ATKTFormDate
+        open={isATKTSDailogOpen}
+        handleClose={() => {
+          setIsATKTDailogOpen(false);
+        }}
         subjectGroupId={subjectGroupId}
       />
       <div className="mb-4 grid grid-cols-12 justify-between">
@@ -131,7 +128,7 @@ const SubjectsRoot = () => {
                 <DropdownMenuItem onClick={(e) => generateResult(e)}>
                   Generate Result
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={(e) => sendRevalutionReminder(e)}>
+                <DropdownMenuItem onClick={() => setIsATKTDailogOpen(true)}>
                   Send Revalution Reminder
                 </DropdownMenuItem>
               </DropdownMenuContent>

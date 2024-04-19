@@ -12,17 +12,20 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { SubjectService } from "@/services";
+import { SubjectGroupService } from "@/services";
 
 function ATKTFormDate(props) {
-  const { open, handleClose, subjectId } = props;
+  const { open, handleClose, subjectGroupId } = props;
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const { status } = await SubjectService.sendAtktReminder(subjectId, date);
+      const { status } = await SubjectGroupService.sendRevalutionReminder(
+        subjectGroupId,
+        date
+      );
       if (status === "success") {
         toast("Reminders sent!");
       } else {
@@ -39,7 +42,7 @@ function ATKTFormDate(props) {
     <Dialog open={open} onOpenChange={() => handleClose()}>
       <DialogContent className="sm:max-w-[300px]">
         <DialogHeader>
-          <DialogTitle>ATKT Form Last Date </DialogTitle>
+          <DialogTitle>Revalution Form Last Date </DialogTitle>
           <DialogDescription>
             Please enter last date of form submission
           </DialogDescription>
