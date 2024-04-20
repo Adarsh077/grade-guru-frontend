@@ -14,6 +14,7 @@ import {
   FormRootError,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { UserService } from "@/services";
 
 import RoleSelector from "./RoleSelector";
 const addUserSchema = z.object({
@@ -30,12 +31,18 @@ const AddUserForm = ({ handleClose }) => {
       name: "",
       email: "",
       password: "",
+      role: "STAFF",
     },
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
-    handleClose();
+    await UserService.addUser({
+      email: values.email,
+      name: values.name,
+      role: values.role,
+      password: values.password,
+    });
+    window.location.reload();
   };
 
   return (

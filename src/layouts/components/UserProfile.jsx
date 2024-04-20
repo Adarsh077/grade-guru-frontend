@@ -59,6 +59,11 @@ const UserProfile = () => {
               <DropdownMenuItem>Master List</DropdownMenuItem>
             </Link>
           )}
+          {isAdmin && (
+            <Link to="/settings/users">
+              <DropdownMenuItem>Users</DropdownMenuItem>
+            </Link>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => dispatch(logout())}>

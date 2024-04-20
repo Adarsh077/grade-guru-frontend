@@ -28,11 +28,12 @@ class UserService {
     return { users: [] };
   });
 
-  static addUser = catchAsync(async ({ email, name, role }) => {
+  static addUser = catchAsync(async ({ email, name, role, password }) => {
     const response = await appAxios.post(endpoints.user.add, {
       email,
       name,
       role,
+      password,
     });
 
     if (response.data.status === "success" && response.data.body?.user) {
