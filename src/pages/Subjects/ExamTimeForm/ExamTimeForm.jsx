@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { DateTime } from "luxon";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -94,6 +95,12 @@ function ExamTimeForm(props) {
                           ? datesBySubjects[subject._id].date
                           : ""
                       }
+                      min={DateTime.now()
+                        .plus({ days: 1 })
+                        .toFormat("yyyy-LL-dd")}
+                      max={DateTime.now()
+                        .plus({ days: 90 })
+                        .toFormat("yyyy-LL-dd")}
                       onOpenChange
                       className="col-span-2"
                       type="date"

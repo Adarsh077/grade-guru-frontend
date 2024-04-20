@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { DateTime } from "luxon";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -48,6 +49,8 @@ function ATKTFormDate(props) {
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
+          min={DateTime.now().plus({ days: 1 }).toFormat("yyyy-LL-dd")}
+          max={DateTime.now().plus({ days: 90 }).toFormat("yyyy-LL-dd")}
           type="date"
         />
 
