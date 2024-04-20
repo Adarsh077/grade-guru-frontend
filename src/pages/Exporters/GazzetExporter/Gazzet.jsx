@@ -108,7 +108,7 @@ const GazzetExporter = (props) => {
     exams: ExamsWithMarksBySubjectType[subject.subjectType],
   }));
 
-  const sortedSubjects = subjects.sort((a, b) => a.code.localeCompare(b.code));
+  let sortedSubjects = subjects.sort((a, b) => a.code.localeCompare(b.code));
 
   const maxTotal = sortedSubjects.reduce((total, subject) => {
     return (total +=
@@ -121,6 +121,15 @@ const GazzetExporter = (props) => {
       subject.exams.find((exam) => exam.name === ExamNamesEnum.TOT)?.minMarks ||
       0);
   }, 0);
+
+  sortedSubjects = sortedSubjects.map((subject) => {
+    subject.exams = subject.exams.filter((exam) => {
+      const examMarks = ExamsWithMarksBySubjectType[subject.subjectType];
+      const examMark = examMarks.find((e) => e.name === exam.name);
+      return !examMark?.hideInGazzet;
+    });
+    return subject;
+  });
 
   return (
     <div className="h-screen">

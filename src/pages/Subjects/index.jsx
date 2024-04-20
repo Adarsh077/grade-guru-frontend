@@ -72,6 +72,24 @@ const SubjectsRoot = () => {
     );
   };
 
+  const generateMarksheet = async (e) => {
+    e.stopPropagation();
+
+    toast.promise(
+      ResultService.generateResult({
+        subjectGroupId,
+      }),
+      {
+        loading: "Generating marksheet...",
+        success: () => {
+          window.open(`/exporters/marksheet/${subjectGroupId}`, "_blank");
+          return "Result generated!";
+        },
+        error: (error) => error.message || "Something went wrong",
+      }
+    );
+  };
+
   return (
     <div>
       <ExamTimeForm
@@ -124,6 +142,9 @@ const SubjectsRoot = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setIsATKTDailogOpen(true)}>
                   Send Revalution Reminder
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => generateMarksheet(e)}>
+                  Generate Marksheet
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
