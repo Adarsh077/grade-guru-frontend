@@ -20,6 +20,7 @@ import {
   GazzetExporter,
   HallTicketExporter,
   MarksheetExporter,
+  Users,
 } from "@/pages";
 
 import Redirect from "./Redirect";
@@ -76,6 +77,9 @@ const ProtectedRoutes = () => {
       </Route>
       <Route path="/subject-groups" element={<DashbordLayout />}>
         <Route path=":subjectGroupId/subjects" element={<SubjectsScreen />} />
+      </Route>
+      <Route path="/settings" element={<DashbordLayout />}>
+        <Route path="users" element={<Users />} />
       </Route>
       <Route path="/subjects" element={<MySubjectsLayout />}>
         <Route

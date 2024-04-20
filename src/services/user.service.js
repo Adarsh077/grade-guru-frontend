@@ -1,6 +1,7 @@
-import catchAsync from "@/utils";
-import appAxios from "./axios.service";
 import endpoints from "@/constants/endpoints";
+import catchAsync from "@/utils";
+
+import appAxios from "./axios.service";
 
 class UserService {
   static getUserDetails = catchAsync(async () => {
@@ -19,6 +20,30 @@ class UserService {
         query,
       },
     });
+
+    if (response.data.status === "success" && response.data.body?.users) {
+      return { users: response.data.body.users };
+    }
+
+    return { users: [] };
+  });
+
+  static addUser = catchAsync(async ({ email, name, role }) => {
+    const response = await appAxios.post(endpoints.user.add, {
+      email,
+      name,
+      role,
+    });
+
+    if (response.data.status === "success" && response.data.body?.user) {
+      return { user: response.data.body.user };
+    }
+
+    return { user: null };
+  });
+
+  static getAllUsers = catchAsync(async () => {
+    const response = await appAxios.get(endpoints.user.getAllUsers);
 
     if (response.data.status === "success" && response.data.body?.users) {
       return { users: response.data.body.users };

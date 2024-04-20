@@ -5,7 +5,9 @@ const endpoints = {
   user: {
     details: "/user",
     search: "/user/search",
+    add: "/auth/register",
     getAbilityStatements: "/user/ability",
+    getAllUsers: "/user/all",
   },
   batch: {
     getAllBatches: "/batches",
