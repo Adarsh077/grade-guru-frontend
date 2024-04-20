@@ -42,6 +42,8 @@ export const ExamsBySubjectType = {
 export const ExamsWithMarksBySubjectType = {
   [SubjectTypeEnum.WRITTEN]: [
     { name: ExamNamesEnum.ESE, maxMarks: 80, minMarks: 32 },
+    { name: ExamNamesEnum.IAT1, maxMarks: 20, minMarks: 8 },
+    { name: ExamNamesEnum.IAT2, maxMarks: 20, minMarks: 8 },
     { name: ExamNamesEnum.IA, maxMarks: 20, minMarks: 8 },
     { name: ExamNamesEnum.TOT, maxMarks: 100, minMarks: 40 },
   ],

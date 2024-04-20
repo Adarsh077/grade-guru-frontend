@@ -4,11 +4,13 @@ import { useRef } from "react";
 
 import DataGrid, { textEditor } from "react-data-grid";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 
 import caslEnum from "@/constants/casl.enum";
 import {
   ExamNamesEnum,
   ExamsBySubjectType,
+  ExamsWithMarksBySubjectType,
   ReadableExamNamesEnum,
 } from "@/constants/enum";
 import { useCaslCan } from "@/hooks";
@@ -61,11 +63,35 @@ const MarksBySubject = ({ subjectId }) => {
   });
 
   const handleChange = (updatedRows, data) => {
+    console.log("ere");
     const updatedRow = updatedRows[data.indexes[0]];
 
     const examName = data.column.key;
-    const marksScored = updatedRow[examName];
+    let marksScored = updatedRow[examName];
     const studentId = updatedRow.studentId;
+
+    const marksByExam = ExamsWithMarksBySubjectType[subject.subjectType].find(
+      (exam) => exam.name === examName
+    );
+
+    try {
+      marksScored = parseInt(marksScored);
+    } catch (error) {
+      toast.error("Only numbers are allowed!");
+      return;
+    }
+
+    if (!marksScored || marksScored < 0) {
+      toast.error(`You cannot enter less than 0 marks for ${examName}`);
+      return;
+    }
+
+    if (marksByExam && marksScored > marksByExam.maxMarks) {
+      toast.error(
+        `You cannot enter more than ${marksByExam.maxMarks} marks for ${examName}`
+      );
+      return;
+    }
 
     dispatch(
       updateMarksBySubjectId({ subjectId, studentId, examName, marksScored })
