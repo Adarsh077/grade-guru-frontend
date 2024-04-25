@@ -19,7 +19,7 @@ const MasterListSidebar = () => {
           startIcon={<Users className="w-4 h-4" />}
           to="/master-list/batches"
         >
-          Students
+          Batches
         </MasterListSidebarItem>
         <MasterListSidebarItem
           isSelected={["/master-list/departments"].find((path) =>
