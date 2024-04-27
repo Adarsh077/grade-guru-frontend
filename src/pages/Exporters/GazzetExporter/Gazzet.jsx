@@ -188,10 +188,12 @@ const GazzetExporter = (props) => {
     <div className="h-screen">
       {batches.map((batch) => {
         return (
-          <div className="gazzet flex items-center justify-center break-after-page">
+          <div
+            key={uuid()}
+            className="gazzet flex items-center justify-center break-after-page mb-20"
+          >
             <Marksheet
               examName={examName}
-              key={uuid()}
               studentRecords={batch}
               subjects={sortedSubjects}
               maxTotal={maxTotal}
