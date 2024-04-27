@@ -691,6 +691,7 @@ const Marksheet = (props) => {
               {roundUpToTwoDecimals(
                 studentResult.marks.MarksOTotal / maxTotal
               ) * 100}
+              %
             </td>
             <td className="s17" dir="ltr" colSpan={7}>
               Status :{" "}

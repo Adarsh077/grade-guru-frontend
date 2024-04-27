@@ -29,6 +29,12 @@ const SubjectExamsSelector = (props) => {
         {ReadableSubjectTypeEnum[SubjectTypeEnum.WRITTEN]}
       </SubjectExamGroup>
       <SubjectExamGroup
+        onClick={() => onChange(SubjectTypeEnum.WRITTEN_TW)}
+        isSelected={value === SubjectTypeEnum.WRITTEN_TW}
+      >
+        {ReadableSubjectTypeEnum[SubjectTypeEnum.WRITTEN_TW]}
+      </SubjectExamGroup>
+      <SubjectExamGroup
         onClick={() => onChange(SubjectTypeEnum.LAB)}
         isSelected={value === SubjectTypeEnum.LAB}
       >

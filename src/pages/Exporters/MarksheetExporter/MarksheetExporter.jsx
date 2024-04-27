@@ -2,7 +2,11 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-import { ExamNamesEnum, ExamsWithMarksBySubjectType } from "@/constants/enum";
+import {
+  ExamNamesEnum,
+  ExamsWithMarksBySubjectType,
+  SubjectTypeEnum,
+} from "@/constants/enum";
 import { resultsSelector } from "@/store/result/result.selectors";
 import { subjectSelector } from "@/store/subject/subject.selectors";
 
@@ -36,6 +40,13 @@ const MarksheetExporter = (props) => {
               marksOTotalGrace += exam.graceMarks;
             }
 
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              marksOTotal += exam.marksO;
+            }
+
             return {
               name: exam.examName,
               marks: exam.marksO,
@@ -62,10 +73,23 @@ const MarksheetExporter = (props) => {
           subjectCode: marks.subjectCode,
           exams: marks.exams.map((exam) => {
             if (exam.examName === ExamNamesEnum.TOT) {
-              creditsTotal += marks.credits;
+              creditsTotal += exam.credits;
               return {
                 name: exam.examName,
-                marks: marks.credits,
+                marks: exam.credits,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
+              };
+            }
+
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              creditsTotal += exam.credits;
+              return {
+                name: exam.examName,
+                marks: exam.credits,
                 graceMarks: exam.graceMarks,
                 symbols: exam.symbols,
               };
@@ -83,14 +107,28 @@ const MarksheetExporter = (props) => {
           subjectCode: marks.subjectCode,
           exams: marks.exams.map((exam) => {
             if (exam.examName === ExamNamesEnum.TOT) {
-              gpcTotal += marks.gpc;
+              gpcTotal += exam.gpc;
               return {
                 name: exam.examName,
-                marks: marks.gpc,
+                marks: exam.gpc,
                 graceMarks: exam.graceMarks,
                 symbols: exam.symbols,
               };
             }
+
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              gpcTotal += exam.gpc;
+              return {
+                name: exam.examName,
+                marks: exam.gpc,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
+              };
+            }
+
             return {
               name: exam.examName,
               marks: "",

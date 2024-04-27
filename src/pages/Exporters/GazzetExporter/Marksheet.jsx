@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import { StudentGenderEnum } from "@/constants/enum";
+import { StudentGenderEnum, SubjectTypeEnum } from "@/constants/enum";
 
 import GazzetFooter from "./components/GazzetFooter";
 import "./GazzetExporter.css";
@@ -39,7 +39,14 @@ const MarkSheet = (props) => {
               style={{ position: "relative" }}
               className="s3"
               dir="ltr"
-              colSpan={9 + 3 * subjects.length}
+              colSpan={
+                9 +
+                3 * subjects.length +
+                subjects.filter(
+                  (subject) =>
+                    subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+                ).length
+              }
               rowSpan={3}
             >
               Vidya Vikas Education Trust&apos;s
@@ -104,7 +111,14 @@ const MarkSheet = (props) => {
             <td className="s5" rowSpan={2} />
             {subjects.map((subject) => {
               return (
-                <td key={uuid()} className="s6" dir="ltr" colSpan={3}>
+                <td
+                  key={uuid()}
+                  className="s6"
+                  dir="ltr"
+                  colSpan={
+                    subject.subjectType === SubjectTypeEnum.WRITTEN_TW ? 4 : 3
+                  }
+                >
                   {subject.code}
                 </td>
               );
@@ -220,7 +234,9 @@ const MarkSheet = (props) => {
                     verticalAlign: "middle",
                     height: 50,
                   }}
-                  colSpan={3}
+                  colSpan={
+                    subject.subjectType === SubjectTypeEnum.WRITTEN_TW ? 4 : 3
+                  }
                 >
                   {subject.name}
                 </td>

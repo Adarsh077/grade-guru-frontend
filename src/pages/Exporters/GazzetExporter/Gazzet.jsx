@@ -1,7 +1,12 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
-import { ExamNamesEnum, ExamsWithMarksBySubjectType } from "@/constants/enum";
+import {
+  ExamNamesEnum,
+  ExamsWithMarksBySubjectType,
+  SubjectTypeEnum,
+} from "@/constants/enum";
 import { resultsSelector } from "@/store/result/result.selectors";
 import { subjectSelector } from "@/store/subject/subject.selectors";
 
@@ -19,6 +24,7 @@ const GazzetExporter = (props) => {
     let marksOTotalGrace = 0;
     let creditsTotal = 0;
     let gpcTotal = 0;
+
     return {
       seatNo: studentResult.seatNo,
       name: studentResult.student.name,
@@ -34,6 +40,13 @@ const GazzetExporter = (props) => {
               marksOTotal += exam.marksO;
             } else if (exam.graceMarks) {
               marksOTotalGrace += exam.graceMarks;
+            }
+
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              marksOTotal += exam.marksO;
             }
 
             return {
@@ -62,14 +75,28 @@ const GazzetExporter = (props) => {
           subjectCode: marks.subjectCode,
           exams: marks.exams.map((exam) => {
             if (exam.examName === ExamNamesEnum.TOT) {
-              creditsTotal += marks.credits;
+              creditsTotal += exam.credits;
               return {
                 name: exam.examName,
-                marks: marks.credits,
+                marks: exam.credits,
                 graceMarks: exam.graceMarks,
                 symbols: exam.symbols,
               };
             }
+
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              creditsTotal += exam.credits;
+              return {
+                name: exam.examName,
+                marks: exam.credits,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
+              };
+            }
+
             return {
               name: exam.examName,
               marks: "",
@@ -83,14 +110,28 @@ const GazzetExporter = (props) => {
           subjectCode: marks.subjectCode,
           exams: marks.exams.map((exam) => {
             if (exam.examName === ExamNamesEnum.TOT) {
-              gpcTotal += marks.gpc;
+              gpcTotal += exam.gpc;
               return {
                 name: exam.examName,
-                marks: marks.gpc,
+                marks: exam.gpc,
                 graceMarks: exam.graceMarks,
                 symbols: exam.symbols,
               };
             }
+
+            if (
+              exam.examName === ExamNamesEnum.TW &&
+              marks.subject.subjectType === SubjectTypeEnum.WRITTEN_TW
+            ) {
+              gpcTotal += exam.gpc;
+              return {
+                name: exam.examName,
+                marks: exam.gpc,
+                graceMarks: exam.graceMarks,
+                symbols: exam.symbols,
+              };
+            }
+
             return {
               name: exam.examName,
               marks: "",
@@ -108,7 +149,9 @@ const GazzetExporter = (props) => {
     exams: ExamsWithMarksBySubjectType[subject.subjectType],
   }));
 
-  let sortedSubjects = subjects.sort((a, b) => a.code.localeCompare(b.code));
+  let sortedSubjects = subjects.sort((a, b) =>
+    a.code.trim().localeCompare(b.code.trim())
+  );
 
   const maxTotal = sortedSubjects.reduce((total, subject) => {
     return (total +=
@@ -131,17 +174,32 @@ const GazzetExporter = (props) => {
     return subject;
   });
 
+  function createBatches(array, batchSize) {
+    const batches = [];
+    for (let i = 0; i < array.length; i += batchSize) {
+      batches.push(array.slice(i, i + batchSize));
+    }
+    return batches;
+  }
+
+  const batches = createBatches(studentsResult, 7);
+
   return (
     <div className="h-screen">
-      <div className="gazzet flex items-center justify-center break-after-page">
-        <Marksheet
-          examName={examName}
-          studentRecords={studentsResult}
-          subjects={sortedSubjects}
-          maxTotal={maxTotal}
-          minMarks={minMarks}
-        />
-      </div>
+      {batches.map((batch) => {
+        return (
+          <div className="gazzet flex items-center justify-center break-after-page">
+            <Marksheet
+              examName={examName}
+              key={uuid()}
+              studentRecords={batch}
+              subjects={sortedSubjects}
+              maxTotal={maxTotal}
+              minMarks={minMarks}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

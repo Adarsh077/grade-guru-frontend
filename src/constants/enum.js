@@ -1,4 +1,5 @@
 export const SubjectTypeEnum = {
+  WRITTEN_TW: "WRITTEN_TW",
   WRITTEN: "WRITTEN",
   LAB: "LAB",
 };
@@ -6,6 +7,7 @@ export const SubjectTypeEnum = {
 export const ReadableSubjectTypeEnum = {
   WRITTEN: "Written",
   LAB: "Lab",
+  WRITTEN_TW: "Written + TW",
 };
 
 export const ExamNamesEnum = {
@@ -36,6 +38,12 @@ export const ExamsBySubjectType = {
     ExamNamesEnum.IAT2,
     ExamNamesEnum.ESE,
   ],
+  [SubjectTypeEnum.WRITTEN_TW]: [
+    ExamNamesEnum.IAT1,
+    ExamNamesEnum.IAT2,
+    ExamNamesEnum.ESE,
+    ExamNamesEnum.TW,
+  ],
   [SubjectTypeEnum.LAB]: [ExamNamesEnum.PROR, ExamNamesEnum.TW],
 };
 
@@ -46,6 +54,14 @@ export const ExamsWithMarksBySubjectType = {
     { name: ExamNamesEnum.IAT2, maxMarks: 20, minMarks: 8, hideInGazzet: true },
     { name: ExamNamesEnum.IA, maxMarks: 20, minMarks: 8 },
     { name: ExamNamesEnum.TOT, maxMarks: 100, minMarks: 40 },
+  ],
+  [SubjectTypeEnum.WRITTEN_TW]: [
+    { name: ExamNamesEnum.ESE, maxMarks: 80, minMarks: 32 },
+    { name: ExamNamesEnum.IAT1, maxMarks: 20, minMarks: 8, hideInGazzet: true },
+    { name: ExamNamesEnum.IAT2, maxMarks: 20, minMarks: 8, hideInGazzet: true },
+    { name: ExamNamesEnum.IA, maxMarks: 20, minMarks: 8 },
+    { name: ExamNamesEnum.TOT, maxMarks: 100, minMarks: 40 },
+    { name: ExamNamesEnum.TW, maxMarks: 25, minMarks: 10 },
   ],
   [SubjectTypeEnum.LAB]: [
     { name: ExamNamesEnum.PROR, maxMarks: 25, minMarks: 10 },
