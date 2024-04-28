@@ -31,6 +31,8 @@ const endpoints = {
     getStudentsBy: (semesterId) => `/semesters/${semesterId}/students`,
     getEnrolledStudentsBy: (semesterId) =>
       `/semesters/${semesterId}/enrolled-students`,
+    enrollStudentsInNss: (semesterId) =>
+      `/semesters/${semesterId}/enroll-students-in-nss`,
   },
   subjects: {
     getAllSubjectsBy: (subjectGroupId) =>

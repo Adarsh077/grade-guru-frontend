@@ -90,6 +90,15 @@ class SemesterService {
 
     return { students: [] };
   });
+
+  static enrollStudentsInNss = catchAsync(async ({ semesterId, students }) => {
+    const response = await appAxios.post(
+      endpoints.semesters.enrollStudentsInNss(semesterId),
+      { students }
+    );
+
+    return { status: response.data.status };
+  });
 }
 
 export default SemesterService;

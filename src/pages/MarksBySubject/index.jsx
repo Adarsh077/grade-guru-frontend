@@ -107,11 +107,17 @@ const MarksBySubjectRoot = () => {
       />
 
       <div className="mb-4 grid grid-cols-12 justify-between">
-        <div className="md:col-span-8 xl:col-span-8">
+        <div
+          className={` ${
+            subject?.isATKTSubject
+              ? "md:col-span-8 xl:col-span-8"
+              : "md:col-span-12 xl:col-span-12"
+          }`}
+        >
           <AppBreadcrumb className="-translate-x-4" />
         </div>
-        <div className="md:col-span-5 xl:col-span-4">
-          {subject?.isATKTSubject && (
+        {subject?.isATKTSubject && (
+          <div className="md:col-span-5 xl:col-span-4">
             <div className="flex justify-end gap-x-2">
               <input
                 type="file"
@@ -144,8 +150,8 @@ const MarksBySubjectRoot = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <FetchData
         loadFirstThenRender

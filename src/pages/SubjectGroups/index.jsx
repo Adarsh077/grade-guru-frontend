@@ -1,5 +1,7 @@
 // import { useState } from "react";
 
+import { useState } from "react";
+
 import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -21,12 +23,14 @@ import { SemesterService } from "@/services";
 import { getAllSubjectGroups } from "@/store/subject-group/subject-group.actions";
 import { subjectGroupErrorSelector } from "@/store/subject-group/subject-group.selectors";
 
+import NSSFormRoot from "./NSS";
 import SubjectGroups from "./SubjectGroups";
 
 const SubjectGroupsRoot = () => {
   const { semesterId } = useParams();
   const { parsedQueryString } = useQueryString();
   const subjectGroupError = useSelector(subjectGroupErrorSelector);
+  const [nssOpen, setNssOpen] = useState(false);
 
   const handleDownloadStudents = async (e) => {
     e.stopPropagation();
@@ -125,6 +129,11 @@ const SubjectGroupsRoot = () => {
 
   return (
     <div>
+      <NSSFormRoot
+        open={nssOpen}
+        handleClose={() => setNssOpen(false)}
+        semesterId={semesterId}
+      />
       <div className="mb-4 grid grid-cols-12 justify-between">
         <div className="md:col-span-7 xl:col-span-8">
           <AppBreadcrumb className="-translate-x-4" />
@@ -141,10 +150,13 @@ const SubjectGroupsRoot = () => {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem onClick={handleDownloadStudents}>
-                  Download Students List
+                  Download Eligible Students
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleDownloadEnrolledStudents}>
-                  Download Student Seat No
+                  Download Students with Seat No
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setNssOpen(true)}>
+                  NSS Entries
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
