@@ -65,6 +65,14 @@ class SubjectGroupService {
 
     return { status: response.data.status };
   });
+
+  static lockMarksEntry = catchAsync(async (subjectGroupId) => {
+    const response = await appAxios.post(
+      endpoints.subjectGroups.lockMarksEntry(subjectGroupId)
+    );
+
+    return { status: response.data.status };
+  });
 }
 
 export default SubjectGroupService;

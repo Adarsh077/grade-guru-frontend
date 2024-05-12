@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { MoreHorizontal } from "lucide-react";
+import { Lock, MoreHorizontal } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
@@ -18,11 +18,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ResultService } from "@/services";
 import { getAllSubjects } from "@/store/subject/subject.actions";
-import { subjectErrorSelector } from "@/store/subject/subject.selectors";
+import {
+  subjectErrorSelector,
+  subjectSelector,
+} from "@/store/subject/subject.selectors";
 import { enrollStudents } from "@/store/subject-group/subject-group.actions";
 
 import ATKTFormDate from "./ATKTFormDate";
 import ExamTimeForm from "./ExamTimeForm";
+import LockConfirm from "./LockConfirm";
 import Subjects from "./Subjects";
 
 const SubjectsRoot = () => {
@@ -32,6 +36,8 @@ const SubjectsRoot = () => {
   const inputFile = useRef(null);
   const [isHallTicketDailogOpen, setIsHallTicketDailogOpen] = useState(false);
   const [isATKTSDailogOpen, setIsATKTDailogOpen] = useState(false);
+  const [isMarksEntryLocked, setIsMarksEntryLocked] = useState(false);
+  const subjects = useSelector(subjectSelector(subjectGroupId));
 
   const handleImportStudents = async (e) => {
     let toastId = toast.loading("Reading Excel File...");
@@ -90,6 +96,10 @@ const SubjectsRoot = () => {
     );
   };
 
+  const isMarksEntryLockedForSubjects = (subjects || []).find(
+    (subject) => subject.isMarksEntryLocked
+  );
+
   return (
     <div>
       <ExamTimeForm
@@ -104,9 +114,16 @@ const SubjectsRoot = () => {
         }}
         subjectGroupId={subjectGroupId}
       />
-      <div className="mb-4 grid grid-cols-12 justify-between">
+      <LockConfirm
+        open={isMarksEntryLocked}
+        handleClose={() => {
+          setIsMarksEntryLocked(false);
+        }}
+        subjectGroupId={subjectGroupId}
+      />
+      <div className="mb-4 grid grid-cols-12  align-middle justify-between">
         <div className="md:col-span-7 xl:col-span-8">
-          <AppBreadcrumb className="-translate-x-4" />
+          <AppBreadcrumb />
         </div>
         <div className="md:col-span-5 xl:col-span-4">
           <div className="flex justify-end gap-x-2">
@@ -116,6 +133,18 @@ const SubjectsRoot = () => {
               onChange={handleImportStudents}
               ref={inputFile}
             />
+            {!isMarksEntryLockedForSubjects && (
+              <Button
+                onClick={() => setIsMarksEntryLocked(true)}
+                variant="ghost"
+                type="submit"
+              >
+                <span className="mr-2">
+                  <Lock className="w-4 h-4" />
+                </span>
+                Lock
+              </Button>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-10 w-10 p-0">

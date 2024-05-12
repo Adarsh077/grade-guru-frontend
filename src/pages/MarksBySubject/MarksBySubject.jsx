@@ -42,6 +42,7 @@ const MarksBySubject = ({ subjectId }) => {
         key: exam,
         name: ReadableExamNamesEnum[exam],
         renderEditCell: textEditor,
+        editable: !subject.isMarksEntryLocked,
       })),
   ];
 
@@ -63,7 +64,6 @@ const MarksBySubject = ({ subjectId }) => {
   });
 
   const handleChange = (updatedRows, data) => {
-    console.log("ere");
     const updatedRow = updatedRows[data.indexes[0]];
 
     const examName = data.column.key;

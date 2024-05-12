@@ -52,6 +52,8 @@ const endpoints = {
       `/subject-groups/${subjectGroupId}/students`,
     sendRevalutionReminder: (subjectGroupId) =>
       `/subject-groups/${subjectGroupId}/reminder/revalution`,
+    lockMarksEntry: (subjectGroupId) =>
+      `/subject-groups/${subjectGroupId}/lock`,
   },
   marksBySubject: {
     getMarksBySubjectId: (subjectId) => `/subjects/${subjectId}/marks`,
